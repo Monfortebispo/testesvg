@@ -164,7 +164,7 @@
   }
   function registerServiceWorker(){
     if(!('serviceWorker' in navigator)||!/^https?:$/.test(location.protocol))return;
-    window.addEventListener('load',()=>navigator.serviceWorker.register(window.__VG_SW_URL__||'/service-worker.js?vg=35.8',{scope:'/',updateViaCache:'none'}).then(reg=>{
+    window.addEventListener('load',()=>navigator.serviceWorker.register(window.__VG_SW_URL__||'/service-worker.js?vg=35.6',{scope:'/',updateViaCache:'none'}).then(reg=>{
       reg.update().catch(()=>{});
       if(reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'});
     }).catch(e=>console.warn('Service worker não registado',e)));

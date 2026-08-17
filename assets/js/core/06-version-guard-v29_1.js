@@ -7,7 +7,7 @@
 (function(){
   'use strict';
   const BUILD='32.9'; // identificador de compatibilidade do guard legado
-  const PLATFORM_BUILD='35.8';
+  const PLATFORM_BUILD='35.6';
   const SW_URL='/service-worker.js?vg='+encodeURIComponent(PLATFORM_BUILD);
   window.__VG_APP_BUILD__=PLATFORM_BUILD;
   window.__VG_SW_URL__=SW_URL;

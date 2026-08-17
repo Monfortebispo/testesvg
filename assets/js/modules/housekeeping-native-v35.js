@@ -3074,5 +3074,5 @@ async function hk35Mount(container){
   container.innerHTML='';HK35_HOST=document.createElement('div');HK35_HOST.className='vg-native-module vg-housekeeping-native-v35';container.appendChild(HK35_HOST);HK35_SHADOW=HK35_HOST.attachShadow({mode:'open'});window.HK35Root=HK35_SHADOW;HK35_MARKET=mk;
   HK35_SHADOW.innerHTML='<link rel="stylesheet" href="assets/css/housekeeping-native-v35.css">'+HK35_TEMPLATE;hk35InstallDispatchers();HK35_INIT=hk35Start();return HK35_INIT;
 }
-window.VG.housekeepingNative35={version:35.8,mount:hk35Mount,getRoot:()=>HK35_SHADOW,source:'inventario-main/index.html',architecture:'native-shadow-module'};
+window.VG.housekeepingNative35={version:35.6,mount:hk35Mount,getRoot:()=>HK35_SHADOW,source:'inventario-main/index.html',architecture:'native-shadow-module'};
 })();
