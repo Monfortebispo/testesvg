@@ -1,0 +1,18 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.join(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const js=read('assets/js/modules/city-ledger-v32.js'),backend=read('netlify/functions/dashboard-sessao.js'),css=read('assets/css/city-ledger-v32.css'),sw=read('service-worker.js'),pkg=require('../package.json');
+assert(js.includes('DEFAULT_EMAIL_TEMPLATES')&&js.includes("id:'first'")&&js.includes("id:'reminder'")&&js.includes("id:'urgent'"),'devem existir 3 templates de cobrança');
+assert(js.includes('openEmailComposer')&&js.includes('Preparar cobrança por email')&&js.includes('data-cl-email-client'),'City Ledger deve permitir preparar cobrança a partir da entidade');
+assert(js.includes("'__ALL__'")&&js.includes('Todos os hotéis'),'deve existir âmbito consolidado multi-hotel para perfis com acesso');
+assert(js.includes("mailto:")&&js.includes('downloadCurrentStatement')&&js.includes('%PDF-1.4'),'deve gerar PDF local e abrir o cliente de email sem integração Microsoft');
+assert(js.includes('Registar como enviado')&&js.includes("method:'email'")&&js.includes("result:'sent'"),'o envio manual deve poder ser registado como diligência');
+assert(js.includes('emailBatchId')&&js.includes('balanceAtContact')&&js.includes('statementFileName'),'o histórico deve guardar contexto do email e saldo à data');
+assert(backend.includes('ops-cityledger-email-templates')&&backend.includes('CITYLEDGER_DEFAULT_EMAIL_TEMPLATES'),'templates devem ser partilhados server-side');
+assert(backend.includes('Apenas a Direção pode alterar os templates de cobrança'),'edição de templates deve ser reservada à Direção');
+assert(backend.includes('createdBy:authUser.user')&&backend.includes('createdByName:authUser.name')&&backend.includes('createdByRole:authUser.role'),'autor e perfil da diligência devem vir da sessão autenticada');
+assert(!/createdBy\s*:\s*cleanText\(input\./.test(backend),'backend não pode aceitar autor da diligência enviado pelo cliente');
+assert(backend.includes('ops-cityledger-email-templates"].some')||backend.includes('"ops-cityledger-email-templates"].some'),'templates devem integrar Backup & Recuperação');
+assert(css.includes('.cl-email-panel')&&css.includes('.cl-template-card'),'UI deve ter composer e editor de templates');
+assert(/vg-operations-shell-v32-(?:[3-9]|[1-9][0-9])/.test(sw),'service worker deve manter cache V32.3 ou superior');
+assert(Number(pkg.version.split('.')[0])>32 || (Number(pkg.version.split('.')[0])===32 && Number(pkg.version.split('.')[1])>=3),'versão deve manter ou superar V32.3');
+console.log('✓ V32.3: cobrança por email, PDF, 3 templates, multi-hotel e autor server-side');

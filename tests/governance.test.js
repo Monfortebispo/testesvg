@@ -1,0 +1,21 @@
+const assert=require('assert');const fs=require('fs');const path=require('path');const vm=require('vm');const {ROOT}=require('./helpers/browser-sandbox');
+function clone(v){return v==null?v:JSON.parse(JSON.stringify(v));}
+function loadHandler(){const data=new Map();const store={async get(k){return clone(data.get(k));},async setJSON(k,v){data.set(k,clone(v));},async list(o={}){const p=String(o.prefix||'');return{blobs:[...data.keys()].filter(k=>String(k).startsWith(p)).map(key=>({key}))};}};const module={exports:{}};const sandbox={module,exports:module.exports,require(n){if(n==='@netlify/blobs')return{getStore(){return store},connectLambda(){}};return require(n)},Buffer,console,process,Date,Math,Number,String,Object,Array,JSON,Promise,setTimeout,clearTimeout};vm.createContext(sandbox);vm.runInContext(fs.readFileSync(path.join(ROOT,'netlify/functions/dashboard-sessao.js'),'utf8'),sandbox);return{handler:module.exports.handler,data};}
+function ev(method,resource,body,token,key){return{httpMethod:method,queryStringParameters:{resource,...(key!==undefined?{key:String(key)}:{})},headers:{...(token?{authorization:'Bearer '+token}:{}),'x-nf-client-connection-ip':'10.10.10.10'},body:body===undefined?'':JSON.stringify(body),isBase64Encoded:false};}
+async function call(h,...a){const r=await h(ev(...a));let j={};try{j=JSON.parse(r.body||'{}')}catch(e){}return{...r,json:j};}
+(async()=>{const{handler,data}=loadHandler();data.set('users',{gov_admin:{user:'gov_admin',name:'Admin Gov',pass:'AdminGov2027',role:'direcao',hotel:'*',active:true},gov_dir:{user:'gov_dir',name:'Diretor Gov',pass:'DiretorGov2027',role:'diretor',hotel:'OPERA',active:true}});
+ let r=await call(handler,'POST','auth-login',{user:'gov_admin',password:'AdminGov2027'});assert.strictEqual(r.statusCode,200);const at=r.json.token;
+ r=await call(handler,'POST','auth-login',{user:'gov_dir',password:'DiretorGov2027'});assert.strictEqual(r.statusCode,200);const dt=r.json.token;
+ r=await call(handler,'GET','audit-events',undefined,dt);assert.strictEqual(r.statusCode,403,'Diretor não consulta governação global');
+ r=await call(handler,'POST','settings',{version:1,regions:{lisboa:['OPERA']}},at,'regions');assert.strictEqual(r.statusCode,200);
+ r=await call(handler,'POST','settings',{version:1,regions:{lisboa:['OPERA','ESTORIL']}},at,'regions');assert.strictEqual(r.statusCode,200);
+ r=await call(handler,'POST','hotelsheet',{comment:'Comentário operacional',manual:{x:1}},dt,'OPERA');assert.strictEqual(r.statusCode,200);
+ r=await call(handler,'POST','user-save',{user:'novo_gov',name:'Novo Gov',password:'NovoGov2027',role:'diretor',hotel:'ESTORIL'},at);assert.strictEqual(r.statusCode,200);
+ r=await call(handler,'POST','ops-action-save',{hotel:'OPERA',sourceTitle:'Teste auditoria',sourceKey:'gov',status:'open',ownerUser:'gov_dir',dueDate:'2027-08-20'},dt);assert.strictEqual(r.statusCode,200);
+ r=await call(handler,'POST','data-import-record',{record:{source:'pnl_month',sourceName:'P&L mensal',status:'success',action:'rollback',scope:'Julho'}},at);assert.strictEqual(r.statusCode,200);
+ r=await call(handler,'GET','audit-events',undefined,at);assert.strictEqual(r.statusCode,200);const rows=r.json.data;assert(Array.isArray(rows)&&rows.length>=7);
+ assert(rows.some(x=>x.category==='Configuração'&&x.action.includes('Regiões')));assert(rows.some(x=>x.category==='Comentários Fecho do Mês'&&x.hotel==='OPERA'));assert(rows.some(x=>x.category==='Utilizadores'&&x.key==='novo_gov'));assert(rows.some(x=>x.category==='Ações'));assert(rows.some(x=>x.category==='Dados'&&x.action==='Rollback de dados'));assert(rows.some(x=>x.category==='Sessão'&&x.action==='Login'));
+ const cfg=rows.find(x=>x.category==='Configuração'&&Array.isArray(x.changes)&&x.changes.length);assert(cfg,'alteração de configuração deve conter diferenças antes/depois');
+ const raw=JSON.stringify(rows);assert(!/passwordHash|passwordSalt|AdminGov2027|NovoGov2027/.test(raw),'auditoria não pode expor credenciais/hashes/salts');assert(rows.filter(x=>x.source==='server').every(x=>x.verified===true));
+ console.log('✓ governação: trilho server-side, diferenças, permissões e proteção de credenciais');
+})().catch(e=>{console.error(e.stack||e);process.exit(1)});

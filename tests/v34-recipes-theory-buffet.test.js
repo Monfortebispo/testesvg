@@ -1,0 +1,11 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.resolve(__dirname,'..'),js=fs.readFileSync(path.join(root,'assets/js/modules/operations-domains-v33.js'),'utf8'),css=fs.readFileSync(path.join(root,'assets/css/operations-domains-v33.css'),'utf8');
+for(const t of ['Ver ficha técnica →','recipeDetailHtml','showRecipe','Ingredientes','Preparação','Beverage Cost','Aplicabilidade e controlo']) assert(js.includes(t),`ficha técnica detalhada em falta: ${t}`);
+assert(js.includes('pageSize:36')&&js.includes('ft34-pager')&&css.includes('content-visibility:auto'),'Biblioteca A&B deve usar paginação/renderização leve');
+assert(js.includes('ensureIntegratedData')&&js.includes("if(currentView==='housekeeping'){await renderHK();return;}"),'seed pesado deve carregar apenas ao abrir Reputação/Receita/A&B; Housekeeping exato não depende dele');
+assert(js.includes('Regra V34')&&js.includes('Alias controlado')&&js.includes('Consumo teórico por ingrediente')&&js.includes('Artigos sem ficha correspondente'),'Consumo teórico deve ser auditável e separar não associados');
+assert(js.includes('Mapeamento validado')&&js.includes('theory34MapBtn')&&js.includes('recipeMap'),'artigos sem match devem poder ser associados manualmente a uma ficha e persistidos');
+assert(!js.includes("rec.name).includes(norm(r.artigo))"),'matching fuzzy por substring não pode regressar');
+for(const t of ['Buffets &amp; Ementas','buffetLoadFile','Importar grelha','Refeição','Capitação/Qtd.','Ficha técnica']) assert(js.includes(t),`módulo Buffet deve incluir ${t}`);
+assert(js.includes('Sem grelhas carregadas nesta versão')&&js.includes('sem inventar pratos ou capitações'),'sem fonte buffet não se deve inventar dados');
+console.log('✓ V34: fichas clicáveis, consumo teórico exato, performance e importador Buffet auditados');

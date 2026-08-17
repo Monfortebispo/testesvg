@@ -1,0 +1,18 @@
+const assert=require('assert');
+const fs=require('fs');const path=require('path');const crypto=require('crypto');const cp=require('child_process');
+const {ROOT}=require('./helpers/browser-sandbox');const read=p=>fs.readFileSync(path.join(ROOT,p),'utf8');
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,p))).digest('hex');
+const html=read('index.html'),nav=read('assets/js/ui/vg-operations-2-v30.js'),shell=read('assets/js/ui/navigation-shell.js'),market=read('assets/js/core/07-markets-v31.js'),hotels=read('assets/js/modules/hoteis.js'),mobile=read('assets/js/ui/mobile-pwa.js'),css=read('assets/css/uniformizacao-v32_2.css'),sw=read('service-worker.js'),compras=read('assets/js/modules/compras.js');
+for(const f of ['assets/js/ui/navigation-shell.js','assets/js/ui/vg-operations-2-v30.js','assets/js/core/07-markets-v31.js','assets/js/modules/hoteis.js','assets/js/modules/compras.js','assets/js/ui/mobile-pwa.js'])cp.execFileSync(process.execPath,['--check',path.join(ROOT,f)],{stdio:'pipe'});
+assert(html.includes('id="view-hoteis"')&&html.includes('id="hoteisTitle"'),'página Hotéis deve existir');
+assert(nav.includes("group('Início & Hotéis',['resumo','hoteis','fichahotel'])")&&!/legacyHidden=\[[^\]]*'hoteis'/.test(nav),'Hotéis deve estar visível na navegação');
+assert(hotels.includes('window.VG?.market?.hotelMarket')&&hotels.includes('market:changed'),'Hotéis deve respeitar Geografia ativa');
+assert(mobile.includes('data-view="hoteis"')&&mobile.includes('Características e fichas técnicas'),'Hotéis deve estar acessível em mobile');
+assert(market.includes('<span>Geografia</span>')&&!market.includes('<span>Mercado</span>'),'seletor deve chamar-se Geografia');
+assert(html.includes('Comentários Fecho do Mês')&&nav.includes("['resumo','hoteis','fichahotel']"),'Comentários Fecho do Mês deve manter página própria');
+assert.strictEqual(sha('assets/js/modules/ficha-hotel.js'),'2779d6f5cbfcedb672f037494ee54847a16aec2247f5a0594346e3e6c4963dc7','lógica de ficha/comentários deve permanecer byte-a-byte preservada');
+assert(!html.includes('id="vgNavDock"')&&!shell.includes('function buildDock'),'barra flutuante horizontal deve ser removida, não apenas escondida');
+assert(html.includes('assets/css/uniformizacao-v32_2.css')&&css.includes('.vg-notif-trigger')&&css.includes('.vg-search-top-trigger'),'contraste do topo deve ser uniformizado');
+assert(css.includes('#view-compras .cd-head')&&css.includes('#view-compras .kpi')&&compras.includes("'#06b6d4','#7c3aed'"),'Compras & Artigos deve usar linguagem visual global');
+assert(/vg-operations-shell-v32-[2-9]/.test(sw)&&sw.includes('/assets/css/uniformizacao-v32_2.css')&&sw.includes('/assets/js/modules/hoteis.js'),'PWA deve manter ou superar V32.2 completa');
+console.log('✓ V32.2: Hotéis recuperado, Geografia, Comentários Fecho do Mês, barra removida e uniformização visual');

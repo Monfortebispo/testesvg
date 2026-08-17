@@ -1,0 +1,15 @@
+const fs=require('fs');
+const assert=require('assert');
+const html=fs.readFileSync('index.html','utf8');
+const persistence=fs.readFileSync('assets/js/core/03-persistence-sharing.js','utf8');
+const sw=fs.readFileSync('service-worker.js','utf8');
+const pkg=require('../package.json');
+assert.strictEqual(pkg.version,'35.8.0');
+assert(html.includes('content="35.8"')&&html.includes('V35.8 · Estável'),'V35.8 Estável deve estar identificada');
+assert(!html.includes('08-performance-loader-v35_7.js'),'rollback não pode carregar o loader Performance V35.7');
+assert(html.includes('assets/js/modules/reputacao.js') && html.indexOf('assets/js/modules/reputacao.js') < html.indexOf('assets/js/core/03-persistence-sharing.js'),'REP_STORE deve existir antes da persistência');
+assert(html.includes('assets/css/operational-agenda-v22.css'),'CSS da Agenda deve carregar no shell para impedir formulário cru');
+assert(!persistence.includes('idbRemoteMetaMatchesLocal') && !persistence.includes('cacheScopeMeta'),'não reintroduzir confiança em cache parcial V35.7');
+assert(sw.includes("const CACHE_NAME = 'vg-operations-shell-v35-8'"),'cache nova deve expulsar V35.7');
+assert(!sw.includes('08-performance-loader-v35_7.js'),'Service Worker não pode reter loader Performance');
+console.log('✓ V35.8 Estável: rollback V35.7 e arranque funcional protegidos');

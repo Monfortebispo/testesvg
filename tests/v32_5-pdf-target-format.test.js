@@ -1,0 +1,18 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.join(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const cl=read('assets/js/modules/city-ledger-v32.js');
+const aa=read('assets/js/modules/analytical-assistant-v25.js');
+const sw=read('service-worker.js');
+const pkg=require('../package.json');
+assert(cl.includes("color='dark'")&&cl.includes("color==='white'?'1 1 1':'0.08 0.14 0.22'"),'PDF deve definir explicitamente a cor do texto');
+assert(cl.includes("15,true,'white'")&&cl.includes("10,true,'white'")&&cl.includes("8,false,'white'"),'cabeçalho escuro do PDF deve usar texto branco');
+assert(cl.includes("pdfTxt(30,y,pdfTrunc(r.hotel,20),7,false)"),'linhas do extrato continuam a usar texto escuro por defeito');
+assert(aa.includes('function targetDisplay(k)'),'Assistente deve ter formatador dedicado para metas');
+assert(aa.includes("if(k.id==='revenue')return `${v>=0?'+':''}${fmt(v,1)}%`;"),'meta de crescimento de receita deve aparecer como percentagem arredondada');
+assert(aa.includes("if(k.id==='adr'||k.id==='revpar')return eur(v,2);"),'metas ADR e RevPAR devem aparecer em moeda');
+assert(aa.includes('Meta:targetDisplay(x)'),'visão geral do hotel deve usar meta formatada');
+assert(aa.includes("'Meta / referência':targetDisplay(k)"),'resposta de KPI individual deve usar meta formatada');
+const cache=sw.match(/vg-operations-shell-v(\d+)(?:-(\d+))?/),cm=Number(cache?.[1]||0),cn=Number(cache?.[2]||0);
+assert(cm>32||(cm===32&&cn>=5),'cache PWA deve manter versão V32.5 ou superior');
+const pv=String(pkg.version).split('.').map(Number);assert(pv[0]>32||(pv[0]===32&&pv[1]>=5),'package deve identificar V32.5 ou superior');
+console.log('✓ V32.5: PDF City Ledger com contraste fixo e metas do Assistente formatadas');

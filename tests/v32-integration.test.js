@@ -1,0 +1,16 @@
+const assert=require('assert');
+const fs=require('fs');
+const path=require('path');
+const ROOT=path.resolve(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(ROOT,p),'utf8');
+const html=read('index.html'),nav=read('assets/js/ui/vg-operations-2-v30.js'),mobile=read('assets/js/ui/mobile-pwa.js'),h360=read('assets/js/modules/hotel-360-v30.js'),search=read('assets/js/ui/global-search.js'),city=read('assets/js/modules/city-ledger-v32.js');
+assert(html.includes('id="nav-unitEconomics"')&&html.includes('id="view-unitEconomics"'),'Eficiência deve ter navegação e view próprias');
+assert(html.includes('id="nav-cityledger"')&&html.includes('id="view-cityledger"'),'City Ledger deve ter navegação e view próprias');
+assert(nav.includes("['receitas','custos','pl','unitEconomics','compras'")&&nav.includes("['agenda','approvals','cityledger']"),'menu V30 deve integrar os dois módulos nos grupos corretos');
+assert(mobile.includes('data-view="unitEconomics"')&&mobile.includes('data-view="cityledger"'),'mobile deve expor Eficiência e City Ledger');
+assert(h360.includes("['efficiency','Eficiência']")&&h360.includes('unitEconomics?.hotel360Html'),'Hotel 360 deve expor Eficiência sem alterar Ficha do Hotel');
+assert(search.includes("title:'Eficiência & Unit Economics'")&&search.includes("title:'City Ledger & Cobranças'"),'Pesquisa Global deve encontrar os módulos V32');
+for(const x of ['Telefone','Email','Reunião','Diligência realizada','Resposta obtida','Valor prometido','Data prometida','Próxima diligência'])assert(city.includes(x),`diligências devem incluir ${x}`);
+const ficha=read('assets/js/modules/ficha-hotel.js');
+assert.strictEqual(require('crypto').createHash('sha256').update(ficha).digest('hex'),'2779d6f5cbfcedb672f037494ee54847a16aec2247f5a0594346e3e6c4963dc7','Ficha do Hotel deve permanecer byte-a-byte inalterada');
+console.log('✓ V32 integração: menu, mobile, Hotel 360, Pesquisa Global, diligências e Ficha preservada');
