@@ -1,0 +1,85 @@
+/* VG Operations V35.6 — desktop responsive / Windows scaling guard
+   Objetivo: a aplicação nunca cria scroll horizontal global em resoluções
+   desktop normais, incluindo Windows a 125%/150%. Tabelas largas fazem
+   scroll apenas dentro do respetivo contentor. */
+
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body,.main,.view-content,.global-filter-bar,.topbar,.topbar-center,.topbar-right{min-width:0;max-width:100%}
+.main,.view-content{overflow-x:hidden}
+.view-content>*{min-width:0;max-width:100%}
+.charts-grid>*,.kpi-grid>*,[class*="-grid"]>*{min-width:0}
+img,svg,canvas,video{max-width:100%}
+pre{max-width:100%;overflow:auto}
+
+/* Qualquer tabela larga deve deslocar-se dentro do cartão e nunca alargar o body. */
+.table-wrapper,
+[class*="table-wrap"],
+[class*="table-wrapper"]{
+  max-width:100%;
+  overflow-x:auto!important;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* 1920px físicos com escala Windows 125% ~= 1536 CSS px.
+   Neste intervalo retiramos o painel contextual permanente e compactamos o topo. */
+@media (max-width:1650px){
+  :root{--sidebar-w:240px}
+  body{
+    grid-template-columns:var(--sidebar-w) minmax(0,1fr);
+    grid-template-areas:"topbar topbar" "sidebar main";
+  }
+  .context-panel{display:none!important}
+  .topbar{padding-right:12px}
+  .logo-block{padding-left:14px;padding-right:14px}
+  .topbar-center{padding:0 10px;gap:5px;overflow:hidden}
+  .topbar-pill{padding:5px 8px;font-size:10px;min-width:0;flex:0 1 auto}
+  .topbar-right{gap:6px;flex:0 1 auto}
+  .vg-build-badge{max-width:62px;overflow:hidden;white-space:nowrap}
+  .vg-search-top-trigger .vg-search-label,
+  .vg-search-top-trigger .vg-search-key,
+  .vg-notif-trigger-label,
+  .v30-top-assistant span,
+  .vg-interface-trigger .txt,
+  .vg-market-switch>span,
+  .vg-market-switch .vg-market-label{display:none!important}
+  .vg-search-top-trigger,.vg-notif-trigger,.v30-top-assistant,.vg-interface-trigger{min-width:32px;justify-content:center;padding-left:7px!important;padding-right:7px!important;margin-left:0!important}
+  .vg-market-switch{gap:3px;padding:3px 4px}
+  .vg-market-switch>div{gap:2px}
+  .vg-market-switch button{padding:5px 6px}
+  .theme-dots{gap:4px}
+  .theme-dot{width:16px;height:16px}
+}
+
+/* Em largura útil equivalente a portáteis pequenos/125%, a sidebar passa a drawer.
+   Isto preserva a largura do conteúdo sem pedir ao utilizador que reduza o zoom. */
+@media (max-width:1180px){
+  body{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"topbar" "main";
+  }
+  .context-panel{display:none!important}
+  .sidebar{
+    position:fixed;
+    top:0;left:0;
+    height:100vh;
+    width:min(280px,88vw);
+    z-index:300;
+    transform:translateX(-100%);
+    transition:transform .28s cubic-bezier(.4,0,.2,1);
+    box-shadow:4px 0 32px rgba(0,0,0,.4);
+    padding-top:58px;
+  }
+  .sidebar.open{transform:translateX(0)}
+  .hamburger{display:flex}
+  .logo-block{width:auto;border-right:none}
+  .topbar-center{display:none!important}
+  .topbar-right{margin-left:auto;gap:5px}
+  .view-content{padding:16px 14px 60px}
+  .global-filter-bar{padding-left:14px;padding-right:14px}
+}
+
+@media (max-width:760px){
+  .vg-build-badge{display:none!important}
+  .v30-top-assistant{display:none!important}
+}

@@ -1,0 +1,32 @@
+/* VG Operations V31 — seletor de mercado */
+.vg-market-switch{display:flex;align-items:center;gap:8px;margin:0 2px 0 0;padding:5px 7px;border:1px solid var(--border-2);border-radius:10px;background:var(--surface-1);flex:0 0 auto}
+.vg-market-switch>span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:800}
+.vg-market-switch>div{display:flex;gap:4px}.vg-market-switch button{border:1px solid transparent;background:transparent;color:var(--text-2);font:700 10px var(--font);padding:6px 8px;border-radius:7px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}.vg-market-switch button.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+html[data-vg-market="brasil"] .ctx-region-badge:before{content:'🇧🇷 ';}html[data-vg-market="iberia"] .ctx-region-badge:before{content:''}
+@media(max-width:820px){.vg-market-switch{width:auto;margin:0;padding:3px;gap:3px}.vg-market-switch>span,.vg-market-switch .vg-market-label{display:none}.vg-market-switch button{padding:6px 7px;font-size:12px}.vg-market-switch>div{gap:2px}}
+
+/* V31.2 — isolamento visual quando o mercado ativo ainda não tem P&L. */
+body.vg-market-no-pnl{--context-w:0px}
+body.vg-market-no-pnl #contextPanel{display:none!important}
+body.vg-market-no-pnl #globalFilterBar{display:none!important}
+body.vg-market-no-pnl #view-resumo.active,
+body.vg-market-no-pnl #view-receitas.active,
+body.vg-market-no-pnl #view-custos.active,
+body.vg-market-no-pnl #view-kpis.active,
+body.vg-market-no-pnl #view-pl.active,
+body.vg-market-no-pnl #view-costanalysis.active,
+body.vg-market-no-pnl #view-cua.active,
+body.vg-market-no-pnl #view-alertas.active,
+body.vg-market-no-pnl #view-compare.active,
+body.vg-market-no-pnl #view-ranking.active,
+body.vg-market-no-pnl #view-sazonalidade.active,
+body.vg-market-no-pnl #view-simulador.active,
+body.vg-market-no-pnl #view-orcamento.active,
+body.vg-market-no-pnl #view-benchmark.active,
+body.vg-market-no-pnl #view-anomalies.active,
+body.vg-market-no-pnl #view-fichahotel.active,
+body.vg-market-no-pnl #view-hotel360.active,
+body.vg-market-no-pnl #view-hotelperformance.active,
+body.vg-market-no-pnl #view-automaticreports.active,
+body.vg-market-no-pnl #view-analyticalassistant.active{display:none!important}
+body.vg-market-no-pnl #emptyState{max-width:680px;margin:72px auto 0;border:1px dashed var(--border);border-radius:18px;background:rgba(255,255,255,.015);padding:42px 28px}

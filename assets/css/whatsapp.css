@@ -1,0 +1,25 @@
+
+.wa-share-btn {
+  background: #25D366; color: #fff; border: none;
+  padding: 5px 12px; border-radius: 7px;
+  font-family: var(--font); font-size: 10px; font-weight: 700;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+  letter-spacing: .3px; transition: opacity .18s; margin-left: auto;
+}
+.wa-share-btn:hover { opacity: .85; }
+.wa-sel-btn {
+  background: var(--surface-2); border: 1px solid var(--border-2);
+  color: var(--text-2); padding: 6px 12px; border-radius: 8px;
+  font-family: var(--font); font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all .18s;
+}
+.wa-sel-btn:hover { border-color: var(--border); color: var(--text-1); }
+.wa-sel-btn.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+.wa-mes-btn {
+  background: var(--surface-2); border: 1px solid var(--border-2);
+  color: var(--text-2); padding: 6px 12px; border-radius: 8px;
+  font-family: var(--font); font-size: 11px; font-weight: 700;
+  cursor: pointer; transition: all .18s;
+}
+.wa-mes-btn:hover { border-color: var(--border); color: var(--text-1); }
+.wa-mes-btn.active { background: rgba(37,211,102,.15); border-color: #25D366; color: #25D366; }

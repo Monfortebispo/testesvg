@@ -1,0 +1,52 @@
+
+/* Logótipo limpo no cabeçalho; regra exclusivamente visual. */
+.logo-block .logo-mark.vg-official-mark,
+body.vg-interface-modern .logo-block .logo-mark.vg-official-mark,
+body.theme-erp .logo-block .logo-mark.vg-official-mark,
+body.theme-vilagale .logo-block .logo-mark.vg-official-mark{
+  width:38px!important;
+  height:38px!important;
+  min-width:38px!important;
+  max-width:38px!important;
+  border-radius:13px!important;
+  padding:6px!important;
+  background:linear-gradient(135deg,#5FBEB5 0%,#E2C06A 100%)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:0 10px 22px rgba(6,182,212,.20), inset 0 1px 0 rgba(255,255,255,.42)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  color:transparent!important;
+  font-size:0!important;
+  line-height:0!important;
+  flex:0 0 38px!important;
+}
+.logo-block .logo-mark.vg-official-mark img,
+body.vg-interface-modern .logo-block .logo-mark.vg-official-mark img,
+body.theme-erp .logo-block .logo-mark.vg-official-mark img,
+body.theme-vilagale .logo-block .logo-mark.vg-official-mark img{
+  width:27px!important;
+  height:27px!important;
+  min-width:27px!important;
+  max-width:27px!important;
+  display:block!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.28))!important;
+  pointer-events:none!important;
+}
+body.vg-interface-modern .logo-block{gap:11px!important;}
+@media (max-width:768px){
+  .logo-block .logo-mark.vg-official-mark,
+  body.vg-interface-modern .logo-block .logo-mark.vg-official-mark{
+    width:34px!important;height:34px!important;min-width:34px!important;max-width:34px!important;flex-basis:34px!important;padding:5px!important;
+  }
+  .logo-block .logo-mark.vg-official-mark img,
+  body.vg-interface-modern .logo-block .logo-mark.vg-official-mark img{
+    width:24px!important;height:24px!important;min-width:24px!important;max-width:24px!important;
+  }
+}

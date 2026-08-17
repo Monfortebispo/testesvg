@@ -1,0 +1,134 @@
+/* VG Operations V32.2 — uniformização visual transversal */
+/* Barra flutuante de atalhos removida em todas as geografias e modos. */
+#vgNavDock{display:none!important}
+.main{padding-bottom:28px!important}
+body.vg-interface-modern .main{padding-bottom:28px!important}
+
+/* Contraste consistente no topo claro da Interface 2.0. */
+body.vg-interface-modern .vg-notif-trigger,
+body.vg-interface-modern .vg-search-top-trigger,
+body.vg-interface-modern .v30-top-assistant{
+  min-height:34px!important;
+  border:1px solid rgba(15,23,42,.12)!important;
+  background:#fff!important;
+  color:#334155!important;
+  box-shadow:0 7px 18px rgba(15,23,42,.05)!important;
+}
+body.vg-interface-modern .vg-notif-trigger:hover,
+body.vg-interface-modern .vg-search-top-trigger:hover,
+body.vg-interface-modern .v30-top-assistant:hover{background:#f8fafc!important;border-color:rgba(6,182,212,.30)!important;color:#0f172a!important}
+body.vg-interface-modern .vg-search-top-trigger .vg-search-key{color:#475569!important;background:#f1f5f9!important;border-color:#cbd5e1!important}
+body.vg-interface-modern .vg-notif-trigger-label,
+body.vg-interface-modern .vg-search-label{color:#334155!important}
+body.vg-interface-modern .vg-notif-trigger b{border-color:#fff!important}
+
+
+/* Geografia usa o mesmo estado ativo da navegação principal. */
+body.vg-interface-modern .vg-market-switch{background:#fff!important;border-color:rgba(15,23,42,.10)!important;box-shadow:0 7px 18px rgba(15,23,42,.04)!important}
+body.vg-interface-modern .vg-market-switch>span{color:#64748b!important}
+body.vg-interface-modern .vg-market-switch button{color:#475569!important}
+body.vg-interface-modern .vg-market-switch button.active{background:linear-gradient(135deg,var(--vgs-cyan),var(--vgs-violet))!important;color:#fff!important;border-color:transparent!important}
+
+/* Página Hotéis recuperada, na mesma linguagem dos restantes módulos. */
+.ht-empty-state{grid-column:1/-1;padding:24px;border:1px dashed var(--border-2);border-radius:16px;background:var(--surface-1);color:var(--text-2);display:flex;flex-direction:column;gap:6px}
+.ht-empty-state strong{color:var(--text-1);font-size:13px}.ht-empty-state span{font-size:11px;line-height:1.55}
+body.vg-interface-modern #view-hoteis .ht-card{border-radius:22px!important;border:1px solid rgba(15,23,42,.08)!important;box-shadow:0 16px 38px rgba(15,23,42,.07)!important;background:rgba(255,255,255,.92)!important}
+body.vg-interface-modern #view-hoteis .ht-filter-btn.active{background:linear-gradient(135deg,var(--vgs-cyan),var(--vgs-violet))!important;color:#fff!important;border-color:transparent!important}
+
+/* Compras & Artigos deixa de ter uma identidade visual paralela. */
+#view-compras .cd-head{background:var(--surface-1)!important;color:var(--text-1)!important;border:1px solid var(--border-2)!important;border-radius:14px!important;box-shadow:0 12px 30px rgba(15,23,42,.06)!important}
+#view-compras .cd-meta{color:var(--text-2)!important;opacity:1!important}
+#view-compras .fgrp label{color:var(--text-2)!important;opacity:1!important;font-weight:800!important}
+#view-compras .fgrp select{background:var(--surface-2)!important;color:var(--text-1)!important;border:1px solid var(--border-2)!important;border-radius:9px!important}
+#view-compras .seg{background:var(--surface-2)!important;border:1px solid var(--border-2)!important;border-radius:10px!important}
+#view-compras .seg button{color:var(--text-2)!important;border-radius:8px!important}
+#view-compras .seg button.on{background:var(--gold)!important;color:var(--navy)!important;font-weight:800!important}
+#view-compras .kpi,#view-compras .card,#view-compras .cd-tabs{background:var(--surface-1)!important;border:1px solid var(--border-2)!important;box-shadow:0 12px 30px rgba(15,23,42,.06)!important}
+#view-compras .kpi{border-top:1px solid var(--border-2)!important;position:relative;overflow:hidden}
+#view-compras .kpi::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:var(--gold)}
+#view-compras .kpi .v,#view-compras .card h3,#view-compras .clk{color:var(--text-1)!important}
+#view-compras .kpi .l,#view-compras .kpi .s,#view-compras .note,#view-compras .bc{color:var(--text-2)!important}
+#view-compras th{background:var(--surface-2)!important;color:var(--text-2)!important;border-color:var(--border-2)!important}
+#view-compras td{color:var(--text-1)!important;border-color:var(--border-2)!important}
+#view-compras tr:hover td{background:var(--surface-2)!important}
+#view-compras .cd-tabs button{color:var(--text-2)!important}
+#view-compras .cd-tabs button.on{color:var(--text-1)!important;border-bottom-color:var(--gold)!important}
+#view-compras .bar{background:var(--surface-3)!important}
+#view-compras .bar i{background:linear-gradient(90deg,var(--gold),var(--teal))!important}
+
+
+#view-compras .btn:not(.gold){background:var(--text-1)!important;color:var(--surface-1)!important}
+#view-compras .btn:not(.gold):hover{filter:brightness(.92)}
+
+/* Interface 2.0: mesmo tratamento de seleção usado no menu lateral. */
+body.vg-interface-modern #view-compras .seg button.on,
+body.vg-interface-modern #view-compras .btn.gold,
+body.vg-interface-modern #view-compras .cd-tabs button.on{
+  background:linear-gradient(135deg,var(--vgs-cyan),var(--vgs-violet))!important;
+  color:#fff!important;
+  border-color:transparent!important;
+}
+body.vg-interface-modern #view-compras .cd-tabs button.on{background:transparent!important;color:#0f172a!important;border-bottom:3px solid var(--vgs-cyan)!important}
+body.vg-interface-modern #view-compras .kpi::before{background:linear-gradient(90deg,var(--vgs-cyan),var(--vgs-violet),var(--vgs-gold))}
+body.vg-interface-modern #view-compras .card,
+body.vg-interface-modern #view-compras .kpi,
+body.vg-interface-modern #view-compras .cd-tabs,
+body.vg-interface-modern #view-compras .cd-head{border-radius:22px!important;background:rgba(255,255,255,.90)!important;border-color:rgba(15,23,42,.08)!important;box-shadow:0 16px 42px rgba(15,23,42,.07)!important}
+body.vg-interface-modern #view-compras .btn:not(.gold){background:#0f172a!important;color:#fff!important}
+
+/* Texto secundário: nunca usar contraste tão baixo que pareça desativado. */
+body.vg-interface-modern{--text-2:#526174;--text-3:#718096}
+
+
+/* V32.4 — contraste explícito nos dois temas claros do cabeçalho.
+   O tema escuro mantém o tratamento original. */
+body.theme-erp .vg-notif-trigger,
+body.theme-erp .vg-search-top-trigger,
+body.theme-erp .v30-top-assistant,
+body.theme-vilagale .vg-notif-trigger,
+body.theme-vilagale .vg-search-top-trigger,
+body.theme-vilagale .v30-top-assistant{
+  background:rgba(255,255,255,.88)!important;
+  border-color:var(--border)!important;
+  color:var(--text-1)!important;
+  box-shadow:0 5px 14px rgba(15,23,42,.05)!important;
+}
+body.theme-erp .vg-notif-trigger-label,
+body.theme-erp .vg-search-label,
+body.theme-erp .v30-top-assistant span,
+body.theme-vilagale .vg-notif-trigger-label,
+body.theme-vilagale .vg-search-label,
+body.theme-vilagale .v30-top-assistant span{
+  color:var(--text-1)!important;
+  opacity:1!important;
+}
+body.theme-erp .vg-search-top-trigger svg,
+body.theme-vilagale .vg-search-top-trigger svg{color:var(--text-2)!important;opacity:1!important}
+body.theme-erp .vg-search-top-trigger .vg-search-key,
+body.theme-vilagale .vg-search-top-trigger .vg-search-key{
+  color:var(--text-2)!important;
+  background:var(--surface-2)!important;
+  border-color:var(--border)!important;
+  opacity:1!important;
+}
+body.theme-erp #onlineUsersWrap,
+body.theme-vilagale #onlineUsersWrap{
+  background:rgba(255,255,255,.76)!important;
+  border-color:var(--border)!important;
+}
+body.theme-erp #onlineCount,
+body.theme-erp #onlineUsersWrap span:last-child,
+body.theme-vilagale #onlineCount,
+body.theme-vilagale #onlineUsersWrap span:last-child{
+  color:var(--text-2)!important;
+  opacity:1!important;
+}
+body.theme-erp .vg-notif-trigger:hover,
+body.theme-erp .vg-search-top-trigger:hover,
+body.theme-erp .v30-top-assistant:hover,
+body.theme-vilagale .vg-notif-trigger:hover,
+body.theme-vilagale .vg-search-top-trigger:hover,
+body.theme-vilagale .v30-top-assistant:hover{
+  background:var(--surface-2)!important;
+  color:var(--text-1)!important;
+}

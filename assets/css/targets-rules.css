@@ -1,0 +1,15 @@
+/* VG Dashboard v9 — Metas & Regras */
+.vg-config-section{margin-top:22px;padding-top:18px;border-top:1px solid var(--border-2)}
+.vg-config-title{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:800;margin:0 0 6px}
+.vg-config-help{font-size:11px;color:var(--text-3);margin:0 0 12px;line-height:1.5}
+.vg-rules-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.vg-rule-card{background:var(--surface-2);border:1px solid var(--border-2);border-radius:9px;padding:10px}
+.vg-rule-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;font-size:10px;font-weight:700;color:var(--text-1)}
+.vg-rule-head label{display:flex;align-items:flex-start;gap:6px;line-height:1.35}.vg-rule-head input{accent-color:var(--gold);margin-top:1px}
+.vg-rule-head select,.vg-rule-value input,.vg-target-form input,.vg-target-form select{background:var(--surface-1);border:1px solid var(--border-2);color:var(--text-1);border-radius:6px;padding:7px;font:inherit}
+.vg-rule-head select{font-size:9px;padding:4px 5px}.vg-rule-value{display:flex;align-items:center;gap:6px;margin-top:9px}.vg-rule-value input{width:88px;font-size:12px;font-weight:700}.vg-rule-value span{font-size:10px;color:var(--text-3)}
+.vg-rule-help{font-size:9px;color:var(--text-3);margin-top:7px;line-height:1.4}
+.vg-target-form{display:grid;grid-template-columns:1.5fr .65fr 1fr repeat(4,.8fr);gap:7px;align-items:end}.vg-target-form label{display:flex;flex-direction:column;gap:4px;font-size:9px;color:var(--text-3);text-transform:uppercase;letter-spacing:.4px}.vg-target-form input,.vg-target-form select{min-width:0;font-size:10px}
+.vg-target-actions{display:flex;gap:7px;margin-top:9px;align-items:center}.vg-target-table{margin-top:10px;max-height:240px;overflow:auto}.vg-target-table table{width:100%;border-collapse:collapse;font-size:10px}.vg-target-table th,.vg-target-table td{padding:7px 6px;border-bottom:1px solid var(--border-2);text-align:left;white-space:nowrap}.vg-target-table th{position:sticky;top:0;background:var(--surface-1);color:var(--text-3);font-size:9px;text-transform:uppercase;letter-spacing:.4px}
+@media(max-width:900px){.vg-rules-grid{grid-template-columns:1fr 1fr}.vg-target-form{grid-template-columns:1fr 1fr 1fr}.vg-target-form label:first-child{grid-column:span 2}}
+@media(max-width:620px){.vg-rules-grid,.vg-target-form{grid-template-columns:1fr}.vg-target-form label:first-child{grid-column:auto}}
