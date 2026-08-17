@@ -1,8 +1,8 @@
 {
   "name": "vg-dashboard-operacoes",
-  "version": "35.8.0",
+  "version": "35.6.0",
   "private": true,
-  "description": "VG Operations v35.8 Estável: rollback integral da camada Performance V35.7 para a base funcional V35.6, mantendo navegação, Governanta, acessos e responsividade",
+  "description": "VG Operations v35.6: correções Hotel 360, Pesquisa Global e acesso direto da Governanta, mantendo responsividade 125%/150%",
   "scripts": {
     "test": "node tests/run-tests.js",
     "validate": "node tests/run-tests.js"

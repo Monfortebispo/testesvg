@@ -10,9 +10,9 @@ assert(saveFn.includes('expectedUpdatedAt:HOTEIS_PROFILE_META[sk]?.updatedAt||\'
 assert(hotels.includes('function htRegionSelect'),'Região deve ser escolhida de valores canónicos e não ficar apenas como texto livre');
 
 // Coerência de versão e lazy-load dos módulos pesados.
-assert.strictEqual(pkg.version,'35.8.0');
-assert(html.includes('content="35.8"')&&html.includes('V35.8 · Estável'),'HTML e badge devem identificar V35.8');
-assert(sw.includes("const CACHE_NAME = 'vg-operations-shell-v35-8'"),'Service Worker deve usar cache V35.8');
+assert.strictEqual(pkg.version,'35.6.0');
+assert(html.includes('content="35.6"')&&html.includes('V35.6 · Navegação & Governanta'),'HTML e badge devem identificar V35.6');
+assert(sw.includes("const CACHE_NAME = 'vg-operations-shell-v35-6'"),'Service Worker deve usar cache V35.6');
 assert(!html.includes('src="assets/js/modules/compras-ab-native-v35.js"')&&!html.includes('src="assets/js/modules/housekeeping-native-v35.js"'),'A&B e HK devem carregar apenas quando abertos');
 
 // Histórico HK: não declarar sucesso sem as 3 campanhas conhecidas (2 fechadas + 1 aberta).

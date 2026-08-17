@@ -19,10 +19,10 @@ const hkcss=read('assets/css/housekeeping-native-v35.css');
 const authcss=read('assets/css/auth.css');
 const responsive=read('assets/css/responsive-desktop-v35_6.css');
 
-assert.strictEqual(pkg.version,'35.8.0','package deve identificar V35.8');
-assert(html.includes('content="35.8"')&&html.includes('V35.8 · Estável'),'HTML deve identificar V35.8');
-assert(guard.includes("PLATFORM_BUILD='35.8'"),'Version Guard deve identificar V35.8');
-assert(sw.includes("vg-operations-shell-v35-8"),'Service Worker deve usar cache V35.8');
+assert.strictEqual(pkg.version,'35.6.0','package deve identificar V35.6');
+assert(html.includes('content="35.6"')&&html.includes('V35.6 · Navegação & Governanta'),'HTML deve identificar V35.6');
+assert(guard.includes("PLATFORM_BUILD='35.6'"),'Version Guard deve identificar V35.6');
+assert(sw.includes("vg-operations-shell-v35-6"),'Service Worker deve usar cache V35.6');
 assert(html.includes('assets/css/responsive-desktop-v35_6.css'),'responsividade 125%/150% tem de estar realmente ligada ao HTML');
 assert(sw.includes('/assets/css/responsive-desktop-v35_6.css'),'responsividade deve integrar o shell PWA');
 assert(responsive.includes('@media (max-width:1650px)')&&responsive.includes('@media (max-width:1180px)'),'breakpoints de desktop escalado devem manter-se');
@@ -55,4 +55,4 @@ assert(hkcss.includes('#govMode.hidden{display:none!important}')&&hkcss.includes
 assert(authcss.includes('body.vg-governanta-mode #housekeepingRoot .od-hero{display:none!important'),'fallback exterior deve esconder hero da Governanta');
 
 ['assets/js/modules/hotel-360-v30.js','assets/js/ui/navigation-shell.js','assets/js/ui/global-search.js','assets/js/modules/operations-domains-v33.js','assets/js/modules/housekeeping-native-v35.js'].forEach(rel=>cp.execFileSync(process.execPath,['--check',path.join(ROOT,rel)],{stdio:'pipe'}));
-console.log('✓ V35.8: Hotel 360 Eficiência, Ctrl+K, Governanta direta e CSS 125% validados');
+console.log('✓ V35.6: Hotel 360 Eficiência, Ctrl+K, Governanta direta e CSS 125% validados');

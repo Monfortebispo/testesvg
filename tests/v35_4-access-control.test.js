@@ -1,7 +1,7 @@
 const assert=require('assert'),fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const ROOT=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(ROOT,p),'utf8');
 const pkg=require('../package.json'),html=read('index.html'),auth=read('assets/js/auth/auth-client.js'),server=read('netlify/functions/dashboard-sessao.js'),hkjs=read('assets/js/modules/housekeeping-native-v35.js'),nav=read('assets/js/ui/navigation-shell.js'),search=read('assets/js/ui/global-search.js'),responsive=read('assets/css/responsive-desktop-v35_6.css');
-assert.strictEqual(pkg.version,'35.8.0','V35.8 deve estar identificada no package');
+assert.strictEqual(pkg.version,'35.6.0','V35.6 deve estar identificada no package');
 assert(html.includes('value="governanta"')&&html.includes('value="chefe_recepcao"'),'Setup deve criar Governanta e Chefe de Receção');
 assert(html.includes('vgHotelAccessWrap')&&html.includes('vgModuleAccessWrap'),'Setup deve permitir escolher vários hotéis e menus por utilizador');
 assert(auth.includes("governanta:['housekeeping']")&&auth.includes("chefe_recepcao:['resumo'"),'perfis recomendados devem existir no cliente');
@@ -10,7 +10,7 @@ assert(server.includes('"governanta","chefe_recepcao"')&&server.includes('rec.ho
 assert(server.includes('DIRECTION_ONLY_MODULES')&&server.includes('if(requiredModule&&!userCanModule'),'servidor deve validar módulos e reservar governação à DO');
 assert(hkjs.includes("r==='governanta')return'Governanta'")&&hkjs.includes('abrirModoGovernanta')&&hkjs.includes('Registar quebras')&&hkjs.includes('Contagem física'),'Governanta deve entrar no modo mobile original');
 assert(nav.includes('vgAuthCanAccessModule')&&search.includes('vgAuthCanAccessModule'),'command palette e pesquisa global devem respeitar menus atribuídos');
-assert(responsive.includes('@media (max-width:1650px)')&&responsive.includes('@media (max-width:1180px)')&&responsive.includes('overflow-x:hidden')&&responsive.includes('overflow-x:auto!important'),'V35.8 deve adaptar desktop 125%/150% sem scroll horizontal global e manter scroll local nas tabelas');
+assert(responsive.includes('@media (max-width:1650px)')&&responsive.includes('@media (max-width:1180px)')&&responsive.includes('overflow-x:hidden')&&responsive.includes('overflow-x:auto!important'),'V35.6 deve adaptar desktop 125%/150% sem scroll horizontal global e manter scroll local nas tabelas');
 
 function clone(v){return v==null?v:JSON.parse(JSON.stringify(v));}
 function b64url(buf){return Buffer.from(buf).toString('base64').replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');}
@@ -55,5 +55,5 @@ async function dashCall(handler,...args){const r=await handler(dashEvent(...args
   const ab=loadEsm('netlify/functions/custos-ab-store.js',{'vg-dashboard-operacoes':seedAuth,'vg-custos-ab':{previsoes:{p:{porHotel:{'VG Opera':1,'VG Estoril':2,'VG Cascais':3}}}}});
   r=await ab.handler(req('POST','https://x/api/shared',chiefTok,{action:'get',key:'previsoes'}));assert.strictEqual(r.status,403,'Chefe de Receção sem A&B não acede ao backend A&B');
   r=await ab.handler(req('POST','https://x/api/shared',chiefAbTok,{action:'get',key:'previsoes'}));j=await r.json();assert.strictEqual(r.status,200);assert.deepStrictEqual(Object.keys(j.data.p.porHotel).sort(),['VG Estoril','VG Opera'],'Chefe de Receção com A&B vê apenas os hotéis atribuídos');
-  console.log('✓ V35.8: acessos e responsividade desktop 125%/150% validados');
+  console.log('✓ V35.6: acessos e responsividade desktop 125%/150% validados');
 })().catch(e=>{console.error(e.stack||e);process.exit(1)});
