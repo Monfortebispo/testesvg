@@ -1,0 +1,10 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');const ROOT=path.join(__dirname,'..');
+const html=fs.readFileSync(path.join(ROOT,'index.html'),'utf8'),sw=fs.readFileSync(path.join(ROOT,'service-worker.js'),'utf8'),mobile=fs.readFileSync(path.join(ROOT,'assets/js/ui/mobile-pwa.js'),'utf8'),search=fs.readFileSync(path.join(ROOT,'assets/js/ui/global-search.js'),'utf8'),nav=fs.readFileSync(path.join(ROOT,'assets/js/core/02-navigation-kpis.js'),'utf8'),js=fs.readFileSync(path.join(ROOT,'assets/js/modules/automatic-reports-v24.js'),'utf8');
+require('child_process').execFileSync(process.execPath,['--check',path.join(ROOT,'assets/js/modules/automatic-reports-v24.js')]);
+assert(html.includes('nav-automaticreports')&&html.includes('view-automaticreports')&&html.includes('automatic-reports-v24.js')&&html.includes('automatic-reports-v24.css'));
+assert(sw.includes('vg-operations-shell-v32')&&sw.includes('automatic-reports-v24.js')&&sw.includes('automatic-reports-v24.css'));
+assert(mobile.includes('data-view="automaticreports"'));assert(search.includes("type:'report'")&&search.includes('automaticReports?.open'));assert(nav.includes("currentView==='automaticreports'"));
+assert(js.includes("state={scope:'hotel'")&&js.includes("type:'monthly'")&&js.includes("'weekly'")&&js.includes('application/msword')&&js.includes('window.print()'));
+assert(js.includes('window.VG.hotelPerformance.buildModel')&&js.includes('window.VG?.benchmark?.metricGroup?.'));
+assert(!js.includes('dashboard-sessao'));
+console.log('✓ v24: hotel/região/consolidado, mensal/semanal, V23 canónica, PDF/Word/HTML, mobile/PWA/pesquisa');

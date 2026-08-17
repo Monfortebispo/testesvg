@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "VG Operations",
+  "short_name": "VG Ops",
+  "description": "Dashboard operacional Vila Galé — Central de Operações, ações, forecast, anomalias e análise hoteleira.",
+  "lang": "pt-PT",
+  "start_url": "/#resumo",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#071a2b",
+  "theme_color": "#071a2b",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {"src": "/assets/icons/vg-ops-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/assets/icons/vg-ops-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/assets/icons/vg-ops-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Central de Operações", "short_name": "Central", "url": "/#resumo", "icons": [{"src":"/assets/icons/vg-ops-192.png","sizes":"192x192","type":"image/png"}]},
+    {"name": "Forecast & Cenários", "short_name": "Forecast", "url": "/#forecast", "icons": [{"src":"/assets/icons/vg-ops-192.png","sizes":"192x192","type":"image/png"}]},
+    {"name": "Deteção de Anomalias", "short_name": "Anomalias", "url": "/#anomalies", "icons": [{"src":"/assets/icons/vg-ops-192.png","sizes":"192x192","type":"image/png"}]}
+  ]
+}

@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<!-- VG Operations 2.0 · v35.8 Estável · 2026-08-17 -->
+
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vila Galé — Dashboard Operações · V35.8 Estável</title>
+<meta name="vg-build" content="35.8"/>
+<meta name="theme-color" content="#071a2b"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="VG Operations"/>
+<meta name="application-name" content="VG Operations"/>
+<meta name="format-detection" content="telephone=no"/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/vg-ops-192.png"/>
+<link rel="apple-touch-icon" href="assets/icons/vg-ops-180.png"/>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<script src="assets/js/core/06-version-guard-v29_1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+
+<script src="assets/vendor/fflate.min.js" defer></script>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/operations-center.css">
+<link rel="stylesheet" href="assets/css/actions-management.css">
+<link rel="stylesheet" href="assets/css/targets-rules.css">
+<link rel="stylesheet" href="assets/css/benchmarking.css">
+<link rel="stylesheet" href="assets/css/forecast-scenarios.css">
+<link rel="stylesheet" href="assets/css/scenario-comparison-v29.css">
+<link rel="stylesheet" href="assets/css/anomaly-detection.css">
+<link rel="stylesheet" href="assets/css/data-center.css">
+<link rel="stylesheet" href="assets/css/auth.css">
+<link rel="stylesheet" href="assets/css/cost-detail.css">
+
+
+<link rel="stylesheet" href="assets/css/revenue-intelligence-ask.css">
+
+<link rel="stylesheet" href="assets/css/revenue-intelligence.css">
+
+<link rel="stylesheet" href="assets/css/revenue-intelligence-secondary.css">
+<link rel="stylesheet" href="assets/css/mobile-pwa.css">
+<link rel="stylesheet" href="assets/css/global-search.css">
+<link rel="stylesheet" href="assets/css/responsive-desktop-v35_6.css">
+<link rel="stylesheet" href="assets/css/notifications-v21.css">
+<link rel="stylesheet" href="assets/css/operational-agenda-v22.css">
+<link rel="stylesheet" href="assets/css/hotel-performance-v23.css">
+<link rel="stylesheet" href="assets/css/automatic-reports-v24.css">
+<link rel="stylesheet" href="assets/css/analytical-assistant-v25.css">
+<link rel="stylesheet" href="assets/css/document-management-v26.css">
+<link rel="stylesheet" href="assets/css/workflow-approvals-v27.css">
+<link rel="stylesheet" href="assets/css/vg-operations-2-v30.css">
+<link rel="stylesheet" href="assets/css/markets-v31.css">
+<link rel="stylesheet" href="assets/css/unit-economics-v32.css">
+<link rel="stylesheet" href="assets/css/city-ledger-v32.css">
+</head>
+<body>
+<div id="cdnWarningBanner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:99999;background:#9c0006;color:#fff;text-align:center;padding:10px 16px;font-family:Arial,sans-serif;font-size:13px;font-weight:700">
+  ⚠️ As bibliotecas externas (Chart.js / Excel) não carregaram. Verifica a ligação à internet e recarrega a página (Ctrl+R / Cmd+R). Sem ligação à internet, gráficos e exportação Excel não vão funcionar.
+</div>
+<script src="assets/js/ui/cdn-healthcheck.js" defer></script>
+<div id="vgLoginOverlay">
+<div class="vg-login-card">
+<img alt="Vila Galé Hotéis" class="vg-login-logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMCAggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoICAgICQkJCAgLDQoIDQgICggBAwQEBgUGCAYGCgoICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICP/AABEIAVQCAAMBEQACEQEDEQH/xAAdAAEAAQQDAQAAAAAAAAAAAAAACQMEBwgBBQYC/8QAYBAAAgIBAgIFBQYOCw8CBQUAAQIAAwQFERIhBgcIEzEJQVFVYRQicYGR0xUYGSMyQlJyk5ShsbLUMzRTVHOCkpWz0dIWFyQ1NkNidHWio7TBwtVFgyUmhKTxY7Xh4/D/xAAZAQEAAwEBAAAAAAAAAAAAAAAAAQIDBAX/xAAvEQEAAQIEBAYCAwACAwAAAAAAAQIRAxITUSExQWEycZGh0fCBscHS4SLxQpKi/9oADAMBAAIRAxEAPwCVOAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwTA8J016+NG05jXm6lh0Wjxpa5WvH/ALKFrf8AclopmeUKzVEMJdKvKMaHQxWirPzdvt6Ka66z8ByrqH2/9vw9M0jCnraFZxIeK1LynNI/YdGuf+GzK6v6Oi/85ltHurqdnRN5ULI3O2gU7ebfWH329o+hJ2+Uy2jG8+n+qalW0f8AtP8AVWw/KgWk/XNBrUcuaaqznz78m0ysejz+nw25xODHSfb/AFMYlXWI9b/xD0WF5TfD5d7pOYvp7q/Ht+TvDRv8e0rozuvqdns+jXlENAvIFwzsP23462KPjxbMg/7srOFV5pzwy70L7QmiajalGHqeJffZxcFAtC3vwqXbhpfhsbhVSx2U7AEnwlJpmOi0VRLIcqsQEBAQEBAQ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FC7ynON9rpGST/pZVKjb4RW539m3xyNGdzUULPKd07ctGtJ8wOdWBv7SMYkD27H4JOj39kanZb/VPR6jP85D9RjS7+xqdlm/lQrd+WgIRvyJ1dgdvTt9CiN/ZxH4ZOj39v8AUanb3bd9SnWvVrem4+pU1WUpebVNVhUuj0XWUWDiUlWHHWxVhtupG4U7qMKqcs2ltE3e5lUkBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQOv17QKMqmzHyaq76LVKWVWoHrdT5mRgQRuAeY5EA8iBF7IYk+kw6Meqavw2V8/NNSrdXJGx9Jj0Y9U1fhsr5+Rnq3MkbLodkLo16oxf8Ai/ORnq3TljZz9KH0a9UYv/F+cjPVuZY2VKeyV0bXw0fDP3ys/wAgZyB8IjPVuZY2VfpU+jnqbB/Aj+uM9W5ljY+lS6OepsH8CP64z1bmWNlyvZh6Ojl9BNM+PDoJ+MlCSfaeZjPVvPqjJTtDn6WPo76k0v8AEqP7EZ6t59TJTtD6r7M/R0f+h6SfvsDGYfI1ZEZ6t59TJTtHoq/S3dHfUOj/AM2YXzMZ6t59ZMlO0eh9Ld0d9Q6N/NmF8zGerefWTJTtHouq+oPQgABo2lADkANPxAAPYO5kZp3n1lbLGz6/vD6H6m0r+b8T5qM07z6yWh909Ruiqd10jS1PhuMDFB/JVGad59S0K/8Aec0j1Vp34ljfNSLzvPqWg/vOaR6q078SxvmovO8+paFwnVdpgGw07AAHgBiY4A/4cXktD6/vY6b6uwfxTH+bi8lnDdV2mEbHTsAg8iPcmPt/RxeSy2/vOaR6q078SxvmovO8+paD+85pHqrTvxLG+ai87z6loUbupDRW+y0jTG+HAxT+eqTmnefWS0Kf94fQ/U2lfzfifNRmnefWS0OG6hdDPL6DaVz5f4vxPmozTvPrJljZafS3dHfUOj/zZhfMyc9W8+sq5Kdo9IPpbujvqHR/5swvmYz1bz6yZKdo9IU7OzR0dP8A6HpI+9wMZB8i1gfHGerefUyU7R6Pj6WPo76k0v8AEqP7EZ6t59TJTtHo4bsw9HT/AOiaZ8WHQD8RCAg+0cxGereTJTtC2+lT6OepsH8CP64z1bpyxsfSpdHPU2D+BH9cnUq3MsbKN3ZJ6Nt46Phj71XQfIrgfHIz1bmWNnx9KH0a9UYv/F+cjPVuZY2cHshdGvVGN8tvzkZ6tzLGy1+kx6Meqavw2V8/GerdGSNj6TDox6pq/DZXz8nUq3MkbMt6DoFGLTXj41NdFFShKqaUWuutR4KiKAqj4B4zO9+a0RZ2EJICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH/9k="/>
+<div class="vg-login-title">Dashboard Operacional</div>
+<div class="vg-login-sub">Vila Galé Hotéis</div>
+<div class="vg-login-field"><label>Utilizador</label><input autocomplete="username" id="vgLoginUser"/></div>
+<div class="vg-login-field"><label>Palavra-passe</label><input autocomplete="current-password" id="vgLoginPass" type="password"/></div>
+<button class="vg-login-btn" id="vgLoginBtn" type="button">Entrar</button>
+<div class="vg-login-error" id="vgLoginError"></div>
+<div class="vg-login-note">Acesso reservado a utilizadores autorizados.</div>
+</div>
+</div>
+<div id="vgSetupModal">
+<div class="vg-auth-modal-card" style="max-width:900px">
+<div class="vg-auth-modal-head"><h3>Gestão de Utilizadores</h3><button class="vg-auth-smallbtn" id="vgCloseSetupBtn" type="button">Fechar</button></div>
+<div class="vg-auth-modal-body">
+<h4 style="color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0 0 10px">Novo / Editar Utilizador</h4>
+<div class="vg-auth-grid" style="grid-template-columns:1fr 1fr 1fr 1fr 1fr auto">
+<input id="vgNewUser" placeholder="utilizador (login)"/>
+<input id="vgNewName" placeholder="nome completo"/>
+<input autocomplete="new-password" id="vgNewPass" placeholder="nova palavra-passe (vazio = manter)" type="password"/>
+<select id="vgNewRole">
+  <option value="direcao">Direção de Operações</option>
+  <option value="diretor">Diretor</option>
+  <option value="assistente">Assistente de Direção</option>
+  <option value="governanta">Governanta</option>
+  <option value="chefe_recepcao">Chefe de Receção</option>
+  <option value="compras">Compras</option>
+</select>
+<select id="vgNewHotel" style="display:none"></select>
+<button class="vg-login-btn" id="vgSaveUserBtn" style="height:38px;margin:0;white-space:nowrap" type="button">Guardar</button>
+</div>
+<div id="vgUserAccessEditor" style="margin:10px 0 12px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--surface-2)">
+  <div style="display:grid;grid-template-columns:minmax(240px,.85fr) minmax(360px,1.6fr);gap:16px">
+    <div><div style="font-size:10px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Hotéis autorizados</div><div id="vgHotelAccessWrap" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;max-height:210px;overflow:auto;padding-right:4px"></div></div>
+    <div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px"><span style="font-size:10px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.08em">Menus / módulos visíveis</span><button class="vg-auth-smallbtn" id="vgApplyRoleDefaults" type="button">Aplicar perfil recomendado</button></div><div id="vgModuleAccessWrap" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;max-height:210px;overflow:auto;padding-right:4px"></div></div>
+  </div>
+  <div id="vgDirectionAccessNote" style="display:none;font-size:11px;color:var(--text-2);padding:8px 10px;border-radius:7px;background:var(--surface-1)">A Direção de Operações tem acesso automático a todos os hotéis e a todos os módulos.</div>
+</div>
+<p id="vgFormMsg" style="font-size:11px;color:var(--gold);margin:4px 0 10px;min-height:16px"></p>
+<div class="vg-auth-table-wrap"><table class="vg-auth-table">
+<thead><tr><th>Utilizador</th><th>Nome</th><th>Perfil</th><th>Hotéis / Âmbito</th><th>Módulos</th><th>Estado</th><th>Ações</th></tr></thead>
+<tbody id="vgUsersTable"></tbody></table></div>
+<h4 style="color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px">Auditoria recente</h4>
+<div class="vg-auth-table-wrap"><table class="vg-auth-table"><thead><tr><th>Data</th><th>Utilizador</th><th>Hotel</th><th>Ação</th><th>Detalhe</th></tr></thead><tbody id="vgAuditTable"></tbody></table></div>
+
+<div class="vg-config-section" id="vgTargetsRulesEditor">
+  <div class="vg-config-title">Metas &amp; Regras</div>
+  <p class="vg-config-help">Define os limiares globais dos alertas e metas específicas por hotel/mês. As metas explícitas têm prioridade sobre as regras gerais e são partilhadas com todos os utilizadores.</p>
+  <div id="vgRulesGrid" class="vg-rules-grid"></div>
+  <div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap">
+    <button class="vg-login-btn" style="height:32px;font-size:11px;margin:0" type="button" onclick="vgSaveRules()">💾 Guardar regras</button>
+    <button class="vg-auth-smallbtn" type="button" onclick="vgResetRules()">↺ Repor regras por defeito</button>
+    <span id="vgRulesMsg" style="font-size:11px;color:var(--gold);min-height:16px"></span>
+  </div>
+
+  <h4 style="color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:18px 0 8px">Metas por Hotel / Mês</h4>
+  <div class="vg-target-form">
+    <label>Hotel<select id="vgTargetHotel" onchange="vgTargetFormChanged()"></select></label>
+    <label>Ano<select id="vgTargetYear" onchange="vgTargetFormChanged()"></select></label>
+    <label>Mês<select id="vgTargetMonth" onchange="vgTargetFormChanged()"></select></label>
+    <label>Ocupação %<input type="number" step="0.1" min="0" max="100" data-target-field="occupancy" placeholder="ex.: 88"></label>
+    <label>GOP %<input type="number" step="0.1" data-target-field="gopPct" placeholder="ex.: 32"></label>
+    <label>Receita vs LY %<input type="number" step="0.1" data-target-field="revenueGrowthPct" placeholder="ex.: 5"></label>
+    <label>ADR vs LY %<input type="number" step="0.1" data-target-field="adrGrowthPct" placeholder="ex.: 3"></label>
+  </div>
+  <div class="vg-target-actions">
+    <button class="vg-login-btn" style="height:32px;font-size:11px;margin:0" type="button" onclick="vgSaveTarget()">💾 Guardar meta</button>
+    <button class="vg-auth-smallbtn" type="button" onclick="vgDeleteTarget()">Eliminar meta selecionada</button>
+    <span id="vgTargetsMsg" style="font-size:11px;color:var(--gold);min-height:16px"></span>
+  </div>
+  <div class="vg-target-table"><table class="vg-auth-table"><thead><tr><th>Hotel</th><th>Ano</th><th>Mês</th><th>Ocupação</th><th>GOP%</th><th>Receita vs LY</th><th>ADR vs LY</th><th>Ação</th></tr></thead><tbody id="vgTargetsTable"></tbody></table></div>
+  <div id="vgTargetsRulesMeta" style="font-size:9px;color:var(--text-3);margin-top:7px"></div>
+</div>
+
+<h4 style="color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:20px 0 8px">Regiões — Afectação de Hotéis</h4>
+<p style="font-size:11px;color:var(--text-3);margin:0 0 10px">Altera a região de cada hotel. As alterações são guardadas no servidor partilhado e ficam disponíveis para todos os utilizadores.</p>
+<div id="vgRegioesEditor" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px"></div>
+<div style="display:flex;gap:8px;margin-bottom:4px">
+  <button class="vg-login-btn" style="height:32px;font-size:11px;margin:0" type="button" onclick="vgSaveRegioes()">💾 Guardar alterações de regiões</button>
+  <button class="vg-auth-smallbtn" type="button" onclick="vgResetRegioes()">↺ Repor regiões por defeito</button>
+</div>
+<p id="vgRegioesMsg" style="font-size:11px;color:var(--gold);min-height:16px;margin:2px 0"></p>
+</div>
+</div>
+</div>
+<div id="vgPasswordModal">
+  <div class="vg-password-card">
+    <h3 id="vgPasswordTitle">Alterar palavra-passe</h3>
+    <p id="vgPasswordHelp">A nova palavra-passe deve ter pelo menos 8 caracteres e incluir uma letra e um número.</p>
+    <div class="vg-login-field"><label>Palavra-passe atual</label><input autocomplete="current-password" id="vgOldPassword" type="password"/></div>
+    <div class="vg-login-field"><label>Nova palavra-passe</label><input autocomplete="new-password" id="vgNewPassword1" type="password"/></div>
+    <div class="vg-login-field"><label>Confirmar nova palavra-passe</label><input autocomplete="new-password" id="vgNewPassword2" type="password"/></div>
+    <div class="vg-login-error" id="vgPasswordError"></div>
+    <div class="vg-password-actions">
+      <button class="vg-auth-smallbtn" id="vgPasswordCancel" type="button">Cancelar</button>
+      <button class="vg-login-btn" id="vgPasswordSave" type="button">Guardar nova palavra-passe</button>
+    </div>
+  </div>
+</div>
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="drawerClose()"></div>
+<!-- TOPBAR -->
+<header class="topbar">
+<button aria-label="Menu" class="hamburger" id="hamburgerBtn" onclick="drawerToggle()">
+<span></span><span></span><span></span>
+</button>
+<div class="logo-block">
+<div class="logo-mark vg-official-mark" aria-label="Vila Galé Hotéis"><img alt="Vila Galé" src="data:image/png;base64,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"></div>
+<div class="logo-text">
+<strong>Vila Galé Hotéis</strong>
+<span>Dashboard Operações</span>
+</div>
+</div>
+<div class="topbar-center">
+<div class="topbar-pill">
+<div class="topbar-pill-dot"></div>
+<span>Período: <strong id="headerMes">—</strong></span>
+</div>
+<div class="topbar-pill" id="topbarComparativoPill">
+<span id="topbarComparativo">Comparativo <strong>2025 vs 2026</strong></span>
+<select id="yrPrevSel" style="display:none;background:transparent;border:none;color:inherit;font:inherit;font-size:12px;font-weight:700;cursor:pointer;outline:none;margin-left:4px" onchange="yrPrevChange(this.value)" title="Escolher ano de comparação"></select>
+</div>
+<div class="topbar-pill" id="yearBtnsWrap" style="gap:4px;padding:2px 4px">
+<div id="yearBtns" style="display:flex;gap:3px"></div>
+</div>
+<div class="topbar-pill">
+<span><strong id="headerHotels">—</strong> unidades activas</span>
+</div>
+</div>
+<div class="topbar-right">
+<div class="vg-build-badge" id="vgBuildBadge" title="Versão instalada">V35.8 · Estável</div>
+<div id="onlineUsersWrap" style="display:none;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:4px 10px;cursor:pointer" title="Utilizadores online agora" onclick="onlineShowDetail()">
+  <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;box-shadow:0 0 6px #4ade80"></span>
+  <span id="onlineCount" style="font-size:11px;font-weight:700;color:#e2e8f0">—</span>
+  <span style="font-size:10px;color:#94a3b8">online</span>
+</div>
+<div class="theme-dots">
+<button class="theme-dot td-blue active" onclick="setTheme('blue')" title="Azul escuro"></button>
+<button class="theme-dot td-erp" onclick="setTheme('erp')" title="ERP — vermelho institucional"></button>
+<button class="theme-dot td-vilagale" onclick="setTheme('vilagale')" title="Vila Galé — verde oficial"></button>
+</div>
+</div>
+
+<!-- Modal utilizadores online -->
+<div id="onlineModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:var(--surface-1);border:1px solid var(--border);border-radius:14px;padding:22px;min-width:280px;max-width:360px;width:90%">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div style="font-size:14px;font-weight:800;color:var(--text-1)">🟢 Utilizadores online</div>
+      <button onclick="document.getElementById('onlineModal').style.display='none'" style="background:none;border:none;color:var(--text-3);font-size:18px;cursor:pointer">✕</button>
+    </div>
+    <div id="onlineList" style="display:flex;flex-direction:column;gap:8px"></div>
+    <div style="font-size:10px;color:var(--text-3);margin-top:12px">Activo nos últimos 5 minutos</div>
+  </div>
+</div>
+</header>
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+<!-- Navigation -->
+<div class="sb-section">
+<nav class="sb-nav">
+<!-- OPERACIONAL -->
+<div class="sb-nav-group">
+<div class="sb-nav-group-label">Operacional</div>
+<button class="sb-nav-btn active" id="nav-resumo" onclick="setView('resumo')"> <span class="sb-nav-icon">⬛</span> Resumo</button>
+<button class="sb-nav-btn" id="nav-kpis" onclick="setView('kpis')"> <span class="sb-nav-icon">🎯</span> KPIs</button>
+<button class="sb-nav-btn" id="nav-ocupacao" onclick="setView('ocupacao')"><span class="sb-nav-icon">🛏</span> Ocupação</button>
+<button class="sb-nav-btn" id="nav-fichahotel" onclick="setView('fichahotel')"><span class="sb-nav-icon">📝</span> Comentários Fecho do Mês</button>
+<button class="sb-nav-btn" id="nav-hotelperformance" onclick="setView('hotelperformance')"><span class="sb-nav-icon">🏨</span> Performance Hotel</button>
+<button class="sb-nav-btn" id="nav-automaticreports" onclick="setView('automaticreports')"><span class="sb-nav-icon">📄</span> Relatórios Automáticos</button>
+<button class="sb-nav-btn" id="nav-analyticalassistant" onclick="analyticalAssistantOpen()" style="background:rgba(201,168,76,.12);color:var(--gold);border-left:2px solid var(--gold)"><span class="sb-nav-icon">✦</span> Assistente Analítico</button>
+<button class="sb-nav-btn" id="nav-documents" onclick="setView('documents')"><span class="sb-nav-icon">🗂️</span> Gestão de Documentos</button>
+<button class="sb-nav-btn" id="nav-approvals" onclick="setView('approvals')"><span class="sb-nav-icon">✅</span> Workflow de Aprovações</button>
+</div>
+<!-- FINANCEIRO -->
+<div class="sb-nav-group">
+<div class="sb-nav-group-label">Financeiro</div>
+<button class="sb-nav-btn" id="nav-receitas" onclick="setView('receitas')"> <span class="sb-nav-icon">📈</span> Receitas</button>
+<button class="sb-nav-btn" id="nav-custos" onclick="setView('custos')"> <span class="sb-nav-icon">📉</span> Custos</button>
+<button class="sb-nav-btn" id="nav-pl" onclick="setView('pl')"> <span class="sb-nav-icon">📊</span> P&amp;L USALI</button>
+<button class="sb-nav-btn" id="nav-unitEconomics" onclick="setView('unitEconomics')"><span class="sb-nav-icon">⚡</span> Eficiência &amp; Unit Economics</button>
+<button class="sb-nav-btn" id="nav-cityledger" onclick="setView('cityledger')"><span class="sb-nav-icon">💳</span> City Ledger &amp; Cobranças</button>
+<button class="sb-nav-btn" id="nav-revenueint" onclick="setView('revenueint')"> <span class="sb-nav-icon">🧠</span> Revenue Intelligence</button>
+<button class="sb-nav-btn" id="nav-forecast" onclick="setView('forecast')"> <span class="sb-nav-icon">🔭</span> Forecast &amp; Cenários</button>
+<button class="sb-nav-btn" id="nav-scenariocompare" onclick="setView('scenariocompare')"> <span class="sb-nav-icon">⚖️</span> Comparação de Cenários</button>
+<button class="sb-nav-btn" id="nav-costanalysis" onclick="setView('costanalysis')"><span class="sb-nav-icon">🔬</span> Análise de Custos</button>
+<button class="sb-nav-btn" id="nav-cua" onclick="setView('cua')"> <span class="sb-nav-icon">⚡</span> Custo / Actividade</button>
+<button class="sb-nav-btn" id="nav-compras" onclick="setView('compras')"> <span class="sb-nav-icon">🧾</span> Compras &amp; Artigos</button>
+<button class="sb-nav-btn" id="nav-receitasdet" onclick="setView('receitasdet')"><span class="sb-nav-icon">↗</span> Receita Detalhada</button>
+<button class="sb-nav-btn" id="nav-ab" onclick="setView('ab')"><span class="sb-nav-icon">◫</span> Compras &amp; A&amp;B</button>
+<button class="sb-nav-btn" id="nav-housekeeping" onclick="setView('housekeeping')"><span class="sb-nav-icon">▦</span> Housekeeping &amp; Têxtil</button>
+<button class="sb-nav-btn" id="nav-benchmark" onclick="setView('benchmark')"> <span class="sb-nav-icon">◎</span> Benchmarking</button>
+<button class="sb-nav-btn" id="nav-anomalies" onclick="setView('anomalies')"> <span class="sb-nav-icon">⚠</span> Deteção de Anomalias</button>
+<button class="sb-nav-btn" id="nav-compare" onclick="setView('compare')"> <span class="sb-nav-icon">⚖️</span> Comparar Hotéis</button>
+<button class="sb-nav-btn" id="nav-ranking" onclick="setView('ranking')"> <span class="sb-nav-icon">🏆</span> Ranking Composto</button>
+<button class="sb-nav-btn" id="nav-sazonalidade" onclick="setView('sazonalidade')"><span class="sb-nav-icon">📆</span> Sazonalidade</button>
+<button class="sb-nav-btn" id="nav-simulador" onclick="setView('simulador')"> <span class="sb-nav-icon">🎛</span> Simulador</button>
+<button class="sb-nav-btn" id="nav-orcamento" onclick="setView('orcamento')"><span class="sb-nav-icon">📋</span> Orçamento</button>
+<button class="sb-nav-btn" id="nav-alertas" onclick="setView('alertas')"> <span class="sb-nav-icon">🔔</span> Alertas</button>
+</div>
+<!-- QUALIDADE & INFO -->
+<div class="sb-nav-group">
+<div class="sb-nav-group-label">Qualidade &amp; Info</div>
+<button class="sb-nav-btn" id="nav-reputacao" onclick="setView('reputacao')"><span class="sb-nav-icon">★</span> Reputação &amp; Guest Experience</button>
+<button class="sb-nav-btn" id="nav-instagram" onclick="setView('instagram')"><span class="sb-nav-icon">📱</span> Instagram</button>
+<button class="sb-nav-btn" id="nav-agenda" onclick="setView('agenda')"> <span class="sb-nav-icon">📅</span> Agenda Operacional</button>
+<button class="sb-nav-btn" id="nav-hoteis" onclick="setView('hoteis')"> <span class="sb-nav-icon">🏨</span> Hotéis</button>
+<button class="sb-nav-btn" id="nav-datacenter" onclick="setView('datacenter')"> <span class="sb-nav-icon">🗄️</span> Centro de Dados</button>
+<button class="sb-nav-btn vg-direction-only" id="nav-governance" onclick="setView('governance')"> <span class="sb-nav-icon">🛡️</span> Auditoria &amp; Governação</button>
+<button class="sb-nav-btn vg-direction-only" id="nav-backup" onclick="setView('backup')"> <span class="sb-nav-icon">💾</span> Backup &amp; Recuperação</button>
+<button class="sb-nav-btn" id="nav-upload" onclick="setView('upload')"> <span class="sb-nav-icon">📂</span> Carregar Docs</button>
+</div>
+</nav>
+</div>
+<!-- Regions (sidebar — visível apenas no tema v2; a barra superior original mantém-se para Original/2.0) -->
+<div class="sb-section v2-only" id="sbRegionSection" style="display:none">
+<div class="sb-label">Região</div>
+<div class="sb-region-list">
+<button class="pl-region-btn sb-region-item active" data-r="todos" id="sbRbTodos" onclick="selectRegion('todos')"><span class="sb-region-dot" style="background:#8b1a1a"></span>Todos</button>
+<button class="pl-region-btn sb-region-item" data-r="norte" id="sbRbNorte" onclick="selectRegion('norte')"><span class="sb-region-dot" style="background:#5b7fa6"></span>Norte e Centro</button>
+<button class="pl-region-btn sb-region-item" data-r="lisboa" id="sbRbLisboa" onclick="selectRegion('lisboa')"><span class="sb-region-dot" style="background:#1f6b4a"></span>Lisboa &amp; Ilhas</button>
+<button class="pl-region-btn sb-region-item" data-r="alentejo" id="sbRbAlentejo" onclick="selectRegion('alentejo')"><span class="sb-region-dot" style="background:#b08a3e"></span>Alentejo</button>
+<button class="pl-region-btn sb-region-item" data-r="algarve" id="sbRbAlgarve" onclick="selectRegion('algarve')"><span class="sb-region-dot" style="background:#a3492f"></span>Algarve</button>
+</div>
+</div>
+<!-- Months -->
+<div class="sb-section" id="mesSection" style="display:none">
+<div class="sb-label">Mês</div>
+<button class="sb-mes-all" id="mesAllBtn" onclick="selectAllMeses()">Todos os meses</button>
+<div class="sb-months" id="mesBtns"></div>
+</div>
+<!-- Hotels -->
+<div class="sb-section" id="hotelSection" style="display:none">
+<div class="sb-label">Hotéis</div>
+<input class="sb-hotel-search" id="sidebarHotelSearch" oninput="filterHotelSidebar()" placeholder="Filtrar hotel..." type="text"/>
+<div style="display:flex;gap:4px;margin-top:4px">
+<button class="sb-action-btn" onclick="toggleAll(true)" style="flex:1;font-size:10px;padding:5px 8px">✓ Todos</button>
+<button class="sb-action-btn danger" onclick="toggleAll(false)" style="flex:1;font-size:10px;padding:5px 8px">✕ Limpar</button>
+</div>
+<div class="sb-hotels" id="hotelPills"></div>
+</div>
+<!-- Import -->
+<div class="sb-section">
+<div class="sb-label">Importar dados</div>
+<div class="sb-actions">
+<button class="sb-action-btn primary" onclick="document.getElementById('fileInput').click()">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+        Carregar P&amp;L (mês ou acumulado)
+      </button>
+<button class="sb-action-btn" onclick="manualRefresh()">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="13"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+        Actualizar dashboard
+      </button>
+<input accept=".xlsx,.xls" id="fileInput" onchange="loadExcel(event)" style="display:none" type="file"/>
+<div id="pnlMonthModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9200;align-items:center;justify-content:center;padding:24px">
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;max-width:440px;width:100%;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,.5)">
+<div id="pnlMonthTitulo" style="color:var(--gold);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px">A que mês corresponde este P&amp;L?</div>
+<div id="pnlMonthAjuda" style="color:var(--text-3);font-size:12px;line-height:1.5;margin-bottom:16px">Escolhe o mês a que corresponde este ficheiro.</div>
+<select id="pnlMonthSel" style="width:100%;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:11px 12px;border-radius:8px;font-family:var(--font);font-size:14px;margin-bottom:18px">
+<option value="1">Janeiro</option><option value="2">Fevereiro</option><option value="3">Março</option><option value="4">Abril</option><option value="5">Maio</option><option value="6">Junho</option><option value="7">Julho</option><option value="8">Agosto</option><option value="9">Setembro</option><option value="10">Outubro</option><option value="11">Novembro</option><option value="12">Dezembro</option>
+</select>
+<div style="display:flex;gap:10px;justify-content:flex-end">
+<button onclick="pnlCancelMonth()" style="background:transparent;border:1px solid var(--border-2);color:var(--text-2);padding:9px 16px;border-radius:7px;font-family:var(--font);font-size:12px;cursor:pointer">Cancelar</button>
+<button onclick="pnlConfirmMonth()" style="background:var(--gold);color:var(--navy);border:none;padding:9px 22px;border-radius:7px;font-family:var(--font);font-size:12px;font-weight:800;cursor:pointer">Continuar</button>
+</div>
+</div>
+</div>
+<div id="pnlTipoModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9200;align-items:center;justify-content:center;padding:24px">
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;max-width:460px;width:100%;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,.5)">
+<div style="color:var(--gold);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px">Tipo de carregamento</div>
+<div style="color:var(--text-3);font-size:12px;line-height:1.5;margin-bottom:18px">Este ficheiro é o P&amp;L <b>só de um mês</b> ou o <b>acumulado do ano</b> (janeiro até um mês)? O acumulado alimenta as colunas acumuladas da Ficha com os valores oficiais (GOP com sede, ADR, ADR NET); o do mês alimenta as colunas mensais. A seguir vais indicar o mês.</div>
+<div style="display:flex;gap:10px">
+<button onclick="pnlConfirmarTipo('mes')" style="flex:1;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:14px;border-radius:9px;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer">📅 P&amp;L do mês</button>
+<button onclick="pnlConfirmarTipo('acumulado')" style="flex:1;background:var(--gold);border:none;color:var(--navy);padding:14px;border-radius:9px;font-family:var(--font);font-size:13px;font-weight:800;cursor:pointer">📊 Acumulado do ano</button>
+</div>
+<div style="text-align:center;margin-top:12px"><button onclick="pnlCancelTipo()" style="background:none;border:none;color:var(--text-3);font-size:12px;cursor:pointer;text-decoration:underline">Cancelar</button></div>
+</div>
+</div>
+<span id="importStatus" style="font-size:10px;color:var(--text-3);font-family:var(--mono);padding:2px 4px"></span>
+</div>
+</div>
+<!-- Session -->
+<div class="sb-section">
+<div class="sb-label">Sessão</div>
+<div class="sb-actions">
+<button class="sb-action-btn" onclick="idbSaveAll()">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+        Guardar no browser
+      </button>
+<button class="sb-action-btn" onclick="idbLoadAll()">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M3 12a9 9 0 009 9 9 9 0 009-9 9 9 0 00-9-9"></path><polyline points="3 3 3 9 9 9"></polyline></svg>
+        Restaurar do browser
+      </button>
+<button class="sb-action-btn" onclick="exportSession()">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+        Exportar sessão (.json)
+      </button>
+<label class="sb-action-btn">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+        Importar sessão (.json)
+        <input accept=".json" onchange="importSession(event)" style="display:none" type="file"/>
+</label>
+<button class="sb-action-btn danger" onclick="idbClearAll()">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"></path><path d="M10 11v6M14 11v6"></path></svg>
+        Limpar browser
+      </button>
+</div>
+<div class="sb-status" id="idbStatus"></div>
+</div>
+<!-- Dados partilhados -->
+<div class="sb-section">
+<div class="sb-label">Dados partilhados (todos os utilizadores)</div>
+<div class="sb-actions">
+<button class="sb-action-btn primary" onclick="publishSharedData(true)">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+        Publicar para todos
+      </button>
+<button class="sb-action-btn" onclick="fetchSharedData(true)">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="13"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+        Atualizar dados partilhados
+      </button>
+</div>
+<div class="sb-status" id="sharedSyncStatus" style="font-size:10.5px;">A ligar ao servidor partilhado...</div>
+</div>
+<!-- PDF Export -->
+<div class="sb-section">
+<div class="sb-label">Exportar</div>
+<div class="sb-actions">
+<button class="sb-action-btn primary" onclick="pdfShowModal()">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Exportar PDF
+      </button>
+</div>
+</div>
+</aside>
+<!-- PDF MODAL -->
+<div id="pdfModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9000;display:none;align-items:center;justify-content:center;padding:24px">
+<div style="background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:28px;width:100%;max-width:480px;box-shadow:0 24px 64px rgba(0,0,0,.5)">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+<span style="color:var(--gold);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1.5px">📄 Exportar PDF</span>
+<button onclick="pdfHideModal()" style="background:none;border:none;color:var(--text-3);cursor:pointer;font-size:20px;line-height:1">✕</button>
+</div>
+<p style="font-size:12px;color:var(--text-2);margin-bottom:16px;line-height:1.6">Selecciona os separadores a incluir. Cada separador gera uma secção horizontal no PDF, com quebras de página automáticas sem cortes.</p>
+<div style="margin-bottom:16px">
+<label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-3);font-weight:800;margin-bottom:6px">Âmbito</label>
+<select id="pdfHotelSel" style="width:100%;background:var(--surface-2);color:var(--text-1);border:1px solid var(--border-2);border-radius:8px;padding:9px 10px;font-size:12px;font-family:var(--font)">
+<option value="__all__">🌐 Todos os hotéis (seleção actual)</option>
+</select>
+</div>
+<div id="pdfCheckboxes" style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px"></div>
+<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+<button onclick="pdfSelectAll()" style="background:transparent;border:1px solid var(--border-2);color:var(--text-2);padding:8px 16px;border-radius:7px;font-family:var(--font);font-size:12px;cursor:pointer">Seleccionar tudo</button>
+<button onclick="pdfHideModal()" style="background:transparent;border:1px solid var(--border-2);color:var(--text-2);padding:8px 16px;border-radius:7px;font-family:var(--font);font-size:12px;cursor:pointer">Cancelar</button>
+<button onclick="pdfExport()" style="background:var(--gold);color:var(--navy);border:none;padding:8px 20px;border-radius:7px;font-family:var(--font);font-size:12px;font-weight:800;cursor:pointer">Imprimir / Guardar PDF</button>
+</div>
+</div>
+</div>
+
+<!-- MODAL: exportar tabela KPIs/Custos por região -->
+<div id="tblPdfModal" data-kind="kpis" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9100;align-items:center;justify-content:center;padding:24px">
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;max-width:440px;width:100%;padding:22px;box-shadow:0 24px 60px rgba(0,0,0,.5)">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+<span id="tblPdfTitle" style="color:var(--gold);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1.2px">📄 Exportar tabela (PDF)</span>
+<button onclick="tblPdfHideModal()" style="background:none;border:none;color:var(--text-3);cursor:pointer;font-size:20px;line-height:1">✕</button>
+</div>
+<div style="font-size:12px;color:var(--text-2);margin-bottom:8px;font-weight:700">Região</div>
+<select id="tblPdfRegionSel" style="width:100%;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:10px 12px;border-radius:8px;font-family:var(--font);font-size:13px;margin-bottom:16px">
+<option value="todos">🌐 Todos os hotéis</option>
+<option value="norte">🔵 Norte e Centro</option>
+<option value="lisboa">🟢 Lisboa &amp; Ilhas</option>
+<option value="alentejo">🟡 Alentejo</option>
+<option value="algarve">🔴 Algarve</option>
+</select>
+<div style="font-size:12px;color:var(--text-2);margin-bottom:8px;font-weight:700">Orientação</div>
+<div style="display:flex;gap:16px;margin-bottom:20px">
+<label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-1);cursor:pointer"><input type="radio" name="tblPdfOrient" value="landscape" checked style="accent-color:var(--gold)"> Horizontal (recomendado)</label>
+<label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-1);cursor:pointer"><input type="radio" name="tblPdfOrient" value="portrait" style="accent-color:var(--gold)"> Vertical</label>
+</div>
+<div style="display:flex;gap:10px;justify-content:flex-end">
+<button onclick="tblPdfHideModal()" style="background:transparent;border:1px solid var(--border-2);color:var(--text-2);padding:9px 16px;border-radius:7px;font-family:var(--font);font-size:12px;cursor:pointer">Cancelar</button>
+<button onclick="tblPdfExport()" style="background:var(--gold);color:var(--navy);border:none;padding:9px 20px;border-radius:7px;font-family:var(--font);font-size:12px;font-weight:800;cursor:pointer">Gerar PDF</button>
+</div>
+</div>
+</div>
+<!-- TOAST -->
+<div class="toast" id="toast">
+<span class="toast-icon" id="toastIcon">✓</span>
+<span id="toastMsg"></span>
+</div>
+<!-- CONTEXT PANEL (body grid column — persistent KPIs) -->
+<aside class="context-panel" id="contextPanel">
+<div class="ctx-title-row">
+<div class="ctx-title">Portfólio</div>
+<div class="ctx-edit-actions">
+<button class="ctx-edit-btn" id="ctxAddBtn" onclick="toggleCtxKpiEditor('add')" title="Adicionar indicadores">+</button>
+<button class="ctx-edit-btn" id="ctxRemoveBtn" onclick="toggleCtxKpiEditor('remove')" title="Retirar indicadores">−</button>
+</div>
+</div>
+<div class="ctx-region-badge" id="ctxRegionBadge">🌐 Todos os hotéis</div>
+<div class="ctx-kpi-editor" id="ctxKpiEditor"></div>
+<div id="ctxKpis"></div>
+<div class="ctx-divider"></div>
+<div class="ctx-title">Meses activos</div>
+<div id="ctxMeses" style="font-size:11px;color:var(--text-3)">—</div>
+</aside>
+<!-- MAIN -->
+<main class="main">
+<!-- GLOBAL FILTER BAR -->
+<div class="global-filter-bar" id="globalFilterBar">
+<div class="gfb-group">
+<span class="gfb-label">Região</span>
+<button class="pl-region-btn rr-todos active" id="rbTodos" onclick="selectRegion('todos')">🌐 Todos</button>
+<button class="pl-region-btn rr-norte" id="rbNorte" onclick="selectRegion('norte')">🔵 Norte</button>
+<button class="pl-region-btn rr-lisboa" id="rbLisboa" onclick="selectRegion('lisboa')">🟢 Lisboa</button>
+<button class="pl-region-btn rr-alentejo" id="rbAlentejo" onclick="selectRegion('alentejo')">🟡 Alentejo</button>
+<button class="pl-region-btn rr-algarve" id="rbAlgarve" onclick="selectRegion('algarve')">🔴 Algarve</button>
+</div>
+<div class="gfb-sep"></div>
+<div class="gfb-group" id="gfbMeses" style="display:none">
+<span class="gfb-label">Mês</span>
+<div id="gfbMesBtns" style="display:flex;gap:4px"></div>
+</div>
+</div>
+<div class="view-content">
+<!-- LOADING OVERLAY (arranque) -->
+<!-- POP-UP FLUTUANTE DE CARREGAMENTO (canto inferior direito) -->
+<div class="vg-load-pop" id="vgLoadPop">
+<div class="ring"><svg viewBox="0 0 48 48"><circle class="bg" cx="24" cy="24" r="21"></circle><circle class="fg" cx="24" cy="24" r="21"></circle></svg></div>
+<div class="txt"><div class="t" id="vgLoadPopTitle">A obter dados…</div><div class="s" id="vgLoadPopSub">A ligar ao servidor partilhado…</div></div>
+<div class="vgbar"></div>
+</div>
+<!-- EMPTY STATE -->
+<div class="empty-state" id="emptyState">
+<div class="icon">📊</div>
+<h2>Nenhum dado carregado</h2>
+<p>Use o painel lateral → <strong style="color:var(--gold)">Carregar P&amp;L</strong><br/>
+    para importar o ficheiro de exploração.<br/>Pode carregar múltiplos meses em simultâneo.</p>
+</div>
+<!-- RESUMO -->
+<div class="tab-content" id="view-resumo">
+<div id="v30ProfileHomeRoot"></div>
+<!-- CENTRAL DE OPERAÇÕES v8.1 -->
+<section class="ops-center" id="opsCenter">
+  <div class="ops-head">
+    <div>
+      <div class="ops-title"><span class="ops-title-mark">◎</span><span>Central de Operações</span></div>
+      <div class="ops-sub" id="opsMeta">Prioridades de decisão com base nos hotéis e período selecionados.</div>
+    </div>
+    <div class="ops-head-actions">
+      <button class="ops-btn" onclick="opsGoTo('alertas')">Alertas detalhados</button>
+      <button class="ops-btn" onclick="opsGoTo('fichahotel')">Comentários Fecho do Mês</button>
+      <button class="ops-btn" onclick="opsActionsOpen()">Ações</button>
+      <button class="ops-btn primary" onclick="opsGoTo('revenueint')">Revenue Intelligence</button>
+    </div>
+  </div>
+  <div class="ops-strip" id="opsStats"></div>
+  <div class="ops-actions-strip" id="opsActionStats"></div>
+  <div class="ops-layout">
+    <div class="ops-panel">
+      <div class="ops-panel-head"><div class="ops-panel-title">Prioridades para decisão</div><div class="ops-panel-meta" id="opsPriorityMeta"></div></div>
+      <div class="ops-list" id="opsPriorities"><div class="ops-empty">A analisar os dados do período...</div></div>
+    </div>
+    <div class="ops-side">
+      <div class="ops-panel">
+        <div class="ops-panel-head"><div class="ops-panel-title">Ações a acompanhar</div><button class="ops-btn" onclick="opsActionsOpen()">Ver todas</button></div>
+        <div id="opsActionWatch"><div class="ops-empty">A carregar ações...</div></div>
+      </div>
+      <div class="ops-panel">
+        <div class="ops-panel-head"><div class="ops-panel-title">Oportunidades a proteger</div><div class="ops-panel-meta">sinais positivos</div></div>
+        <div id="opsOpportunities"><div class="ops-empty">A analisar...</div></div>
+      </div>
+      <div class="ops-panel">
+        <div class="ops-panel-head"><div class="ops-panel-title">Cobertura & qualidade</div><div class="ops-panel-meta">estado dos dados</div></div>
+        <div class="ops-health" id="opsHealth"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /CENTRAL DE OPERAÇÕES v8.1 -->
+<!-- Filtro de Região -->
+<div class="section-title">KPIs Consolidados
+      <button id="opsPdfAccumBtn" onclick="operationalSummaryPdfOpen()" title="Gerar Resumo Operacional acumulado Janeiro → mês escolhido" style="margin-left:auto;background:var(--surface-2);color:var(--text-1);border:1px solid var(--border);padding:6px 12px;border-radius:8px;font-family:var(--font);font-size:10px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px">📄 PDF acumulado</button>
+      <button onclick="waShareResumo()" style="margin-left:auto;background:#25D366;color:#fff;border:none;padding:6px 14px;border-radius:8px;font-family:var(--font);font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;letter-spacing:.3px">
+<svg fill="currentColor" height="13" viewbox="0 0 24 24" width="13"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.879L.057 23.077a.75.75 0 00.921.921l5.198-1.478A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.964-1.356l-.356-.212-3.685 1.048 1.048-3.685-.212-.356A9.75 9.75 0 1112 21.75z"></path></svg>
+        Partilhar no WhatsApp
+      </button>
+</div>
+<div class="kpi-grid" id="kpiGrid"></div>
+<div class="ai-insights-card" id="aiGlobalInsights"></div>
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-title">Receita Total por Hotel <span class="chart-sub">Top 15 · 2025 vs 2026</span></div>
+<div style="height:340px"><canvas id="chartRevHotel"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Mix de Receitas <span class="chart-sub">Alojamento / F&amp;B / Outros</span></div>
+<div style="height:340px"><canvas id="chartRevMix"></canvas></div>
+</div>
+</div>
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-title">Taxa de Ocupação <span class="chart-sub">Ocupados / Disponíveis</span></div>
+<div style="height:300px"><canvas id="chartOcc"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">RevPAR <span class="chart-sub">Receita Aloj ÷ Quartos Disp</span></div>
+<div style="height:300px"><canvas id="chartRevpar"></canvas></div>
+</div>
+</div>
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-title">GOP por Hotel <span class="chart-sub">Top 15 · 2025 vs 2026</span></div>
+<div style="height:320px"><canvas id="chartGOP"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">GOP% (Margem) <span class="chart-sub">GOP ÷ Receita Total · 2026</span></div>
+<div style="height:320px"><canvas id="chartGOPpct"></canvas></div>
+</div>
+</div>
+<div class="section-title">Tabela Comparativa</div>
+<div class="table-wrapper">
+<div class="table-header">
+<h3>Resumo Operacional</h3>
+<input class="search-input" id="tableSearch" oninput="filterHotelSidebar()" placeholder="Filtrar hotel..." type="text"/>
+</div>
+<div style="overflow-x:auto">
+<table id="mainTable">
+<thead><tr>
+<th onclick="sortTable(0)">Hotel</th>
+<th onclick="sortTable(1)">Rec. Total 2025</th>
+<th onclick="sortTable(2)">Rec. Total 2026</th>
+<th onclick="sortTable(3)">Var. €</th>
+<th onclick="sortTable(4)">Var. %</th>
+<th onclick="sortTable(5)">Occ 2025</th>
+<th onclick="sortTable(6)">Occ 2026</th>
+<th onclick="sortTable(7)">RevPAR 2025</th>
+<th onclick="sortTable(8)">RevPAR 2026</th>
+<th onclick="sortTable(9)">ADR 2025</th>
+<th onclick="sortTable(10)">ADR 2026</th>
+<th onclick="sortTable(11)">GOP 2025</th>
+<th onclick="sortTable(12)">GOP 2026</th>
+<th onclick="sortTable(13)">GOP% 2026</th>
+<th onclick="sortTable(14)">GOP sem sede 2026</th>
+</tr></thead>
+<tbody id="mainTableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- RECEITAS -->
+<div class="tab-content" id="view-receitas">
+<div class="section-title">Detalhe de Receitas</div>
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-title">Receita Alojamento <span class="chart-sub">2025 vs 2026</span></div>
+<div style="height:340px"><canvas id="chartRevAloj"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Receita F&amp;B <span class="chart-sub">2025 vs 2026</span></div>
+<div style="height:340px"><canvas id="chartRevFB"></canvas></div>
+</div>
+</div>
+<div class="chart-card full-width" style="margin-bottom:20px">
+<div class="chart-title">Variação de Receita Total (%) <span class="chart-sub">2026 vs 2025</span></div>
+<div style="height:320px"><canvas id="chartVarPct"></canvas></div>
+</div>
+<div class="table-wrapper">
+<div class="table-header"><h3>Receitas por Categoria</h3></div>
+<div style="overflow-x:auto">
+<table id="revTable">
+<thead><tr>
+<th>Hotel</th>
+<th>Aloj 2025</th><th>Aloj 2026</th>
+<th>FB 2025</th><th>FB 2026</th>
+<th>Outros 2025</th><th>Outros 2026</th>
+<th>Total 2025</th><th>Total 2026</th><th>Δ%</th>
+</tr></thead>
+<tbody id="revTableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- CUSTOS -->
+<div class="tab-content" id="view-custos">
+<div class="section-title">Detalhe de Custos</div>
+<div class="charts-grid">
+<div class="chart-card">
+<div style="height:340px"><canvas id="chartCostPessoal"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Custos Comidas &amp; Bebidas <span class="chart-sub">2025 vs 2026 · Top 15</span></div>
+<div style="height:340px"><canvas id="chartCostFB"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Variação Total de Custos <span class="chart-sub">% vs ano anterior</span></div>
+<div style="height:340px"><canvas id="chartCostVarPct"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Custos por Categoria <span class="chart-sub">Acumulado 2026 · Top 15</span></div>
+<div style="height:340px"><canvas id="chartCostStack"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Rácio Custos / Receita <span class="chart-sub">%</span></div>
+<div style="height:340px"><canvas id="chartCostRatio"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Rácios Comidas &amp; Bebidas <span class="chart-sub">Custo / Receita F&amp;B · seleção atual</span></div>
+<div style="height:340px"><canvas id="chartCostFBRatio"></canvas></div>
+</div>
+</div>
+<div class="table-wrapper">
+<div class="table-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3>Custos por Categoria — 2025 vs 2026</h3><button class="pl-region-btn" style="border-color:var(--gold);color:var(--gold);white-space:nowrap" onclick="tblPdfShowModal('custos')">📄 Exportar PDF</button></div>
+<div style="overflow-x:auto">
+<table id="costTable">
+<thead><tr>
+<th>Hotel</th>
+<th>Pessoal 25</th><th>Pessoal 26</th><th>Var%</th>
+<th>Comidas 25</th><th>Comidas 26</th><th>Var%</th>
+<th>Bebidas 25</th><th>Bebidas 26</th><th>Var%</th>
+<th>Energia 25</th><th>Energia 26</th><th>Var%</th>
+<th>Total 25</th><th>Total 26</th><th>Var%</th>
+</tr></thead>
+<tbody id="costTableBody"></tbody>
+</table>
+</div>
+</div>
+<div class="table-wrapper">
+<div class="table-header"><h3>Rácios de Comidas &amp; Bebidas — seleção mensal/acumulada</h3><span style="font-size:10px;color:var(--text-3);">Exclui armazém, PdV Staff, SV, Garrafeira e HORECA; 1 mês = mensal, vários meses = acumulado.</span></div>
+<div style="overflow-x:auto">
+<table id="costFbRatioTable">
+<thead><tr>
+<th>Hotel</th>
+<th>Comidas 25</th><th>Comidas 26</th><th>Var. p.p.</th>
+<th>Bebidas 25</th><th>Bebidas 26</th><th>Var. p.p.</th>
+<th>A&amp;B 25</th><th>A&amp;B 26</th><th>Var. p.p.</th>
+</tr></thead>
+<tbody id="costFbRatioTableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="tab-content" id="view-kpis">
+<div class="section-title">KPIs Operacionais</div>
+<div class="kpi-grid" id="kpiGridDetail"></div>
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-title">ADR — Average Daily Rate <span class="chart-sub">€ / quarto ocupado</span></div>
+<div style="height:360px"><canvas id="chartADR"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Dormidas <span class="chart-sub">2025 vs 2026</span></div>
+<div style="height:360px"><canvas id="chartDormidas"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Taxa de Ocupação <span class="chart-sub">% quartos ocupados</span></div>
+<div style="height:360px"><canvas id="chartKpiOcc"></canvas></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">RevPAR <span class="chart-sub">€ / quarto disponível</span></div>
+<div style="height:360px"><canvas id="chartKpiRevpar"></canvas></div>
+</div>
+</div>
+<div class="table-wrapper">
+<div class="table-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3>KPIs por Hotel</h3><button class="pl-region-btn" style="border-color:var(--gold);color:var(--gold);white-space:nowrap" onclick="tblPdfShowModal('kpis')">📄 Exportar PDF</button></div>
+<div style="overflow-x:auto">
+<table id="kpiTable">
+<thead><tr>
+<th>Hotel</th>
+<th>Occ 25</th><th>Occ 26</th><th>Var%</th>
+<th>ADR 25</th><th>ADR 26</th><th>Var%</th>
+<th>RevPAR 25</th><th>RevPAR 26</th><th>Var%</th>
+<th>TRevPAR 25</th><th>TRevPAR 26</th><th>Var%</th>
+<th>GOP 2025</th><th>GOP 2026</th><th>Var%</th>
+<th>GOP% 25</th><th>GOP% 26</th><th>Var p.p.</th>
+<th>GOP−NOP 25</th><th>GOP−NOP 26</th><th>Var%</th>
+<th>Dormidas 25</th><th>Dormidas 26</th><th>Var%</th>
+</tr></thead>
+<tbody id="kpiTableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- REPUTAÇÃO -->
+<div class="tab-content" id="view-fichahotel">
+<div class="section-title">📝 Comentários Fecho do Mês — análise mensal e comentários</div>
+<div class="hotel-sheet-toolbar">
+<div class="hs-field"><label>Hotel</label><select id="hsHotel" onchange="hsRender()"></select></div>
+<div class="hs-field"><label>Mês comentado</label><select id="hsMes" onchange="hsRender()"></select></div>
+<div class="hs-field"><label>Diretor(a)</label><input id="hsDiretor" onchange="hsSaveDirector()" placeholder="Nome do diretor"/></div>
+<button class="hs-btn" onclick="hsSaveAllComments()">Guardar ficha mensal</button>
+<button class="hs-btn secondary" onclick="hsGenAllSuggestions()">💡 Sugerir comentários</button>
+<button class="hs-btn secondary" onclick="hsExportCsv()">Exportar Excel</button>
+<button class="hs-btn secondary" onclick="hsExportRegion()">📊 Exportar Região Excel</button>
+<button class="hs-btn secondary" onclick="hsOpenPrintPicker()">🖨️ Imprimir Espelho</button>
+<span class="hs-status-pill" id="hsMonthStatus">Comentários: —</span>
+</div>
+<div id="hsAcumNote" style="display:none;margin:6px 0 10px;padding:8px 12px;border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:8px;font-size:11px;color:var(--text-2);line-height:1.5"></div>
+
+<!-- Print month picker modal -->
+<div id="hsPrintModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:var(--surface-1);border:1px solid var(--border);border-radius:14px;padding:22px;max-width:420px;width:90%">
+    <div style="font-size:15px;font-weight:800;color:var(--text-1);margin-bottom:4px">Imprimir Espelho do Hotel</div>
+    <div style="font-size:12px;color:var(--text-3);margin-bottom:14px">Seleciona os meses a incluir na impressão para <strong id="hsPrintHotelName" style="color:var(--text-1)"></strong>.</div>
+    <div id="hsPrintMonthChips" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="hs-btn secondary" onclick="hsClosePrintPicker()" style="padding:8px 14px">Cancelar</button>
+      <button class="hs-btn" onclick="hsPrintSelectedMonths()" style="padding:8px 14px">🖨️ Imprimir</button>
+    </div>
+  </div>
+</div>
+<div class="hs-grid" id="hsCards"></div>
+<div class="hs-section">
+<div class="hs-section-head"><div><div class="hs-section-title">Leitura automática</div><div class="hs-section-sub">Resumo gerado com base nos indicadores disponíveis no HTML.</div></div></div>
+<div class="hs-auto-list" id="hsInsights"></div>
+</div>
+<div class="hs-section">
+<div class="hs-section-head"><div><div class="hs-section-title">Indicadores e comentários por rubrica</div><div class="hs-section-sub">Os comentários são preenchidos mensalmente pelo diretor, ficam editáveis e guardados por hotel, mês e rubrica no browser.</div></div></div>
+<div class="hs-table-wrap"><table class="hs-table"><thead><tr><th>Indicador</th><th>Result. mês 2025</th><th>Result. mês 2026</th><th>Result. acum. 2025</th><th>Result. acum. 2026</th><th>Variação mês</th><th>Variação ano</th><th>Justificação / comentários</th></tr></thead><tbody id="hsTableBody"></tbody></table></div>
+</div>
+<div class="hs-section">
+<div class="hs-section-head"><div><div class="hs-section-title">Histórico de comentários</div><div class="hs-section-sub">Últimos comentários registados para o hotel selecionado.</div></div></div>
+<div class="hs-history" id="hsHistory"></div>
+</div>
+</div>
+<!-- VG OPERATIONS 2.0 / V30 — HOTEL 360º -->
+<div class="tab-content" id="view-hotel360">
+  <div id="hotel360Root"><div class="v30-empty prominent">A preparar Hotel 360º…</div></div>
+</div>
+<!-- VG OPERATIONS 2.0 / V30 — REVENUE & FORECAST -->
+<div class="tab-content" id="view-revenuehub">
+  <div id="revenueHubRoot" class="v30-revenue-shell">
+    <header class="v30-page-head"><div><div class="v30-eyebrow">VG Operations 2.0</div><h2>Revenue &amp; Forecast</h2><p>Revenue Intelligence, Forecast e Cenários numa única área.</p></div></header>
+    <nav class="v30-tabs"><button data-rh-tab="current" class="active">Situação atual</button><button data-rh-tab="forecast">Forecast</button><button data-rh-tab="scenarios">Cenários</button></nav>
+    <div class="v30-revenue-panels"><div class="v30-revenue-panel active" id="v30RevenuePanel-current"></div><div class="v30-revenue-panel" id="v30RevenuePanel-forecast"></div><div class="v30-revenue-panel" id="v30RevenuePanel-scenarios"></div></div>
+  </div>
+</div>
+<!-- PERFORMANCE DOS HOTÉIS V23 -->
+<div class="tab-content" id="view-hotelperformance">
+  <div id="hotelPerformanceRoot"><div class="hp-empty prominent">A preparar Performance dos Hotéis…</div></div>
+</div>
+<!-- RELATÓRIOS AUTOMÁTICOS V24 -->
+<div class="tab-content" id="view-automaticreports">
+  <div id="automaticReportsRoot"><div class="ar-empty">A preparar Relatórios Automáticos…</div></div>
+</div>
+<!-- ASSISTENTE ANALÍTICO V25 -->
+<div class="tab-content" id="view-analyticalassistant">
+  <div id="analyticalAssistantRoot"><div class="aa-welcome">A preparar Assistente Analítico…</div></div>
+</div>
+<!-- GESTÃO DE DOCUMENTOS V26 -->
+<div class="tab-content" id="view-documents">
+  <div id="documentsRoot"><div class="doc-empty"><strong>A preparar Gestão de Documentos…</strong></div></div>
+</div>
+<!-- WORKFLOW DE APROVAÇÕES v27 -->
+<div class="tab-content" id="view-approvals">
+  <div id="approvalsRoot"><div class="ap-empty"><strong>A preparar Workflow de Aprovações…</strong></div></div>
+</div>
+<!-- /WORKFLOW DE APROVAÇÕES v27 -->
+<!-- COMPARAÇÃO DE CENÁRIOS v29 -->
+<div class="tab-content" id="view-scenariocompare">
+  <div id="scenarioComparisonRoot"><div class="sc29-empty"><strong>A preparar Comparação de Cenários…</strong></div></div>
+</div>
+<!-- /COMPARAÇÃO DE CENÁRIOS v29 -->
+<div class="tab-content" id="view-reputacao">
+<div class="view-rep-root">
+<div class="rt-bar">
+<button class="rt-clear-btn" onclick="rtClearAll()">🗑 Limpar tudo</button>
+<button class="rt-clear-btn" onclick="document.getElementById('rtDebugInput').click()" title="Diagnóstico: ver texto extraído de um PDF">🔍 Debug PDF</button>
+<button class="wa-share-btn" onclick="waModalOpen('reputacao')" style="margin-left:auto">
+<svg fill="currentColor" height="12" viewbox="0 0 24 24" width="12"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.879L.057 23.077a.75.75 0 00.921.921l5.198-1.478A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.964-1.356l-.356-.212-3.685 1.048 1.048-3.685-.212-.356A9.75 9.75 0 1112 21.75z"></path></svg>
+        WhatsApp
+      </button>
+<input accept=".pdf" id="rtFileInput" multiple="" onchange="rtLoadFiles(this.files)" style="display:none" type="file"/>
+<input accept=".pdf" id="rtDebugInput" onchange="rtDebugPdf(this.files[0]);this.value=''" style="display:none" type="file"/>
+</div>
+<div class="rt-region-panel" id="rtRegionPanel">
+  <div class="rt-filter-label">Região a analisar</div>
+  <div class="rt-region-bar">
+    <button class="pl-region-btn rt-region-btn rr-todos active" data-r="todos" id="rbRepTodos" onclick="selectRegion('todos')">🌐 Todos</button>
+    <button class="pl-region-btn rt-region-btn rr-norte" data-r="norte" id="rbRepNorte" onclick="selectRegion('norte')">🔵 Norte/Centro</button>
+    <button class="pl-region-btn rt-region-btn rr-lisboa" data-r="lisboa" id="rbRepLisboa" onclick="selectRegion('lisboa')">🟢 Lisboa/Ilhas</button>
+    <button class="pl-region-btn rt-region-btn rr-alentejo" data-r="alentejo" id="rbRepAlentejo" onclick="selectRegion('alentejo')">🟡 Alentejo</button>
+    <button class="pl-region-btn rt-region-btn rr-algarve" data-r="algarve" id="rbRepAlgarve" onclick="selectRegion('algarve')">🔴 Algarve</button>
+  </div>
+</div>
+<div class="rt-filter-wrap" id="rtFilterWrap">
+<div class="rt-filter-label">Comparar hotéis</div>
+<div class="rt-pills" id="rtPills"></div>
+</div>
+<div class="rt-empty" id="rtEmpty" style="display:block">
+<div class="ico">⭐</div>
+<h3>Sem dados de reputação</h3>
+<p>Carregue ficheiros PDF do ReviewPro para ver a análise.</p>
+</div>
+<div class="rt-kpis" id="rtKpis" style="display:none"></div>
+<div id="rtChartsWrap" style="display:none">
+<div class="rt-section">Comparativo de Reputação</div>
+<div class="rt-charts">
+<div class="rt-chart">
+<div class="rt-chart-h">GRI™ por Hotel</div>
+<div class="rt-chart-sub">Semana mais recente · verde ≥90 · âmbar ≥80 · vermelho &lt;80</div>
+<div style="height:320px"><canvas id="rtChartGRI"></canvas></div>
+</div>
+<div class="rt-chart">
+<div class="rt-chart-h">Departamentos</div>
+<div class="rt-chart-sub">Serviço · Quarto · Limpeza · Valor · Localização</div>
+<div style="height:320px"><canvas id="rtChartDepts"></canvas></div>
+</div>
+<div class="rt-chart">
+<div class="rt-chart-h">Reviews &amp; Taxa de Resposta</div>
+<div class="rt-chart-sub">Volume de reviews + % gestão de respostas</div>
+<div style="height:310px"><canvas id="rtChartReviews"></canvas></div>
+</div>
+<div class="rt-chart">
+<div class="rt-chart-h">Fontes de Avaliação</div>
+<div class="rt-chart-sub">GRI™ Booking.com · Google · Tripadvisor</div>
+<div style="height:310px"><canvas id="rtChartSources"></canvas></div>
+</div>
+<div class="rt-chart wide">
+<div class="rt-chart-h">Evolução GRI™ por Semana</div>
+<div class="rt-chart-sub">Série temporal · visível quando há múltiplas semanas carregadas</div>
+<div style="height:230px"><canvas id="rtChartEvo"></canvas></div>
+</div>
+</div>
+</div>
+<div class="rt-rank-wrap" id="rtRankWrap" style="display:none">
+<div class="rt-section">Ranking GRI™ — Semana Mais Recente</div>
+<div class="table-wrapper">
+<div style="overflow-x:auto">
+<table id="rtRankTable">
+<thead><tr>
+<th style="text-align:left">Pos.</th>
+<th style="text-align:left">Hotel</th>
+<th style="text-align:left">Semana</th>
+<th>GRI™</th><th>Δ</th><th>Goal</th>
+<th>Reviews</th><th>Resp.</th>
+<th>Serviço</th><th>Quarto</th><th>Limpeza</th><th>Valor</th>
+<th>CQI™</th><th>Rank VG</th>
+</tr></thead>
+<tbody id="rtRankBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="rtCardControls" style="display:none">
+<div class="rt-section">Detalhe por Unidade e Semana</div>
+<div class="rt-card-controls">
+<div class="rt-sel-group">
+<div class="rt-sel-label">Hotel(s)</div>
+<select class="rt-sel" id="rtSelHotel" multiple="" onchange="rtApplyCardFilter()" size="4"></select>
+<div class="rt-sel-summary" id="rtSelHotelSummary">—</div>
+</div>
+<div class="rt-sel-group">
+<div class="rt-sel-label">Semana(s)</div>
+<select class="rt-sel" id="rtSelWeek" multiple="" onchange="rtApplyCardFilter()" size="4"></select>
+<div class="rt-sel-summary" id="rtSelWeekSummary">—</div>
+</div>
+<button class="rt-apply-btn" onclick="rtSelectAllCards()">Seleccionar tudo</button>
+</div>
+</div>
+<div class="rt-cards" id="rtCards"></div>
+<!-- HEATMAP DE CATEGORIAS -->
+</div>
+</div>
+</div>
+
+<!-- REVENUE INTELLIGENCE -->
+<div class="tab-content" id="view-revenueint">
+  <div class="ri-hero">
+    <div>
+      <div class="ri-title">Revenue Intelligence</div>
+      <div class="ri-sub">Leitura executiva da ocupação: pace STLY, pickup entre snapshots, impacto estimado em receita, risco comercial, agregação regional e comparação com previsão/orçamento quando disponível.</div>
+    </div>
+    <button class="ri-btn" onclick="riRender()">Atualizar análise</button>
+  </div>
+  <div class="ri-controls">
+    <div class="ri-control"><label>Hotel</label><select id="riHotel" onchange="riRender()"><option value="__all__">Portefólio filtrado</option></select></div>
+    <div class="ri-control"><label>Mês</label><select id="riMonth" onchange="riRender()"></select></div>
+    <div class="ri-control"><label>Comparação</label><select id="riCompare" onchange="riRender()"><option value="latest">Últimos 2 snapshots</option><option value="first">S1 vs último snapshot</option></select></div>
+    <div class="ri-control"><label>Região</label><select id="riRegion" onchange="riRender()"><option value="active">Filtro ativo do dashboard</option><option value="todos">Todos</option><option value="norte">Norte/Centro</option><option value="lisboa">Lisboa/Ilhas</option><option value="alentejo">Alentejo</option><option value="algarve">Algarve</option></select></div>
+  </div>
+  <div id="riEmpty" class="ri-card" style="display:none">Carrega primeiro os snapshots de ocupação e/ou restaura a sessão guardada.</div>
+  <div id="riContent">
+    <div class="ri-kpis" id="riKpis"></div>
+    <div class="ri-card wide"><h3>Digest automático — o que mudou</h3><div class="hint">Resumo entre snapshots com foco em room nights, impacto financeiro e risco.</div><div class="ri-summary" id="riSummary"></div></div>
+    <div class="ri-grid">
+      <div class="ri-card"><h3>Pace STLY</h3><div class="hint">Trajetória da ocupação do ano atual no mês selecionado vs referência do ano anterior.</div><div class="ri-chart"><canvas id="riChartPace"></canvas></div></div>
+      <div class="ri-card"><h3>Impacto em Receita (€)</h3><div class="hint">Pickup RN × ADR do P&amp;L.</div><div class="ri-chart"><canvas id="riChartImpact"></canvas></div></div>
+      <div class="ri-card wide"><h3>Ranking de Pickup do Portefólio</h3><div class="hint">Ordenado por impacto financeiro estimado. Inclui ganhos e perdas de room nights.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Região</th><th>OCC Ant.</th><th>OCC Atual</th><th>Pickup pp</th><th>RN</th><th>ADR</th><th>Impacto €</th><th>Estado</th></tr></thead><tbody id="riPickupBody"></tbody></table></div></div>
+      <div class="ri-card"><h3>Meses / Hotéis em risco</h3><div class="hint">Ocupação baixa combinada com pickup negativo ou estagnado.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>OCC</th><th>Pickup pp</th><th>Impacto</th><th>Risco</th></tr></thead><tbody id="riRiskBody"></tbody></table></div></div>
+      <div class="ri-card"><h3>Agregação Regional</h3><div class="hint">Tração geográfica do portefólio.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Região</th><th>OCC</th><th>Pickup pp</th><th>RN</th><th>Impacto €</th></tr></thead><tbody id="riRegionBody"></tbody></table></div></div>
+      <div class="ri-card wide"><h3>Ocupação vs Orçamento / Previsão</h3><div class="hint">Cruza a ocupação captada no snapshot com a previsão gerada no módulo Orçamento, quando existir.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>OCC Snapshot</th><th>OCC Orç./Prev.</th><th>Desvio pp</th><th>Leitura</th></tr></thead><tbody id="riBudgetBody"></tbody></table></div><div class="ri-note">Quando não existir previsão no STORE para esse hotel/mês, o dashboard mostra “—” e não inventa valores.</div></div>
+    </div>
+    <div id="ri2-section">
+      <div class="ri2-head">
+        <div>
+          <h2>Revenue Intelligence 2.0</h2>
+          <p>Camada adicional de decisão: oportunidade tarifária, urgência comercial, forecast, anomalias, benchmark e plano de ação automático.</p>
+        </div>
+        <button class="ri-btn" onclick="riRenderAdvanced()">Atualizar RI 2.0</button>
+      </div>
+      <div class="ri2-grid">
+        <div class="ri2-card"><h3>1. Índice de Oportunidade Tarifária</h3><div class="hint">Hotéis com ocupação alta e ADR abaixo/igual ao STLY. O valor apresentado é potencial teórico, não receita garantida.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>OCC</th><th>ADR</th><th>ADR LY</th><th>Potencial teórico</th></tr></thead><tbody id="riTariffBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>2. Índice de Urgência Comercial</h3><div class="hint">Score 0–100 com base em OCC, pickup, pace e proximidade temporal.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>OCC</th><th>Pickup</th><th>Pace</th><th>Score</th></tr></thead><tbody id="riUrgencyBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>3. Lead Time de Recuperação</h3><div class="hint">Pontos de ocupação necessários por semana para atingir o objetivo, quando existe base do ano anterior.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>Atual</th><th>Objetivo</th><th>Gap</th><th>pp/sem.</th></tr></thead><tbody id="riRecoveryBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>5. Forecast de Fecho Automático</h3><div class="hint">Estimativa simples baseada no ritmo recente dos snapshots.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>Atual</th><th>Tendência</th><th>Forecast</th><th>Leitura</th></tr></thead><tbody id="riForecastBody"></tbody></table></div></div>
+        <div class="ri2-card wide"><h3>4. Calendário de Risco por Cor</h3><div class="hint">Matriz hotel × mês para identificar rapidamente períodos críticos.</div><div class="ri2-calendar"><table class="ri-table"><thead id="riCalendarHead"></thead><tbody id="riCalendarBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>6. Elasticidade OCC / ADR</h3><div class="hint">Leitura da relação entre variação de ADR e variação de ocupação face a STLY.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>ADR YoY</th><th>OCC YoY</th><th>Leitura</th></tr></thead><tbody id="riElasticityBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>7. Alertas de Anomalias</h3><div class="hint">Quedas ou subidas fora do padrão entre snapshots.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>Alerta</th><th>Valor</th><th>Impacto</th></tr></thead><tbody id="riAnomalyBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>8. Top Oportunidades em Euros</h3><div class="hint">Gap até objetivo × quartos × dias × ADR.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>Gap</th><th>RN pot.</th><th>€ pot.</th></tr></thead><tbody id="riEuroOppBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>9. Benchmark de Hotéis Semelhantes</h3><div class="hint">Comparação automática entre pares comerciais relevantes.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Par</th><th>Melhor OCC</th><th>Melhor ADR</th><th>Leitura</th></tr></thead><tbody id="riPeerBody"></tbody></table></div></div>
+        <div class="ri2-card wide"><h3>10. Plano de Ação Automático</h3><div class="hint">Recomendações geradas automaticamente a partir dos alertas anteriores.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>Situação</th><th>Ação Recomendada</th><th>Prioridade</th></tr></thead><tbody id="riActionBody"></tbody></table></div><div class="ri2-small">As recomendações são regras de apoio à decisão; não substituem validação de inventário, eventos, grupos e restrições comerciais.</div></div>
+      </div>
+    </div>
+
+    <div id="ri3-section">
+      <div class="ri2-head">
+        <div>
+          <h2>Revenue Intelligence 3.0</h2>
+          <p>Novas análises executivas: receita em risco, dependência de última hora, eventos, radar de performance, simulador e confiança do forecast.</p>
+        </div>
+        <button class="ri-btn" onclick="riRenderExtra()">Atualizar RI 3.0</button>
+      </div>
+      <div class="ri2-grid">
+        <div class="ri2-card"><h3>11. Revenue at Risk (€)</h3><div class="hint">Receita potencial em risco face ao objetivo, usando o forecast de fecho (não a ocupação captada hoje).</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>OCC</th><th>Forecast</th><th>Objetivo</th><th>RN risco</th><th>€ risco</th></tr></thead><tbody id="riRevenueRiskBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>14. Índice de Dependência de Última Hora</h3><div class="hint">Proxy baseado no peso do pickup recente no crescimento total entre snapshots.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>Pickup Rec.</th><th>Pickup Total</th><th>Índice</th><th>Leitura</th></tr></thead><tbody id="riLastMinuteBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>Perdas / possíveis cancelamentos por Hotel</h3><div class="hint">Room nights perdidas entre snapshots. Pode refletir cancelamentos, alterações de inventário, grupos, bloqueios ou correções. Considera apenas meses atuais/futuros.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Meses afetados</th><th>RN perdidas</th><th>Impacto €</th><th>Leitura</th></tr></thead><tbody id="riCancelHotelBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>Perdas / possíveis cancelamentos por Mês</h3><div class="hint">Resumo mensal das perdas entre snapshots. Não assume que todo o pickup negativo corresponde a cancelamentos. Considera apenas meses atuais/futuros.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Mês</th><th>Hotéis afetados</th><th>RN perdidas</th><th>Impacto €</th><th>Leitura</th></tr></thead><tbody id="riCancelMonthBody"></tbody></table></div></div>
+        <div class="ri2-card wide"><h3>17. Mapa de Eventos</h3><div class="hint">Registo manual de eventos/feriados/congressos e cruzamento com pickup e forecast.</div><div class="ri-event-box"><textarea id="riEventsInput" placeholder="Formato sugerido: AAAA-MM-DD | Hotel ou Região | Evento | Impacto esperado\nEx.: 2026-08-15 | CASCAIS | Feriado + eventos costa | Alto"></textarea><div class="ri-event-actions"><button class="ri-btn" onclick="riSaveEvents()">Guardar eventos</button><button class="ri-btn ghost" onclick="riRenderEvents()">Recalcular</button></div></div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Data</th><th>Âmbito</th><th>Evento</th><th>Mês</th><th>OCC</th><th>Pickup</th><th>Ação</th></tr></thead><tbody id="riEventsBody"></tbody></table></div></div>
+        <div class="ri2-card"><h3>21. Radar de Performance do Hotel</h3><div class="hint">OCC, ADR, ADR NET, RevPAR, GOP e ritmo vs portefólio.</div><div class="ri-chart"><canvas id="riRadarChart"></canvas></div></div>
+        <div class="ri2-card"><h3>22. Simulador Revenue</h3><div class="hint">Simula impacto de alteração de ADR e ocupação no mês selecionado. Atualiza automaticamente ao alterar os campos.</div><div class="ri-sim-grid"><label>ADR %<input id="riSimAdr" type="text" inputmode="decimal" value="5" onchange="riRenderSimulator()" oninput="riRenderSimulator()" onkeyup="riRenderSimulator()"></label><label>OCC pp<input id="riSimOcc" type="text" inputmode="decimal" value="-2" onchange="riRenderSimulator()" oninput="riRenderSimulator()" onkeyup="riRenderSimulator()"></label><label>GOP %<input id="riSimGop" type="text" inputmode="decimal" value="35" onchange="riRenderSimulator()" oninput="riRenderSimulator()" onkeyup="riRenderSimulator()"></label></div><button class="btn" style="margin-top:10px" onclick="riRenderSimulator()">Recalcular simulação</button><div id="riSimulatorResult" class="ri-summary"></div></div>
+        <div class="ri2-card wide"><h3>24. Forecast Confidence Score</h3><div class="hint">Confiança da previsão com base em histórico disponível, volatilidade dos snapshots e proximidade temporal.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>Forecast</th><th>Confiança</th><th>Volatilidade</th><th>Leitura</th></tr></thead><tbody id="riConfidenceBody"></tbody></table></div></div>
+        <div class="ri2-card wide"><h3>Revenue Action Center</h3><div class="hint">Prioriza apenas meses atuais/futuros, com impacto financeiro estimado e ação recomendada.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Prioridade</th><th>Hotel</th><th>Mês</th><th>Dias</th><th>Risco €</th><th>Score</th><th>Ação</th></tr></thead><tbody id="riActionCenterBody"></tbody></table></div></div>
+        <div class="ri2-card wide"><h3>Early Warning System</h3><div class="hint">Sinaliza apenas meses atuais/futuros cuja tendência aponta para falha face ao objetivo dinâmico: OCC do ano anterior + 2 p.p. Quando não existe base do ano anterior, não inventa objetivo.</div><div class="ri-table-wrap"><table class="ri-table"><thead><tr><th>Hotel</th><th>Mês</th><th>Dias</th><th>Atual</th><th>Forecast</th><th>Objetivo</th><th>Gap</th><th>Alerta</th></tr></thead><tbody id="riEarlyWarningBody"></tbody></table></div></div>
+        <div class="ri2-card wide"><h3>Pergunta ao Dashboard</h3><div class="hint">Pesquisa rápida sobre hotéis, meses, risco, forecast, ADR, OCC e ações recomendadas.</div><div class="ri4-ask"><input id="riAskInput" type="text" placeholder="Ex.: Porque está Cascais pior que o ano passado?" onkeydown="if(event.key==='Enter')riAskDashboard()"><button class="ri-btn" onclick="riAskDashboard()">Perguntar</button></div><div id="riAskAnswer" class="ri4-answer">Escreva uma pergunta sobre um hotel, mês, risco, forecast, ADR, OCC ou ações recomendadas.</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OCUPAÇÃO -->
+<div class="tab-content" id="view-ocupacao">
+<!-- Region filter -->
+<div class="pl-region-bar" id="plRegionBarOcc" style="margin-bottom:0">
+<button class="pl-region-btn rr-todos active" id="rbTodosOcc" onclick="selectRegion('todos')">🌐 Todos</button>
+<button class="pl-region-btn rr-norte" id="rbNorteOcc" onclick="selectRegion('norte')">🔵 Norte</button>
+<button class="pl-region-btn rr-lisboa" id="rbLisboaOcc" onclick="selectRegion('lisboa')">🟢 Lisboa</button>
+<button class="pl-region-btn rr-alentejo" id="rbAlentejoOcc" onclick="selectRegion('alentejo')">🟡 Alentejo</button>
+<button class="pl-region-btn rr-algarve" id="rbAlgarveOcc" onclick="selectRegion('algarve')">🔴 Algarve</button>
+</div>
+<!-- Toolbar -->
+<div class="occ-toolbar">
+<button class="occ-clear-btn" onclick="occClearAll()">🗑 Limpar tudo</button>
+<button class="occ-clear-btn" onclick="occExportPDFModal()" style="background:var(--gold);color:#fff;border-color:var(--gold)">📄 Exportar PDF snapshots</button>
+<input accept=".pdf" id="occFileInput" onchange="occLoadFile(this.files[0]);this.value=''" style="display:none" type="file"/>
+</div>
+
+<!-- Modal: âmbito do export PDF de ocupação -->
+<div id="occExportModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:center;justify-content:center;padding:24px">
+  <div style="background:var(--surface-1);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:440px;width:100%">
+    <h3 style="font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:4px">📄 Exportar PDF de Ocupação</h3>
+    <p style="font-size:12px;color:var(--text-3);margin-bottom:16px">Escolhe o âmbito do relatório.</p>
+
+    <div style="display:flex;gap:6px;margin-bottom:14px">
+      <button id="occExpScopeTodos" class="occ-clear-btn" style="flex:1;background:var(--gold);color:#fff;border-color:var(--gold)" onclick="occExportSetScope('todos')">Todos os hotéis</button>
+      <button id="occExpScopeRegiao" class="occ-clear-btn" style="flex:1" onclick="occExportSetScope('regiao')">Por região</button>
+      <button id="occExpScopeHotel" class="occ-clear-btn" style="flex:1" onclick="occExportSetScope('hotel')">Um hotel</button>
+    </div>
+
+    <div id="occExpRegiaoSel" style="display:none;margin-bottom:14px">
+      <div class="occ-sel-label" style="margin-bottom:4px">Região</div>
+      <select class="occ-sel" id="occExpRegiao" style="width:100%"></select>
+    </div>
+
+    <div id="occExpHotelSel" style="display:none;margin-bottom:14px">
+      <div class="occ-sel-label" style="margin-bottom:4px">Hotel</div>
+      <select class="occ-sel" id="occExpHotel" style="width:100%"></select>
+    </div>
+
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:18px">
+      <button class="occ-clear-btn" onclick="document.getElementById('occExportModal').style.display='none'">Cancelar</button>
+      <button class="occ-clear-btn" style="background:var(--gold);color:#fff;border-color:var(--gold)" onclick="occExportPDF()">Gerar PDF</button>
+    </div>
+  </div>
+</div>
+<!-- Snapshot chips -->
+<div class="occ-snapshots" id="occSnapshots"></div>
+<!-- Empty state -->
+<div class="occ-empty" id="occEmpty">
+<div class="ico">🛏</div>
+<h3>Sem dados de ocupação</h3>
+<p>Carregue o ficheiro PDF de Ocupação Mensal exportado do PMS.<br/>Pode carregar várias versões — o histórico é preservado.</p>
+</div>
+<!-- Controls (hotel selector) -->
+<div class="occ-controls" id="occControls" style="display:none">
+<div class="occ-sel-group">
+<div class="occ-sel-label">Hotel</div>
+<select class="occ-sel" id="occHotelSel" onchange="occRender()">
+<option value="__all__">— Todos os hotéis (heatmap) —</option>
+</select>
+</div>
+<div class="occ-sel-group">
+<div class="occ-sel-label">Snapshot</div>
+<select class="occ-sel" id="occSnapSel" onchange="occRender()">
+<option value="__latest__">Mais recente</option>
+</select>
+</div>
+</div>
+<!-- KPIs -->
+<div class="occ-kpis" id="occKpis" style="display:none"></div>
+<!-- Executive intelligence occupation -->
+<div class="occ-intel-wrap" id="occIntelWrap">
+<div class="occ-intel-card">
+<div class="occ-intel-head">
+<div>
+<div class="occ-intel-title">Leitura Executiva da Ocupação</div>
+<div class="occ-intel-note">Semáforo, prioridades, estabilidade e tendência com os dados disponíveis</div>
+</div>
+<div class="occ-insight-badge occ-badge-watch" id="occIntelScope">Snapshot</div>
+</div>
+<div class="occ-insight-grid" id="occInsightGrid"></div>
+</div>
+<div class="occ-exec-grid">
+<div class="occ-intel-card">
+<div class="occ-intel-head">
+<div class="occ-intel-title">Radar de Prioridades</div>
+<div class="occ-intel-note">ordem sugerida de análise</div>
+</div>
+<div class="occ-priority-list" id="occPriorityList"></div>
+</div>
+<div class="occ-intel-card">
+<div class="occ-intel-head">
+<div class="occ-intel-title">Matriz Comercial</div>
+<div class="occ-intel-note">ocupação atual vs tendência</div>
+</div>
+<div class="occ-matrix" id="occMatrix"></div>
+</div>
+</div>
+</div>
+<!-- Charts -->
+<div id="occCharts" style="display:none">
+<div class="occ-chart-card">
+<div class="occ-chart-title">Ocupação Mensal — <span id="occChartHotelName">Hotel</span></div>
+<div class="occ-chart-sub">2025 vs 2026 vs 2027 · % taxa de ocupação por mês</div>
+<div style="height:340px"><canvas id="occChartLine"></canvas></div>
+</div>
+<div class="occ-chart-card" id="occDeltaCard">
+<div class="occ-chart-title">Variação vs Ano Anterior <span style="color:var(--text-3);font-weight:400;text-transform:none;letter-spacing:0;font-size:10px">2026 vs 2025 · pp</span></div>
+<div class="occ-chart-sub">Diferença em pontos percentuais por mês — verde = melhoria, vermelho = queda</div>
+<div style="height:260px"><canvas id="occChartDelta"></canvas></div>
+</div>
+</div>
+<!-- Heatmap (all hotels) -->
+<div id="occHeatmapWrap" style="display:none">
+<div class="occ-chart-card">
+<div class="occ-chart-title">Heatmap de Ocupação — Todos os Hotéis</div>
+<div class="occ-chart-sub">Selecciona "Todos os hotéis" acima · cor por taxa de ocupação</div>
+<div class="occ-heatmap-wrap">
+<table class="occ-heatmap" id="occHeatmap"></table>
+</div>
+</div>
+</div>
+<!-- Snapshot comparison table -->
+<div id="occCompareWrap" style="display:none">
+<div class="occ-chart-card">
+<div class="occ-chart-title">Comparação entre Snapshots <span style="color:var(--text-3);font-weight:400;text-transform:none;letter-spacing:0;font-size:10px">datas, evolução e pickup</span></div>
+<div class="occ-chart-sub">Mostra a evolução entre uploads e o pickup/perda em pontos percentuais face ao snapshot anterior</div>
+<div style="height:300px"><canvas id="occChartCompare"></canvas></div>
+<div id="occCompareSummary"></div>
+</div>
+</div>
+
+<!-- Advanced occupation analyses -->
+<div id="occAdvancedWrap" style="display:none">
+  <div class="occ-advanced-grid">
+    <div class="occ-chart-card">
+      <div class="occ-chart-title">Booking Curve <span style="color:var(--text-3);font-weight:400;text-transform:none;letter-spacing:0;font-size:10px">curva acumulada por mês</span></div>
+      <div class="occ-chart-sub">Leitura proxy a partir dos snapshots carregados: evolução da ocupação prevista por mês entre uploads.</div>
+      <div style="height:300px"><canvas id="occChartBookingCurve"></canvas></div>
+    </div>
+    <div class="occ-chart-card">
+      <div class="occ-chart-title">Portfolio Performance <span style="color:var(--text-3);font-weight:400;text-transform:none;letter-spacing:0;font-size:10px">OCC vs ADR</span></div>
+      <div class="occ-chart-sub">Bolha por hotel: eixo X = ocupação média 2026; eixo Y = ADR estimado pelo P&amp;L carregado.</div>
+      <div style="height:300px"><canvas id="occChartPortfolio"></canvas></div>
+    </div>
+  </div>
+  <div class="occ-chart-card">
+    <div class="occ-chart-title">Revenue Radar — Mapa de Pressão Comercial</div>
+    <div class="occ-chart-sub">Lista de hotéis e meses com maior pressão ou oportunidade. As recomendações são automáticas e servem como alerta inicial.</div>
+    <div style="overflow-x:auto"><table class="occ-revenue-table" id="occRevenueRadarTable"></table></div>
+    <div class="occ-actions-list" id="occRevenueRadarActions"></div>
+  </div>
+</div>
+
+<!-- ═══ PICKUP INTERANUAL ═══ -->
+<div id="occPiuWrap" style="display:none;margin-top:8px">
+  <div class="occ-chart-card" style="border-color:rgba(42,125,140,.3)">
+    <div class="occ-chart-title" style="color:#2a7d8c">📈 Curva de Pickup Interanual <span style="color:var(--text-3);font-weight:400;text-transform:none;letter-spacing:0;font-size:10px">mesmo horizonte temporal: 2025 vs 2026</span></div>
+    <div class="occ-chart-sub">Cada ponto do eixo X é um mês de snapshot. A linha 2025 mostra a ocupação prevista para o mês-alvo vista de cada mês de referência. A linha 2026 mostra o mesmo para 2026 — só aparece ponto quando existe snapshot de 2026 tirado nesse mesmo mês.</div>
+    <div class="piu-controls">
+      <div class="occ-sel-group">
+        <div class="occ-sel-label">Hotel</div>
+        <select class="occ-sel" id="piuHotelSel" onchange="piuRender()" style="min-width:200px"></select>
+      </div>
+      <div class="occ-sel-group">
+        <div class="occ-sel-label">Mês alvo</div>
+        <select class="occ-sel" id="piuMesSel" onchange="piuRender()" style="min-width:140px">
+          <option value="0">Janeiro</option><option value="1">Fevereiro</option><option value="2">Março</option>
+          <option value="3">Abril</option><option value="4">Maio</option><option value="5">Junho</option>
+          <option value="6">Julho</option><option value="7" selected>Agosto</option><option value="8">Setembro</option>
+          <option value="9">Outubro</option><option value="10">Novembro</option><option value="11">Dezembro</option>
+        </select>
+      </div>
+      <div class="occ-sel-group">
+        <div class="occ-sel-label">Carregar Snapshot 2025</div>
+        <button class="occ-clear-btn" onclick="document.getElementById('piuFileInput').click()" style="background:rgba(42,125,140,.15);border-color:rgba(42,125,140,.5);color:#2a7d8c">
+          + Adicionar PDF 2025
+        </button>
+        <input accept=".pdf" id="piuFileInput" onchange="Array.from(this.files).forEach(f=>piuLoadFile(f));this.value=''" style="display:none" type="file" multiple/>
+      </div>
+      <button class="occ-clear-btn" onclick="piuClearAll()" style="margin-top:auto">🗑 Limpar referências 2025</button>
+    </div>
+    <div class="piu-chips" id="piuChips"></div>
+    <div id="piuCoverageNote" style="display:none;font-size:11px;color:var(--text-3);padding:6px 2px;margin-bottom:8px"></div>
+    <div id="piuEmpty" style="display:none;text-align:center;padding:32px;color:var(--text-3);font-size:12px">
+      Carregue pelo menos um PDF de 2025 para ver a curva de pickup de referência.
+    </div>
+    <div id="piuChartWrap" style="height:320px;display:none"><canvas id="piuChart"></canvas></div>
+    <div id="piuTableWrap" style="display:none;margin-top:16px;overflow-x:auto">
+      <table class="piu-table" id="piuTable"></table>
+    </div>
+  </div>
+</div>
+
+</div>
+<!-- ═══ MODAL RELATÓRIO DE HOTEL ═══ -->
+<div id="relatorioModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;align-items:center;justify-content:center">
+  <div style="background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:26px;max-width:500px;width:92%;max-height:90vh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+      <div>
+        <div style="font-size:16px;font-weight:900;color:var(--gold);letter-spacing:-.02em">📄 Relatório Mensal de Hotel</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:2px">Gera um PDF completo por hotel — um bloco por mês + consolidado</div>
+      </div>
+      <button onclick="relatorioCloseModal()" style="background:none;border:none;color:var(--text-3);font-size:20px;cursor:pointer;line-height:1">✕</button>
+    </div>
+
+    <!-- Hotel -->
+    <div style="margin-bottom:14px">
+      <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-3);font-weight:800;margin-bottom:6px">Hotel</label>
+      <select id="relHotelSel" style="width:100%;background:var(--surface-2);color:var(--text-1);border:1px solid var(--border-2);border-radius:8px;padding:9px 10px;font-size:13px;font-family:var(--font)"></select>
+    </div>
+
+    <!-- Meses -->
+    <div style="margin-bottom:14px">
+      <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-3);font-weight:800;margin-bottom:6px">Meses a incluir</label>
+      <div id="relMesesChips" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+
+    <!-- Secções -->
+    <div style="margin-bottom:18px">
+      <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-3);font-weight:800;margin-bottom:8px">Secções</label>
+      <div style="display:flex;flex-direction:column;gap:6px" id="relSeccoesChks">
+        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surface-2);border-radius:8px;cursor:pointer;font-size:12px;color:var(--text-1);font-weight:600">
+          <input type="checkbox" id="relChk-kpis" checked style="accent-color:var(--gold)"> 🎯 KPIs Executivos
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surface-2);border-radius:8px;cursor:pointer;font-size:12px;color:var(--text-1);font-weight:600">
+          <input type="checkbox" id="relChk-usali" checked style="accent-color:var(--gold)"> 📋 Ficha USALI + Comentários
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surface-2);border-radius:8px;cursor:pointer;font-size:12px;color:var(--text-1);font-weight:600">
+          <input type="checkbox" id="relChk-ocupacao" checked style="accent-color:var(--gold)"> 🛏 Ocupação + Pickup
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surface-2);border-radius:8px;cursor:pointer;font-size:12px;color:var(--text-1);font-weight:600">
+          <input type="checkbox" id="relChk-receitas" checked style="accent-color:var(--gold)"> 📈 Receitas
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surface-2);border-radius:8px;cursor:pointer;font-size:12px;color:var(--text-1);font-weight:600">
+          <input type="checkbox" id="relChk-custos" checked style="accent-color:var(--gold)"> 📉 Custos
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surface-2);border-radius:8px;cursor:pointer;font-size:12px;color:var(--text-1);font-weight:600">
+          <input type="checkbox" id="relChk-reputacao" checked style="accent-color:var(--gold)"> ★ Reputação
+        </label>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button onclick="relatorioCloseModal()" style="padding:9px 16px;background:var(--surface-2);color:var(--text-2);border:1px solid var(--border);border-radius:8px;font-size:12px;cursor:pointer;font-family:var(--font)">Cancelar</button>
+      <button onclick="relatorioGerar()" style="padding:9px 18px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;font-family:var(--font)">📄 Gerar PDF</button>
+    </div>
+  </div>
+</div>
+<!-- FIM MODAL RELATÓRIO -->
+
+<!-- INSTAGRAM -->
+<div class="tab-content" id="view-instagram">
+<div class="ig-toolbar">
+<button class="ig-clear-btn" onclick="igClearAll()">🗑 Limpar tudo</button>
+<button class="wa-share-btn" onclick="waModalOpen('instagram')" style="margin-left:auto">
+<svg fill="currentColor" height="12" viewbox="0 0 24 24" width="12"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.879L.057 23.077a.75.75 0 00.921.921l5.198-1.478A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.964-1.356l-.356-.212-3.685 1.048 1.048-3.685-.212-.356A9.75 9.75 0 1112 21.75z"></path></svg>
+        WhatsApp
+      </button>
+<input accept=".xlsx,.xls" id="igFileInput" onchange="igLoadFile(this.files[0]);this.value=''" style="display:none" type="file"/>
+</div>
+<div class="ig-snapshots" id="igSnapshots"></div>
+<div class="ig-empty" id="igEmpty">
+<div class="ico">📱</div>
+<h3>Sem dados Instagram</h3>
+<p>Carregue o ficheiro Excel de análise Instagram.<br/>Cada upload mensal é preservado — o histórico acumula.</p>
+</div>
+<div id="igMain" style="display:none">
+<div class="ig-controls">
+<div class="ig-sel-group">
+<div class="ig-sel-label">Vista</div>
+<select class="ig-sel" id="igViewSel" onchange="igRender()">
+<option value="overview">Visão geral — todos os hotéis</option>
+<option value="hotel">Por hotel — evolução temporal</option>
+</select>
+</div>
+<div class="ig-sel-group" id="igHotelGroup" style="display:none">
+<div class="ig-sel-label">Hotel</div>
+<select class="ig-sel" id="igHotelSel" onchange="igRender()"></select>
+</div>
+<div class="ig-sel-group">
+<div class="ig-sel-label">Mês de referência</div>
+<select class="ig-sel" id="igMonthSel" onchange="igRender()"></select>
+</div>
+</div>
+<div class="ig-kpis" id="igKpis"></div>
+<!-- Overview charts -->
+<div id="igOverviewWrap">
+<div class="ig-chart-grid">
+<div class="ig-chart-card">
+<div class="ig-chart-title">Seguidores por Hotel</div>
+<div class="ig-chart-sub">Total de seguidores no mês seleccionado</div>
+<div style="height:320px"><canvas id="igChartSeguidores"></canvas></div>
+</div>
+<div class="ig-chart-card">
+<div class="ig-chart-title">Visualizações por Hotel</div>
+<div class="ig-chart-sub">Total de visualizações no mês seleccionado</div>
+<div style="height:320px"><canvas id="igChartViews"></canvas></div>
+</div>
+<div class="ig-chart-card">
+<div class="ig-chart-title">Posts + Histórias por Hotel</div>
+<div class="ig-chart-sub">Volume de publicações no mês seleccionado</div>
+<div style="height:320px"><canvas id="igChartPubs"></canvas></div>
+</div>
+<div class="ig-chart-card">
+<div class="ig-chart-title">Crescimento de Seguidores</div>
+<div class="ig-chart-sub">Variação vs mês anterior · +verde / −vermelho</div>
+<div style="height:320px"><canvas id="igChartGrowth"></canvas></div>
+</div>
+</div>
+<div class="ig-chart-card">
+<div class="ig-chart-title">Ranking do Mês</div>
+<div class="ig-chart-sub">Ordenado por visualizações</div>
+<div style="overflow-x:auto">
+<table class="ig-ranking" id="igRankTable">
+<thead><tr>
+<th>Hotel</th>
+<th>Seguidores</th><th>Δ Seg.</th>
+<th>Posts</th><th>Histórias</th><th>Total Pub.</th>
+<th>Média/Dia</th>
+<th>Visualizações</th>
+<th>Gostos</th><th>Partilhas</th>
+<th>Alcance</th>
+</tr></thead>
+<tbody id="igRankBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Hotel evolution charts -->
+<div id="igHotelWrap" style="display:none">
+<div class="ig-chart-card">
+<div class="ig-chart-title">Evolução de Seguidores — <span id="igHotelName"></span></div>
+<div class="ig-chart-sub">Crescimento acumulado de seguidores ao longo do tempo</div>
+<div style="height:300px"><canvas id="igChartSeguEvol"></canvas></div>
+</div>
+<div class="ig-chart-grid">
+<div class="ig-chart-card">
+<div class="ig-chart-title">Visualizações Mensais</div>
+<div class="ig-chart-sub">Total de visualizações por mês</div>
+<div style="height:280px"><canvas id="igChartViewsEvol"></canvas></div>
+</div>
+<div class="ig-chart-card">
+<div class="ig-chart-title">Volume de Publicações</div>
+<div class="ig-chart-sub">Posts e histórias por mês</div>
+<div style="height:280px"><canvas id="igChartPubsEvol"></canvas></div>
+</div>
+</div>
+<div class="ig-chart-card">
+<div class="ig-chart-title">Crescimento Mensal de Seguidores</div>
+<div class="ig-chart-sub">Variação absoluta de seguidores mês a mês</div>
+<div style="height:260px"><canvas id="igChartGrowthEvol"></canvas></div>
+</div>
+</div>
+</div>
+</div>
+<!-- AGENDA OPERACIONAL v22 -->
+<div class="tab-content" id="view-agenda">
+  <div class="vg-agenda-shell" id="vgAgendaRoot">
+    <div class="vg-agenda-head">
+      <div><div class="vg-agenda-title">📅 Agenda Operacional</div><div class="vg-agenda-sub">Ações, prazos, auditorias, visitas, reuniões e eventos operacionais num único calendário partilhado.</div></div>
+      <div class="vg-agenda-head-actions">
+        <span class="vg-agenda-sub" id="vgAgendaMeta">A carregar agenda…</span>
+        <button class="vg-agenda-btn" type="button" data-agenda-cmd="refresh">↻ Atualizar</button>
+        <button class="vg-agenda-btn primary" type="button" data-agenda-cmd="new">＋ Novo evento</button>
+      </div>
+    </div>
+    <div class="vg-agenda-kpis">
+      <div class="vg-agenda-kpi" id="vgAgendaKpiToday"></div>
+      <div class="vg-agenda-kpi" id="vgAgendaKpi7"></div>
+      <div class="vg-agenda-kpi" id="vgAgendaKpiOverdue"></div>
+      <div class="vg-agenda-kpi" id="vgAgendaKpiMonth"></div>
+    </div>
+    <div class="vg-agenda-toolbar">
+      <div class="vg-agenda-field"><label>Hotel</label><select id="vgAgendaHotel"></select></div>
+      <div class="vg-agenda-field"><label>Tipo</label><select id="vgAgendaType"></select></div>
+      <div class="vg-agenda-field vg-agenda-search"><label>Pesquisar</label><input id="vgAgendaSearch" type="search" placeholder="Evento, responsável, hotel…"></div>
+      <div class="vg-agenda-field"><label>Vista</label><div class="vg-agenda-view-toggle" id="vgAgendaViewToggle"><button type="button" data-agenda-cmd="calendar" data-mode="calendar" class="active">Calendário</button><button type="button" data-agenda-cmd="list" data-mode="list">Lista</button></div></div>
+    </div>
+    <div class="vg-agenda-main" id="vgAgendaMain">
+      <div>
+        <div class="vg-agenda-calendar-wrap" id="vgAgendaCalendarWrap">
+          <div class="vg-agenda-calendar-card">
+            <div class="vg-agenda-calendar-head"><div class="vg-agenda-month-nav"><button type="button" data-agenda-cmd="prev">‹</button><div class="vg-agenda-month-title" id="vgAgendaMonthTitle"></div><button type="button" data-agenda-cmd="next">›</button></div><button class="vg-agenda-today" type="button" data-agenda-cmd="today">Hoje</button></div>
+            <div class="vg-agenda-weekdays"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+            <div class="vg-agenda-days" id="vgAgendaDays"></div>
+          </div>
+        </div>
+        <div class="vg-agenda-list-card" id="vgAgendaListCard"><div class="vg-agenda-list" id="vgAgendaList"></div></div>
+      </div>
+      <aside class="vg-agenda-side">
+        <div class="vg-agenda-side-card"><div class="vg-agenda-side-head">Próximos compromissos</div><div class="vg-agenda-upcoming" id="vgAgendaUpcoming"><div class="vg-agenda-upcoming-empty">A carregar…</div></div></div>
+        <div class="vg-agenda-weather">
+          <div class="wx-card"><div class="wx-head"><div><div class="wx-title">🌦️ Tempo por hotel</div><div class="wx-sub">Meteorologia para apoio ao planeamento operacional</div></div><button class="wx-refresh" onclick="wxLoadSelected()">Atualizar</button></div><select class="wx-select" id="wxHotelSelect" onchange="wxLoadSelected()"></select><div id="wxPanel"><div class="wx-status">A carregar previsão meteorológica...</div></div></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<div class="vg-agenda-modal" id="vgAgendaModal" aria-hidden="true">
+  <div class="vg-agenda-editor" role="dialog" aria-modal="true" aria-labelledby="vgAgendaEditorTitle">
+    <div class="vg-agenda-editor-head"><div><strong id="vgAgendaEditorTitle">Novo evento</strong><span>Agenda partilhada e sujeita às permissões do utilizador.</span></div><button class="vg-agenda-editor-close" id="vgAgendaClose" type="button" aria-label="Fechar">✕</button></div>
+    <div class="vg-agenda-editor-body"><div class="vg-agenda-form">
+      <div class="full"><label>Título</label><input id="vgAgendaEventTitle" maxlength="240" placeholder="Ex.: Auditoria Compras"></div>
+      <div><label>Hotel</label><select id="vgAgendaEventHotel"></select></div>
+      <div><label>Tipo</label><select id="vgAgendaEventType"><option value="audit">Auditoria</option><option value="visit">Visita</option><option value="meeting">Reunião</option><option value="deadline">Prazo</option><option value="operational" selected>Operacional</option><option value="other">Outro</option></select></div>
+      <div><label>Data</label><input id="vgAgendaEventDate" type="date"></div>
+      <div><label>Responsável</label><select id="vgAgendaEventOwner"><option value="">— Sem responsável —</option></select></div>
+      <div><label>Hora início</label><input id="vgAgendaEventStart" type="time"></div>
+      <div><label>Hora fim</label><input id="vgAgendaEventEnd" type="time"></div>
+      <div class="full"><label>Notas</label><textarea id="vgAgendaEventNotes" maxlength="2400" placeholder="Objetivo, participantes, pontos a preparar ou observações…"></textarea></div>
+    </div><div class="vg-agenda-editor-meta" id="vgAgendaEditorMeta"></div></div>
+    <div class="vg-agenda-editor-actions"><button class="vg-agenda-btn danger" id="vgAgendaDelete" type="button" style="display:none">Eliminar</button><div class="vg-agenda-editor-actions-right"><button class="vg-agenda-btn" type="button" onclick="document.getElementById('vgAgendaClose').click()">Cancelar</button><button class="vg-agenda-btn primary" id="vgAgendaSave" type="button">Criar evento</button></div></div>
+  </div>
+</div>
+<!-- HOTÉIS -->
+<div class="tab-content" id="view-hoteis">
+<div class="section-title" id="hoteisTitle">🏨 Hotéis — características e fichas técnicas</div>
+<input accept=".xlsx,.xls" id="hoteisXlsxInput" onchange="hoteisLoadXlsx(this.files[0]);this.value=''" style="display:none" type="file"/>
+<!-- Filters -->
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center">
+<input id="hotelSearchFilter" oninput="hoteisFiltrar()" placeholder="Pesquisar hotel..." style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:9px 14px;border-radius:8px;font-family:var(--font);font-size:12px;outline:none;width:220px" type="text"/>
+<div id="hotelRegiaoFilter" style="display:flex;gap:6px;flex-wrap:wrap">
+<button class="ht-filter-btn active" onclick="hoteisRegiao(this,'')">Todos</button>
+<button class="ht-filter-btn" onclick="hoteisRegiao(this,'Norte e Centro')">Norte e Centro</button>
+<button class="ht-filter-btn" onclick="hoteisRegiao(this,'Lisboa &amp; Ilhas')">Lisboa &amp; Ilhas</button>
+<button class="ht-filter-btn" onclick="hoteisRegiao(this,'Alentejo')">Alentejo</button>
+<button class="ht-filter-btn" onclick="hoteisRegiao(this,'Algarve')">Algarve</button>
+<button class="ht-filter-btn" onclick="hoteisRegiao(this,'Espanha')">Espanha</button>
+</div>
+</div>
+<!-- Cards grid -->
+<div id="hoteisGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px"></div>
+</div>
+<!-- RECEITAS DETALHE -->
+<!-- FORECAST & CENÁRIOS v12 -->
+<div class="tab-content" id="view-forecast">
+  <div id="forecastRoot"><div class="fs-empty">A preparar Forecast &amp; Cenários…</div></div>
+</div>
+<!-- /FORECAST & CENÁRIOS v12 -->
+<!-- BENCHMARKING EXECUTIVO v11 -->
+<div class="tab-content" id="view-benchmark">
+  <div id="benchmarkRoot"><div class="bm-empty">A preparar o Benchmarking Executivo…</div></div>
+</div>
+<!-- /BENCHMARKING EXECUTIVO v11 -->
+<!-- DETEÇÃO DE ANOMALIAS v13 -->
+<div class="tab-content" id="view-anomalies">
+  <div id="anomalyRoot"><div class="an-empty">A preparar a Deteção de Anomalias…</div></div>
+</div>
+<!-- /DETEÇÃO DE ANOMALIAS v13 -->
+<!-- CENTRO DE DADOS v10 -->
+<div class="tab-content" id="view-datacenter">
+  <div id="dcRoot"><div class="dc-empty">A preparar o Centro de Dados…</div></div>
+</div>
+<!-- /CENTRO DE DADOS v10 -->
+<!-- AUDITORIA & GOVERNAÇÃO v16 -->
+<div class="tab-content" id="view-governance">
+  <div id="governanceRoot"><div class="gov-loading">A preparar Auditoria &amp; Governação…</div></div>
+</div>
+<!-- /AUDITORIA & GOVERNAÇÃO v16 -->
+<!-- BACKUP & RECUPERAÇÃO v17 -->
+<div class="tab-content" id="view-backup">
+  <div id="backupRoot"><div class="backup-loading">A preparar Backup &amp; Recuperação…</div></div>
+</div>
+<!-- /BACKUP & RECUPERAÇÃO v17 -->
+<!-- CARREGAR DOCUMENTOS -->
+<div class="tab-content" id="view-upload">
+<div class="section-title">📂 Carregar Documentos</div>
+<p style="font-size:12px;color:var(--text-2);margin-bottom:24px;line-height:1.7">
+      Área reservada à Direção de Operações. Carrega aqui os ficheiros de dados do dashboard; a publicação partilhada é validada novamente no servidor.
+    </p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px">
+<!-- Extrato de Compras -->
+<div class="ht-card">
+<div class="ht-card-head">
+<div><div class="ht-hotel-name">🧾 Extrato de Compras</div><div class="ht-regiao">Compras &amp; Artigos · fornecedores · preços · transferências</div></div>
+</div>
+<div class="ht-card-body">
+<div style="font-size:11px;color:var(--text-2);line-height:1.6;border-left:2px solid var(--gold);padding-left:10px">Extrato de movimentos de custos (compras + transferências). Leitura em <b>streaming</b> — sem limite prático de tamanho. Processa todas as folhas com as colunas TIPO, HOTEL, FAMILIA, …, VALOR (ex.: folhas 2025 e 2026).</div>
+<div style="font-size:10px;color:var(--text-3);font-family:var(--mono)">Formato: .xlsx</div>
+<div id="cd_upStatus" style="font-size:10px;color:var(--text-3);font-family:var(--mono);margin-top:4px"></div>
+</div>
+<div style="display:flex;gap:8px;padding:10px 14px 14px">
+<label class="vg-btn" style="cursor:pointer;background:var(--gold);color:#1b2530;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700">Carregar XLSX<input type="file" accept=".xlsx,.xlsm" style="display:none" onchange="cdUpload(this)"></label>
+<button onclick="cdClearData()" style="background:transparent;border:1px solid var(--text-3);color:var(--text-2);border-radius:8px;padding:8px 12px;font-size:12px;cursor:pointer">Limpar</button>
+</div>
+</div>
+<!-- P&L Excel -->
+<div class="ht-card">
+<div class="ht-card-head">
+<div><div class="ht-hotel-name">📈 P&amp;L — Dados Operacionais</div><div class="ht-regiao">Resumo · Receitas · Custos · KPIs</div></div>
+</div>
+<div class="ht-card-body">
+<div style="font-size:11px;color:var(--text-2);line-height:1.6;border-left:2px solid var(--gold);padding-left:10px">Ficheiro Excel mensal com dados operacionais consolidados por hotel. Suporta múltiplos meses em simultâneo.</div>
+<div style="font-size:10px;color:var(--text-3);font-family:var(--mono)">Formato: .xlsx · .xls</div>
+<div id="uploadStatusPL" style="font-size:10px;color:var(--text-3);font-family:var(--mono);margin-top:4px"></div>
+</div>
+<div class="ht-card-foot">
+<button class="sb-action-btn primary" onclick="document.getElementById('fileInput').click()" style="width:auto">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+            Carregar P&amp;L (mês ou acumulado)
+          </button>
+</div>
+</div>
+<!-- Reputação PDFs -->
+<div class="ht-card">
+<div class="ht-card-head">
+<div><div class="ht-hotel-name">★ Reputação — ReviewPro</div><div class="ht-regiao">GRI™ · Departamentos · Fontes</div></div>
+</div>
+<div class="ht-card-body">
+<div style="font-size:11px;color:var(--text-2);line-height:1.6;border-left:2px solid var(--gold);padding-left:10px">PDFs semanais de Resumo Executivo do ReviewPro por hotel. Múltiplos ficheiros e semanas acumulam.</div>
+<div style="font-size:10px;color:var(--text-3);font-family:var(--mono)">Formato: .pdf · múltiplos ficheiros</div>
+<div id="uploadStatusRep" style="font-size:10px;color:var(--text-3);font-family:var(--mono);margin-top:4px"></div>
+</div>
+<div class="ht-card-foot">
+<button class="sb-action-btn primary" onclick="setView('reputacao');document.getElementById('rtFileInput').click()" style="width:auto">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+            Carregar PDFs Reputação
+          </button>
+</div>
+</div>
+<!-- Ocupação PDF -->
+<div class="ht-card">
+<div class="ht-card-head">
+<div><div class="ht-hotel-name">🛏 Ocupação Mensal</div><div class="ht-regiao">Taxa de ocupação por hotel e mês</div></div>
+</div>
+<div class="ht-card-body">
+<div style="font-size:11px;color:var(--text-2);line-height:1.6;border-left:2px solid var(--gold);padding-left:10px">PDF exportado do PMS com taxa de ocupação mensal por hotel para 2025, 2026 e 2027.</div>
+<div style="font-size:10px;color:var(--text-3);font-family:var(--mono)">Formato: .pdf</div>
+<div id="uploadStatusOcc" style="font-size:10px;color:var(--text-3);font-family:var(--mono);margin-top:4px"></div>
+</div>
+<div class="ht-card-foot">
+<button class="sb-action-btn primary" onclick="document.getElementById('occFileInput').click()" style="width:auto">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+            Carregar PDF Ocupação
+          </button>
+</div>
+</div>
+<!-- Instagram Excel -->
+<div class="ht-card">
+<div class="ht-card-head">
+<div><div class="ht-hotel-name">📱 Instagram — Análise</div><div class="ht-regiao">Seguidores · Visualizações · Publicações</div></div>
+</div>
+<div class="ht-card-body">
+<div style="font-size:11px;color:var(--text-2);line-height:1.6;border-left:2px solid var(--gold);padding-left:10px">Excel mensal de análise Instagram para a região Lisboa. Carregamentos acumulam — histórico preservado.</div>
+<div style="font-size:10px;color:var(--text-3);font-family:var(--mono)">Formato: .xlsx · .xls</div>
+<div id="uploadStatusIG" style="font-size:10px;color:var(--text-3);font-family:var(--mono);margin-top:4px"></div>
+</div>
+<div class="ht-card-foot">
+<button class="sb-action-btn primary" onclick="document.getElementById('igFileInput').click()" style="width:auto">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+            Carregar Excel Instagram
+          </button>
+</div>
+</div>
+<!-- Fichas Técnicas Hotéis -->
+<div class="ht-card">
+<div class="ht-card-head">
+<div><div class="ht-hotel-name">🏨 Fichas Técnicas — Hotéis</div><div class="ht-regiao">Restaurantes · Instalações · Contactos</div></div>
+</div>
+<div class="ht-card-body">
+<div style="font-size:11px;color:var(--text-2);line-height:1.6;border-left:2px solid var(--gold);padding-left:10px">Excel com fichas técnicas detalhadas de cada hotel (uma tab por unidade). Substitui os dados ao carregar.</div>
+<div style="font-size:10px;color:var(--text-3);font-family:var(--mono)">Formato: .xlsx</div>
+<div id="uploadStatusHoteis" style="font-size:10px;color:var(--text-3);font-family:var(--mono);margin-top:4px"></div>
+</div>
+<div class="ht-card-foot">
+<button class="sb-action-btn primary" onclick="document.getElementById('hoteisXlsxInput').click()" style="width:auto">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+            Carregar Fichas Técnicas
+          </button>
+</div>
+</div>
+<!-- Receitas Detalhe -->
+</div>
+</div>
+<!-- ANÁLISE DE CUSTOS -->
+<!-- VG OPERATIONS V33 — DOMÍNIOS INTEGRADOS -->
+<div class="tab-content" id="view-receitasdet"><div id="receitasDetalheRoot"><div style="padding:28px;color:var(--text-3)">A preparar Receita Detalhada…</div></div></div>
+<div class="tab-content" id="view-ab"><div id="abHubRoot"><div style="padding:28px;color:var(--text-3)">A preparar Compras &amp; A&amp;B…</div></div></div>
+<div class="tab-content" id="view-housekeeping"><div id="housekeepingRoot"><div style="padding:28px;color:var(--text-3)">A preparar Housekeeping &amp; Inventário Têxtil…</div></div></div>
+<!-- /VG OPERATIONS V33 -->
+<div class="tab-content" id="view-compras">
+<div class="section-title">🧾 Compras &amp; Artigos <span style="font-size:11px;color:var(--text-3);font-weight:400;margin-left:8px">extrato de movimentos · compras, transferências, fornecedores e preços</span></div>
+<div class="cd-head">
+  <div class="cd-meta" id="cd_hdrMeta"></div>
+  <div class="filters" style="margin-left:auto;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+    <div class="fgrp"><label>Âmbito</label>
+      <div class="seg" id="cd_segAmbito">
+        <button data-v="compras" class="on">Só Compras</button>
+        <button data-v="total">Compras + Transferências</button>
+      </div>
+    </div>
+    <div class="fgrp"><label>Região</label><select id="cd_fRegiao"></select></div>
+    <div class="fgrp"><label>Hotel</label><select id="cd_fHotel"></select></div>
+    <div class="fgrp"><label>De</label><select id="cd_fMesDe"></select></div>
+    <div class="fgrp"><label>Até</label><select id="cd_fMesAte"></select></div>
+  </div>
+</div>
+<div class="cd-tabs" id="cd_tabs">
+  <button data-t="geral" class="on">Visão Geral</button>
+  <button data-t="hoteis">Hotéis</button>
+  <button data-t="cat">Categorias</button>
+  <button data-t="forn">Fornecedores</button>
+  <button data-t="precos">Preços</button>
+  <button data-t="transf">Transferências</button>
+  <button data-t="comp">Comparar</button>
+  <button data-t="anos">Homólogo</button>
+  <button data-t="coment">Comentários</button>
+  <button data-t="alertas">Alertas</button>
+  <button data-t="expl">Explorador</button>
+</div>
+<div id="cd_main"></div>
+</div>
+<div class="tab-content" id="view-costanalysis">
+<div class="section-title">🔬 Análise de Custos — Eficiência &amp; Alertas</div>
+<!-- Filtro de Região -->
+<!-- Sub-tabs -->
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+<span style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;font-weight:700">Vista:</span>
+<button class="pl-usali-tab active" id="catab-radar" onclick="caSetTab('radar')">Radar de Alertas</button>
+<button class="pl-usali-tab" id="catab-evolucao" onclick="caSetTab('evolucao')">Evolução por Rubrica</button>
+<button class="pl-usali-tab" id="catab-hotel" onclick="caSetTab('hotel')">Detalhe por Hotel</button>
+<button class="pl-usali-tab" id="catab-eff" onclick="caSetTab('eff')">Eficiência Operacional</button>
+</div>
+<!-- RADAR DE ALERTAS -->
+<div class="pl-panel" id="ca-radar">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:16px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        Para cada categoria de custo, compara a variação do custo com a variação da receita no mesmo período. 
+        <strong style="color:#ef4444">🔴 Alerta</strong> quando o custo cresce mais do que a receita (ineficiência). 
+        <strong style="color:#27ae60">🟢 OK</strong> quando a receita cresce mais do que o custo.
+        <strong style="color:#f59e0b">🟡 Atenção</strong> quando o custo cresce mais de 10pp acima da receita.
+      </div>
+<div id="ca-radar-grid"></div>
+<div style="margin-top:24px">
+<div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:12px">Hotéis com mais alertas activos</div>
+<div id="ca-radar-hotels"></div>
+</div>
+</div>
+<!-- EVOLUÇÃO POR RUBRICA -->
+<div class="pl-panel" id="ca-evolucao" style="display:none">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:16px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        Evolução de cada rubrica de custo como % da receita total, comparando 2025 vs 2026. A linha vermelha pontilhada assinala os benchmarks de referência.
+      </div>
+<div id="ca-evolucao-grid"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+<div class="chart-card"><div class="chart-title">Estrutura de Custos 2026 <span class="chart-sub">composição %</span></div><div style="height:280px"><canvas id="chartCaDonut26"></canvas></div></div>
+<div class="chart-card"><div class="chart-title">Estrutura de Custos 2025 <span class="chart-sub">composição %</span></div><div style="height:280px"><canvas id="chartCaDonut25"></canvas></div></div>
+</div>
+</div>
+<!-- DETALHE POR HOTEL -->
+<div class="pl-panel" id="ca-hotel" style="display:none">
+<div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+<label style="font-size:11px;color:var(--text-3)">Hotel:</label>
+<select id="caHotelSel" onchange="caRenderHotel()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:6px 10px;border-radius:8px;font-family:var(--font);font-size:11px;outline:none"></select>
+</div>
+<div id="ca-hotel-body"></div>
+</div>
+<!-- EFICIÊNCIA OPERACIONAL -->
+<div class="pl-panel" id="ca-eff" style="display:none">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:16px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        Matriz de eficiência — cada hotel posicionado pelo <strong>Custo Total % Receita</strong> (eixo Y) e <strong>GOP%</strong> (eixo X). 
+        Quadrante ideal: custo baixo + GOP alto. Alertas automáticos para desvios face à mediana do portfólio.
+      </div>
+<div id="ca-eff-kpis" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px"></div>
+<div class="chart-card" style="margin-bottom:16px">
+<div class="chart-title">Matriz Eficiência — GOP% vs Custo% <span class="chart-sub">por hotel 2026</span></div>
+<div style="height:380px"><canvas id="chartCaMatrix"></canvas></div>
+</div>
+<div id="ca-eff-table-wrap" style="overflow-x:auto">
+<table class="pl-table" id="ca-eff-table"></table>
+</div>
+</div>
+</div>
+<!-- P&L USALI 12 -->
+<div class="tab-content" id="view-pl">
+<div class="section-title">📊 P&amp;L — Uniform System of Accounts for the Lodging Industry (USALI 12ª Ed.)
+      <button class="wa-share-btn" onclick="waModalOpen('pl')">
+<svg fill="currentColor" height="12" viewbox="0 0 24 24" width="12"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.879L.057 23.077a.75.75 0 00.921.921l5.198-1.478A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.964-1.356l-.356-.212-3.685 1.048 1.048-3.685-.212-.356A9.75 9.75 0 1112 21.75z"></path></svg>
+        WhatsApp
+      </button>
+</div>
+<!-- Filtro de Região -->
+<!-- Sub-tabs -->
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+<span style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;font-weight:700">Vista:</span>
+<button class="pl-usali-tab active" id="utab-stmt" onclick="plSetTab('stmt')">Demonstração</button>
+<button class="pl-usali-tab" id="utab-dept" onclick="plSetTab('dept')">Departamentos</button>
+<button class="pl-usali-tab" id="utab-undist" onclick="plSetTab('undist')">Custos Não Distribuídos</button>
+<button class="pl-usali-tab" id="utab-bench" onclick="plSetTab('bench')">Benchmarking</button>
+<button class="pl-usali-tab" id="utab-flow" onclick="plSetTab('flow')">Eficiência GOP</button>
+</div>
+<!-- STMT — Full P&L Statement USALI style -->
+<div class="pl-panel" id="pl-stmt">
+<div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+<div style="font-size:11px;color:var(--text-3)">Comparação 2025 vs 2026 · valores em €</div>
+<div style="margin-left:auto;display:flex;gap:6px">
+<button class="sb-action-btn" onclick="plExportCSV()" style="font-size:10px;padding:5px 10px">⬇ CSV</button>
+</div>
+</div>
+<div id="pl-stmt-table"></div>
+</div>
+<!-- DEPT — Departmental Operating Results -->
+<div class="pl-panel" id="pl-dept" style="display:none">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        Segundo o USALI 12, cada departamento operacional é avaliado pelo seu <strong>Resultado Departamental</strong> (Receita − Custos Directos). A Eficiência de Pessoal é o rácio Custos Pessoal / Receita Total. O Rácio F&amp;B é (Comidas + Bebidas) / Receita F&amp;B.
+      </div>
+<div id="pl-dept-grid"></div>
+</div>
+<!-- UNDIST — Undistributed Operating Expenses -->
+<div class="pl-panel" id="pl-undist" style="display:none">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        Os <strong>Custos Não Distribuídos</strong> no USALI 12 incluem: Administração &amp; Geral, Marketing, Manutenção de Propriedade, e Utilidades (Energia). São expressos em % da Receita Total.
+      </div>
+<div id="pl-undist-grid"></div>
+</div>
+<!-- BENCH — Hotel-by-hotel benchmarking table -->
+<div class="pl-panel" id="pl-bench" style="display:none">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        Comparação por hotel dos principais rácios USALI: GOP%, Custo Pessoal %, Custo F&amp;B %, Energia %, Manutenção %. Verde = acima da mediana do portfólio. Vermelho = abaixo.
+      </div>
+<div id="pl-bench-wrap" style="overflow-x:auto">
+<table class="pl-table" id="pl-bench-table" style="min-width:900px"></table>
+</div>
+</div>
+<!-- FLOW — Flow-through analysis -->
+<div class="pl-panel" id="pl-flow" style="display:none">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        A <strong>Eficiência GOP</strong> mostra Flow-through (%) quando a receita cresce e Alavancagem negativa (x) quando a receita cai. Assim evitam-se percentagens absurdas em hotéis com quebra de receita.
+      </div>
+<div id="pl-flow-grid"></div>
+<div style="margin-top:20px">
+<canvas height="240" id="chartPlFlow"></canvas>
+</div>
+</div>
+</div>
+<!-- EFICIÊNCIA & UNIT ECONOMICS V32 -->
+<div class="tab-content" id="view-unitEconomics"><div id="unitEconomicsRoot"><div style="padding:28px;color:var(--text-3)">A preparar Eficiência &amp; Unit Economics…</div></div></div>
+<!-- CITY LEDGER & COBRANÇAS V32 -->
+<div class="tab-content" id="view-cityledger"><div id="cityLedgerRoot"><div style="padding:28px;color:var(--text-3)">A preparar City Ledger &amp; Gestão de Cobranças…</div></div></div>
+<!-- CUSTO POR UNIDADE DE ACTIVIDADE -->
+<div class="tab-content" id="view-cua">
+<div class="section-title">⚡ Custo por Unidade de Actividade
+      <button class="wa-share-btn" onclick="waModalOpen('cua')">
+<svg fill="currentColor" height="12" viewbox="0 0 24 24" width="12"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.879L.057 23.077a.75.75 0 00.921.921l5.198-1.478A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.964-1.356l-.356-.212-3.685 1.048 1.048-3.685-.212-.356A9.75 9.75 0 1112 21.75z"></path></svg>
+        WhatsApp
+      </button>
+</div>
+<p style="font-size:11px;color:var(--text-3);margin-bottom:16px;line-height:1.7;border-left:3px solid var(--gold);padding-left:10px">
+      Aproximação ao método ABC (Activity-Based Costing). Os custos são distribuídos pelas unidades de actividade disponíveis:
+      <strong style="color:var(--gold)">quarto disponível</strong>, <strong style="color:var(--gold)">quarto ocupado</strong>,
+      <strong style="color:var(--gold)">dormida</strong>, <strong style="color:var(--gold)">hóspede</strong> e <strong style="color:var(--gold)">chegada</strong>.
+      Permite comparar a eficiência operacional real entre hotéis independentemente da dimensão.
+    </p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+<span style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;font-weight:700">Vista:</span>
+<button class="pl-usali-tab active" id="cuatab-resumo" onclick="cuaSetTab('resumo')">Resumo Portfólio</button>
+<button class="pl-usali-tab" id="cuatab-ranking" onclick="cuaSetTab('ranking')">Ranking por Hotel</button>
+<button class="pl-usali-tab" id="cuatab-rubrica" onclick="cuaSetTab('rubrica')">Detalhe por Rubrica</button>
+<button class="pl-usali-tab" id="cuatab-evolucao" onclick="cuaSetTab('evolucao')">Evolução 2025→2026</button>
+<button class="pl-usali-tab" id="cuatab-consumo" onclick="cuaSetTab('consumo')">Consumo por Cliente</button>
+<button class="pl-usali-tab" id="cuatab-anomalias" onclick="cuaSetTab('anomalias')">Anomalias</button>
+<button class="pl-usali-tab" id="cuatab-benchmark" onclick="cuaSetTab('benchmark')">Benchmark Hotéis</button>
+<button class="pl-usali-tab" id="cuatab-pergunta" onclick="cuaSetTab('pergunta')">Pergunta aos Custos</button>
+</div>
+<div class="pl-panel" id="cua-resumo">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:16px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        Custo total agregado do portfólio seleccionado por unidade de actividade. Valores em € por unidade. Comparação 2025 vs 2026.
+      </div>
+<div id="cua-resumo-cards"></div>
+<div style="margin-top:20px"><canvas height="220" id="chartCuaResumo"></canvas></div>
+</div>
+<div class="pl-panel" id="cua-ranking" style="display:none">
+<div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+<label style="font-size:11px;color:var(--text-3)">Métrica:</label>
+<select id="cuaRankMetric" onchange="cuaRender()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:6px 10px;border-radius:8px;font-family:var(--font);font-size:11px;outline:none">
+<option value="porDisp">Custo Total / Quarto Disponível</option>
+<option value="porOcup">Custo Total / Quarto Ocupado</option>
+<option value="porDorm">Custo Total / Dormida</option>
+<option value="porHosp">Custo Total / Hóspede</option>
+<option value="porCheg">Custo Total / Chegada</option>
+<option value="pessoalOcup">Pessoal / Quarto Ocupado</option>
+<option value="fbDorm">F&amp;B Directo / Dormida</option>
+<option value="energiaDisp">Energia / Quarto Disponível</option>
+<option value="manutDisp">Manutenção / Quarto Disponível</option>
+</select>
+<label style="font-size:11px;color:var(--text-3);margin-left:8px">Ano:</label>
+<select id="cuaRankYear" onchange="cuaRender()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:6px 10px;border-radius:8px;font-family:var(--font);font-size:11px;outline:none">
+<option value="2026">2026</option>
+<option value="2025">2025</option>
+</select>
+</div>
+<div style="margin-bottom:16px"><canvas height="320" id="chartCuaRanking"></canvas></div>
+<div id="cua-ranking-table" style="overflow-x:auto"></div>
+</div>
+<div class="pl-panel" id="cua-rubrica" style="display:none">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        Para cada rubrica de custo, o custo por unidade de actividade — permite perceber onde cada hotel é mais ou menos eficiente.
+      </div>
+<div id="cua-rubrica-grid"></div>
+</div>
+<div class="pl-panel" id="cua-evolucao" style="display:none">
+<div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+        Variação do custo por unidade entre 2025 e 2026. 🟢 Negativo = melhoria de eficiência (menos custo por unidade). 🔴 Positivo = degradação.
+      </div>
+<div id="cua-evolucao-table" style="overflow-x:auto"></div>
+</div>
+<div class="pl-panel" id="cua-consumo" style="display:none">
+  <div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+    Análise detalhada do consumo por cliente/unidade de actividade. Cruza custos P&amp;L, dados operacionais e, quando o extrato de compras está carregado, artigos, fornecedores, famílias e grupos que explicam os desvios.
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+    <label style="font-size:11px;color:var(--text-3)">Hotel:</label>
+    <select id="cuaConsHotel" onchange="cuaBuildConsumo()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:6px 10px;border-radius:8px;font-family:var(--font);font-size:11px;outline:none"></select>
+    <label style="font-size:11px;color:var(--text-3)">Base:</label>
+    <select id="cuaConsBase" onchange="cuaBuildConsumo()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:6px 10px;border-radius:8px;font-family:var(--font);font-size:11px;outline:none">
+      <option value="Hospedes">Hóspede</option>
+      <option value="Dormidas">Dormida</option>
+      <option value="Ocupados">Quarto ocupado</option>
+      <option value="Chegadas">Chegada</option>
+    </select>
+  </div>
+  <div id="cua-consumo-body"></div>
+</div>
+<div class="pl-panel" id="cua-anomalias" style="display:none">
+  <div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+    Alertas de anomalia: identifica hotéis/rubricas com custo por unidade acima da mediana do portfólio e agravamento face ao ano anterior. Quando existem dados de compras, mostra artigos com preço médio acima da mediana do grupo.
+  </div>
+  <div id="cua-anomalias-body"></div>
+</div>
+<div class="pl-panel" id="cua-benchmark" style="display:none">
+  <div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+    Benchmark entre hotéis para comparar eficiência por cliente, dormida, quarto ocupado e principais rubricas. A análise destaca extremos, gaps e prioridades de atuação.
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+    <label style="font-size:11px;color:var(--text-3)">Métrica:</label>
+    <select id="cuaBenchMetric" onchange="cuaBuildBenchmark()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:6px 10px;border-radius:8px;font-family:var(--font);font-size:11px;outline:none">
+      <option value="TOTAIS|Hospedes">Custo total / Hóspede</option>
+      <option value="TOTAIS|Dormidas">Custo total / Dormida</option>
+      <option value="TOTAIS|Ocupados">Custo total / Quarto ocupado</option>
+      <option value="COMIDAS|Hospedes">Comidas / Hóspede</option>
+      <option value="BEBIDAS|Hospedes">Bebidas / Hóspede</option>
+      <option value="PESSOAL|Ocupados">Pessoal / Quarto ocupado</option>
+      <option value="ENERGIA|Disponiveis">Energia / Quarto disponível</option>
+      <option value="MANUTENÇÃO|Disponiveis">Manutenção / Quarto disponível</option>
+    </select>
+  </div>
+  <div id="cua-benchmark-body"></div>
+</div>
+<div class="pl-panel" id="cua-pergunta" style="display:none">
+  <div style="font-size:11px;color:var(--text-2);margin-bottom:14px;line-height:1.6;border-left:3px solid var(--gold);padding-left:10px">
+    Perguntas aos custos com respostas explicativas e extensas. Exemplos: "porque está Cascais caro em comidas", "quais os maiores desvios por hóspede", "que artigos explicam Estoril", "benchmark bebidas".
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+    <input id="cuaPerguntaInput" type="text" placeholder="Ex.: Porque está Cascais acima da média em comidas por hóspede?" onkeydown="if(event.key==='Enter')cuaPerguntar()" style="flex:1;min-width:280px;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:9px 12px;border-radius:8px;font-family:var(--font);font-size:12px;outline:none">
+    <button class="sb-action-btn" onclick="cuaPerguntar()">Perguntar</button>
+  </div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+    <button class="pl-usali-tab" onclick="cuaQuickQ('Quais são os maiores desvios por hóspede?')">Maiores desvios por hóspede</button>
+    <button class="pl-usali-tab" onclick="cuaQuickQ('Que hotéis têm anomalias em comidas e bebidas?')">Anomalias F&amp;B</button>
+    <button class="pl-usali-tab" onclick="cuaQuickQ('Onde devo atuar nos custos amanhã?')">Onde atuar amanhã?</button>
+    <button class="pl-usali-tab" onclick="cuaQuickQ('Que artigos explicam os desvios?')">Artigos com desvio</button>
+  </div>
+  <div id="cua-pergunta-resp"></div>
+</div>
+</div>
+<!-- /view-content -->
+<!-- ALERTAS -->
+<div class="tab-content" id="view-alertas" style="padding:24px 28px 60px">
+<div class="section-title">🔔 Alertas Automáticos
+      <button onclick="alertasRender()" style="margin-left:auto;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-2);padding:5px 12px;border-radius:7px;font-family:var(--font);font-size:10px;font-weight:700;cursor:pointer">↻ Actualizar</button>
+<button class="wa-share-btn" onclick="waModalOpen('alertas')">
+<svg fill="currentColor" height="12" viewbox="0 0 24 24" width="12"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.879L.057 23.077a.75.75 0 00.921.921l5.198-1.478A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.964-1.356l-.356-.212-3.685 1.048 1.048-3.685-.212-.356A9.75 9.75 0 1112 21.75z"></path></svg>
+        WhatsApp
+      </button>
+</div>
+<p style="font-size:11px;color:var(--text-3);margin-bottom:20px;line-height:1.7;border-left:3px solid #ef4444;padding-left:10px">
+      Detecção automática de anomalias por hotel: occupancy a cair, custos acima de threshold, GOP negativo, custo pessoal excessivo. Só mostra hotéis com pelo menos um alerta activo.
+    </p>
+<div id="alertas-summary" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px"></div>
+<div id="alertas-grid"></div>
+</div>
+<!-- COMPARAR HOTÉIS -->
+<div class="tab-content" id="view-compare" style="padding:24px 28px 60px">
+<div class="section-title">⚖️ Comparação Directa entre Hotéis</div>
+<div style="display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-bottom:20px">
+<div>
+<div style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Hotel A</div>
+<select id="cmpHotelA" onchange="cmpRender()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:8px 12px;border-radius:8px;font-family:var(--font);font-size:12px;outline:none;min-width:200px"></select>
+</div>
+<div style="font-size:20px;color:var(--text-3);padding-bottom:8px">vs</div>
+<div>
+<div style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Hotel B</div>
+<select id="cmpHotelB" onchange="cmpRender()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:8px 12px;border-radius:8px;font-family:var(--font);font-size:12px;outline:none;min-width:200px"></select>
+</div>
+</div>
+<div id="cmp-body"></div>
+</div>
+<!-- RANKING COMPOSTO -->
+<div class="tab-content" id="view-ranking" style="padding:24px 28px 60px">
+<div class="section-title">🏆 Ranking Composto de Performance</div>
+<p style="font-size:11px;color:var(--text-3);margin-bottom:16px;line-height:1.7;border-left:3px solid var(--gold);padding-left:10px">
+      Score composto (0–100) que combina GOP%, Occupancy, ADR, Custo/Dormida e GRI™ (se disponível). Verde = top quartil · Vermelho = bottom quartil.
+    </p>
+<div id="rankWeights" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+<span style="font-size:10px;color:var(--text-3);align-self:center">Pesos:</span>
+<label style="font-size:10px;color:var(--text-2);display:flex;gap:4px;align-items:center">GOP% <input id="wGop" max="5" min="0" oninput="rankRender()" style="width:60px;accent-color:var(--gold)" type="range" value="3"/> <span id="wGopV">3</span></label>
+<label style="font-size:10px;color:var(--text-2);display:flex;gap:4px;align-items:center">Occ% <input id="wOcc" max="5" min="0" oninput="rankRender()" style="width:60px;accent-color:var(--gold)" type="range" value="2"/> <span id="wOccV">2</span></label>
+<label style="font-size:10px;color:var(--text-2);display:flex;gap:4px;align-items:center">ADR <input id="wAdr" max="5" min="0" oninput="rankRender()" style="width:60px;accent-color:var(--gold)" type="range" value="2"/> <span id="wAdrV">2</span></label>
+<label style="font-size:10px;color:var(--text-2);display:flex;gap:4px;align-items:center">Custo/Dorm <input id="wCost" max="5" min="0" oninput="rankRender()" style="width:60px;accent-color:var(--gold)" type="range" value="2"/> <span id="wCostV">2</span></label>
+<label style="font-size:10px;color:var(--text-2);display:flex;gap:4px;align-items:center">GRI™ <input id="wGri" max="5" min="0" oninput="rankRender()" style="width:60px;accent-color:var(--gold)" type="range" value="1"/> <span id="wGriV">1</span></label>
+</div>
+<div id="rank-body" style="overflow-x:auto"></div>
+</div>
+<!-- SAZONALIDADE -->
+<div class="tab-content" id="view-sazonalidade" style="padding:24px 28px 60px">
+<div class="section-title">📆 Análise de Sazonalidade</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+<span style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;font-weight:700">Métrica:</span>
+<select id="sazonMetric" onchange="sazonRender()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:6px 10px;border-radius:8px;font-family:var(--font);font-size:11px;outline:none">
+<option value="occ">Occupancy %</option>
+<option value="adr">ADR €</option>
+<option value="revpar">RevPAR €</option>
+<option value="rec">Receita Total</option>
+<option value="gop">GOP %</option>
+<option value="pessoal">Custo Pessoal %</option>
+</select>
+</div>
+<div style="margin-bottom:20px"><canvas height="280" id="chartSazon"></canvas></div>
+<div style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:700">Mapa de Calor — Variação vs Mês Anterior</div>
+<div id="sazon-heatmap" style="overflow-x:auto"></div>
+</div>
+<!-- SIMULADOR -->
+<div class="tab-content" id="view-simulador" style="padding:24px 28px 60px">
+<div class="section-title">🎛 Simulador de Cenários</div>
+<p style="font-size:11px;color:var(--text-3);margin-bottom:20px;line-height:1.7;border-left:3px solid var(--gold);padding-left:10px">
+      Ajusta os parâmetros e vê o impacto no GOP em tempo real. Os valores base são os dados reais do mês mais recente.
+    </p>
+<div style="display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-bottom:20px">
+<div>
+<div style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Hotel</div>
+<select id="simHotel" onchange="simLoad()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-1);padding:8px 12px;border-radius:8px;font-family:var(--font);font-size:12px;outline:none;min-width:220px"></select>
+</div>
+</div>
+<div id="sim-body"></div>
+</div>
+<!-- /view-content -->
+</main>
+<script src="assets/js/core/00-runtime.js" defer></script>
+<script id="vg-performance-v18" src="assets/js/core/05-performance.js" defer></script>
+<script src="assets/js/core/01-data-import.js" defer></script>
+<script src="assets/js/core/02-navigation-kpis.js" defer></script>
+<script src="assets/js/modules/ficha-hotel.js" defer></script>
+<script src="assets/js/modules/pl-usali.js" defer></script>
+<script src="assets/js/modules/custo-atividade.js" defer></script>
+<script id="vg-unit-economics-v32" src="assets/js/modules/unit-economics-v32.js" defer></script>
+<script src="assets/js/modules/analysis-tools.js" defer></script>
+<script src="assets/js/modules/cost-analysis.js" defer></script>
+<script src="assets/js/ui/context-panel.js" defer></script>
+<script src="assets/js/modules/reputacao.js" defer></script>
+<script src="assets/js/core/03-persistence-sharing.js" defer></script>
+<script id="vg-targets-rules" src="assets/js/modules/targets-rules.js" defer></script>
+<script src="assets/js/modules/ocupacao.js" defer></script>
+<script src="assets/js/modules/instagram.js" defer></script>
+<script src="assets/js/modules/pdf-export.js" defer></script>
+<script src="assets/js/modules/agenda-tempo.js" defer></script>
+<script id="vg-operational-agenda-v22" src="assets/js/modules/operational-agenda-v22.js" defer></script>
+<script src="assets/js/modules/hoteis.js" defer></script>
+<script src="assets/js/modules/receitas-detalhe.js" defer></script>
+<script id="vg-markets-v31" src="assets/js/core/07-markets-v31.js" defer></script>
+<script id="vg-city-ledger-v32" src="assets/js/modules/city-ledger-v32.js" defer></script>
+<script src="assets/js/core/04-bootstrap.js" defer></script>
+<!-- GESTÃO DE AÇÕES v8.1 -->
+<div class="ops-action-modal" id="opsActionModal" role="dialog" aria-modal="true" aria-labelledby="opsActionModalTitle">
+  <div class="ops-action-card">
+    <div class="ops-action-modal-head">
+      <div><div class="ops-action-modal-title" id="opsActionModalTitle">Gerir ação</div><div class="ops-action-modal-sub">Responsável, prazo, estado, comentário e histórico partilhado.</div></div>
+      <button class="ops-action-close" type="button" onclick="opsActionClose()" aria-label="Fechar">✕</button>
+    </div>
+    <div class="ops-action-body">
+      <div class="ops-action-source-box">
+        <div class="ops-action-source-hotel" id="opsActionHotel">—</div>
+        <div class="ops-action-source-text" id="opsActionSource">—</div>
+      </div>
+      <div class="ops-action-permission" id="opsActionPermission"></div>
+      <div class="ops-action-form-grid">
+        <div class="ops-action-field">
+          <label for="opsActionOwner">Responsável</label>
+          <select id="opsActionOwner"><option value="">— Sem responsável —</option></select>
+        </div>
+        <div class="ops-action-field">
+          <label for="opsActionDue">Prazo</label>
+          <input id="opsActionDue" type="date"/>
+        </div>
+        <div class="ops-action-field">
+          <label for="opsActionStatus">Estado</label>
+          <select id="opsActionStatus">
+            <option value="open">Em análise</option>
+            <option value="progress">Em curso</option>
+            <option value="waiting">A aguardar</option>
+            <option value="resolved">Resolvido</option>
+          </select>
+        </div>
+        <div class="ops-action-field full">
+          <label for="opsActionComment">Comentário / atualização</label>
+          <textarea id="opsActionComment" placeholder="Regista a decisão, ação tomada ou ponto de situação..."></textarea>
+        </div>
+      </div>
+      <div class="ops-action-history-wrap">
+        <div class="ops-action-history-title">Histórico</div>
+        <div class="ops-action-history" id="opsActionHistory"><div class="ops-action-history-empty">Ainda não existe histórico.</div></div>
+      </div>
+      <div class="ops-action-footer">
+        <button class="ops-btn" type="button" onclick="opsActionClose()">Cancelar</button>
+        <button class="ops-action-save" id="opsActionSave" type="button" onclick="opsActionSave()">Guardar alterações</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ops-action-modal" id="opsActionsModal" role="dialog" aria-modal="true" aria-label="Gestão de ações operacionais">
+  <div class="ops-action-card wide">
+    <div class="ops-action-modal-head">
+      <div><div class="ops-action-modal-title">Gestão de Ações</div><div class="ops-action-modal-sub">Acompanhamento transversal das ações geradas a partir da Central de Operações.</div></div>
+      <button class="ops-action-close" type="button" onclick="opsActionsClose()" aria-label="Fechar">✕</button>
+    </div>
+    <div class="ops-action-body">
+      <div class="ops-action-board-tools">
+        <select class="ops-action-filter" id="opsActionsFilterStatus" onchange="opsActionsRenderBoard()">
+          <option value="active">Ações abertas</option>
+          <option value="all">Todas</option>
+          <option value="open">Em análise</option>
+          <option value="progress">Em curso</option>
+          <option value="waiting">A aguardar</option>
+          <option value="resolved">Resolvidas</option>
+        </select>
+        <select class="ops-action-filter" id="opsActionsFilterHotel" onchange="opsActionsRenderBoard()"><option value="">Todos os hotéis</option></select>
+        <input class="ops-action-filter ops-action-search" id="opsActionsSearch" type="search" placeholder="Pesquisar hotel, responsável ou assunto..." oninput="opsActionsRenderBoard()"/>
+      </div>
+      <div class="ops-action-board-meta" id="opsActionsBoardMeta">A carregar...</div>
+      <div class="ops-action-board" id="opsActionsBoard"><div class="ops-action-board-empty">A carregar ações...</div></div>
+      <div class="ops-action-footer"><button class="ops-btn" type="button" onclick="opsActionsClose()">Fechar</button></div>
+    </div>
+  </div>
+</div>
+<!-- /GESTÃO DE AÇÕES v8.1 -->
+<!-- WHATSAPP MODAL -->
+<div id="waModal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);align-items:center;justify-content:center">
+<div style="background:var(--surface-1);border:1px solid var(--border);border-radius:16px;width:min(560px,95vw);max-height:90vh;overflow-y:auto;display:flex;flex-direction:column">
+<!-- Header -->
+<div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px 16px;border-bottom:1px solid var(--border-2)">
+<div style="display:flex;align-items:center;gap:10px">
+<span style="font-size:22px">📱</span>
+<div>
+<div style="font-size:14px;font-weight:800;color:var(--text-1)">Partilhar no WhatsApp</div>
+<div style="font-size:10px;color:var(--text-3)">Configura o resumo antes de enviar</div>
+</div>
+</div>
+<button onclick="waModalClose()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-2);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center">✕</button>
+</div>
+<div style="padding:20px 24px;display:flex;flex-direction:column;gap:20px">
+<!-- Região -->
+<div id="waRegionWrap">
+<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3);margin-bottom:8px">Região</div>
+<div id="waRegionBtns" style="display:flex;gap:6px;flex-wrap:wrap">
+<button class="wa-sel-btn active" data-r="todos" onclick="waSelRegion(this)">🌐 Todos</button>
+<button class="wa-sel-btn" data-r="norte" onclick="waSelRegion(this)">🔵 Norte</button>
+<button class="wa-sel-btn" data-r="lisboa" onclick="waSelRegion(this)">🟢 Lisboa</button>
+<button class="wa-sel-btn" data-r="alentejo" onclick="waSelRegion(this)">🟡 Alentejo</button>
+<button class="wa-sel-btn" data-r="algarve" onclick="waSelRegion(this)">🔴 Algarve</button>
+</div>
+</div>
+<!-- Meses -->
+<div id="waMesesWrap">
+<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3);margin-bottom:8px">Mês(es)</div>
+<div id="waMesBtns" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+<div style="font-size:10px;color:var(--text-3);margin-top:6px">Podes seleccionar vários meses — os dados serão agregados.</div>
+</div>
+<!-- Detalhe -->
+<div id="waDetailWrap">
+<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3);margin-bottom:8px">Nível de Detalhe</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label id="waDetailCompactLabel" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border-2);border-radius:10px;transition:border-color .18s">
+<input checked="" name="waDetail" onchange="waDetailChange()" style="margin-top:2px;accent-color:var(--gold)" type="radio" value="compact"/>
+<div>
+<div style="font-size:12px;font-weight:700;color:var(--text-1)">Resumo Compacto</div>
+<div style="font-size:10px;color:var(--text-3);margin-top:2px">Uma linha por hotel com Receita, Occ% e GOP%. Ideal para envio rápido.</div>
+</div>
+</label>
+<label id="waDetailFullLabel" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:10px 12px;background:var(--surface-2);border:1px solid var(--border-2);border-radius:10px;transition:border-color .18s">
+<input name="waDetail" onchange="waDetailChange()" style="margin-top:2px;accent-color:var(--gold)" type="radio" value="full"/>
+<div>
+<div style="font-size:12px;font-weight:700;color:var(--text-1)">Completo por Hotel</div>
+<div style="font-size:10px;color:var(--text-3);margin-top:2px">Receitas, GOP, Occupancy, ADR, RevPAR, Dormidas, Custos detalhados.</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Preview -->
+<div id="waPreviewWrap" style="display:none">
+<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3);margin-bottom:8px">Pré-visualização</div>
+<textarea id="waPreviewTxt" readonly="" style="width:100%;height:220px;background:var(--surface-2);border:1px solid var(--border-2);border-radius:10px;color:var(--text-2);font-family:var(--mono);font-size:10px;padding:12px;resize:vertical;outline:none;line-height:1.6"></textarea>
+</div>
+</div>
+<!-- Footer -->
+<div style="padding:16px 24px;border-top:1px solid var(--border-2);display:flex;gap:10px;justify-content:flex-end">
+<button onclick="waModalClose()" style="background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-2);padding:8px 18px;border-radius:8px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer">Cancelar</button>
+<button onclick="waPreview()" style="background:var(--surface-2);border:1px solid var(--gold);color:var(--gold);padding:8px 18px;border-radius:8px;font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer">👁 Pré-visualizar</button>
+<button onclick="waSend()" style="background:#25D366;border:none;color:#fff;padding:8px 18px;border-radius:8px;font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px">
+<svg fill="currentColor" height="13" viewbox="0 0 24 24" width="13"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.879L.057 23.077a.75.75 0 00.921.921l5.198-1.478A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.964-1.356l-.356-.212-3.685 1.048 1.048-3.685-.212-.356A9.75 9.75 0 1112 21.75z"></path></svg>
+        Abrir no WhatsApp
+      </button>
+</div>
+</div>
+</div>
+<link rel="stylesheet" href="assets/css/audit-governance.css">
+<link rel="stylesheet" href="assets/css/backup-recovery.css">
+<link rel="stylesheet" href="assets/css/whatsapp.css">
+<script src="assets/js/modules/whatsapp.js" defer></script>
+<script id="vg-auth-script" src="assets/js/auth/auth-client.js" defer></script>
+
+<script id="vg-restore-after-auth" src="assets/js/auth/restore-after-auth.js" defer></script>
+<script id="vg-compat-stubs" src="assets/js/core/compat-stubs.js" defer></script>
+<link rel="stylesheet" href="assets/css/compras.css">
+<script src="assets/js/modules/compras.js" defer></script>
+<script id="vg-data-center" src="assets/js/modules/data-center.js" defer></script>
+<script id="vg-audit-governance" src="assets/js/modules/audit-governance.js" defer></script>
+<script id="vg-backup-recovery" src="assets/js/modules/backup-recovery.js" defer></script>
+<script src="assets/js/modules/orcamento.js" defer></script>
+<script id="vg-benchmarking" src="assets/js/modules/benchmarking.js" defer></script>
+
+<script id="ri-script" src="assets/js/modules/revenue-intelligence.js" defer></script>
+<script id="vg-forecast-scenarios" src="assets/js/modules/forecast-scenarios.js" defer></script>
+<script id="vg-scenario-comparison-v29" src="assets/js/modules/scenario-comparison-v29.js" defer></script>
+<script id="vg-hotel-performance-v23" src="assets/js/modules/hotel-performance-v23.js" defer></script>
+<script id="vg-operational-score-v30" src="assets/js/modules/operational-score-v28.js" defer></script>
+<script id="vg-hotel-360-v30" src="assets/js/modules/hotel-360-v30.js" defer></script>
+<script id="vg-revenue-hub-v30" src="assets/js/modules/revenue-hub-v30.js" defer></script>
+<script id="vg-automatic-reports-v24" src="assets/js/modules/automatic-reports-v24.js" defer></script>
+<script id="vg-analytical-assistant-v25" src="assets/js/modules/analytical-assistant-v25.js" defer></script>
+<script id="vg-document-management-v26" src="assets/js/modules/document-management-v26.js" defer></script>
+<script id="vg-workflow-approvals-v27" src="assets/js/modules/workflow-approvals-v27.js" defer></script>
+<script id="vg-anomaly-detection" src="assets/js/modules/anomaly-detection.js" defer></script>
+<script id="ops-actions-script" src="assets/js/modules/actions-management.js" defer></script>
+<script id="ops-center-script" src="assets/js/ui/operations-center.js" defer></script>
+
+
+<!-- Ferramentas operacionais e avisos consolidados na v5 -->
+<script src="assets/js/ui/operational-tools.js" defer></script>
+<link rel="stylesheet" href="assets/css/forecast-state.css">
+<script src="assets/js/ui/forecast-state.js" defer></script>
+
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     NAVEGAÇÃO E INTERFACE TRANSVERSAL
+     Camada visual isolada das regras de negócio.
+════════════════════════════════════════════════════════════ -->
+<link rel="stylesheet" href="assets/css/navigation-shell.css">
+<div id="vgNavBackdrop"></div>
+<div id="vgNavCmd" role="dialog" aria-label="Comando rápido Interface 2.0"></div>
+<script id="vg-navigation-shell" src="assets/js/ui/navigation-shell.js" defer></script>
+
+<!-- Ações transversais de gráficos -->
+<link rel="stylesheet" href="assets/css/chart-actions.css">
+<link rel="stylesheet" href="assets/css/theme.css">
+<script id="vg-chart-actions" src="assets/js/ui/chart-actions.js" defer></script>
+
+
+<link rel="stylesheet" href="assets/css/logo-fix.css">
+<link rel="stylesheet" href="assets/css/uniformizacao-v32_2.css">
+<link id="vg-domains-v33-css" rel="stylesheet" href="assets/css/operations-domains-v33.css">
+<link id="vg-operational-summary-pdf-css" rel="stylesheet" href="assets/css/operational-summary-pdf-v32_6.css">
+<script id="vg-operational-summary-pdf" src="assets/js/modules/operational-summary-pdf-v32_6.js" defer></script>
+<script id="vg-domains-v33" src="assets/js/modules/operations-domains-v33.js" defer></script>
+<script id="vg-mobile-pwa" src="assets/js/ui/mobile-pwa.js" defer></script>
+<script id="vg-global-search-v19" src="assets/js/ui/global-search.js" defer></script>
+<script id="vg-notifications-v21" src="assets/js/ui/notifications-v21.js" defer></script>
+<script id="vg-operations-2-v30" src="assets/js/ui/vg-operations-2-v30.js" defer></script>
+
+</body>
+</html>

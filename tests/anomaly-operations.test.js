@@ -1,0 +1,15 @@
+const assert = require('assert');
+const { createSandbox, load } = require('./helpers/browser-sandbox');
+const RAW={hotel_list:['A','B'],hotels_ops:{A:{'Receita Total':{'2025':100,'2026':100}},B:{'Receita Total':{'2025':100,'2026':100}}},hotels_costs:{},hotels_rev:{}};
+const sb=createSandbox({RAW,selectedHotels:new Set(['A','B']),getActiveHotels(){return ['A','B'];},validateDashboardData(){return[];},ALERT_RULES:[],gopPct(){return 20;},occ(){return 60;},adr(){return 100;}});
+load('assets/js/core/00-runtime.js',sb);
+sb.window.VG.actions={findForSource(){return null;},stats(){return{open:0,unassigned:0,overdue:0,progress:0,resolvedWeek:0};},watch(){return[];},canManage(){return true;}};
+sb.window.VG.revenue={getDecisionSnapshot(){return{available:false,totalRisk:0,risks:[],opportunities:[]};}};
+sb.window.VG.anomalies={getDecisionSnapshot(){return{available:true,critical:1,attention:0,impact:12000,priorities:[{kind:'anomaly',hotel:'A',severity:'red',score:150,title:'Energia fora do padrão',reasons:['Custo +40% vs atividade +2%'],action:'Validar consumo.',anomalyId:'x1',type:'activity'}],opportunities:[{hotel:'B',kind:'Anomalia positiva',value:'+20%',score:60,title:'Receita acima do padrão',sub:'Replicar prática.'}]};}};
+load('assets/js/ui/operations-center.js',sb);
+const m=sb.window.opsBuildModel();
+assert.strictEqual(m.critical,1);
+assert(m.priorities.some(p=>p.hotel==='A'&&(p.kind==='anomaly'||p.kind==='mixed')));
+assert(m.opportunities.some(o=>o.hotel==='B'&&o.kind==='Anomalia positiva'));
+assert.strictEqual(m.anomaly.impact,12000);
+console.log('✓ central de operações: anomalias entram nas prioridades e oportunidades');
