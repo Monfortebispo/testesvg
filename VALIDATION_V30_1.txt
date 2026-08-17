@@ -1,0 +1,16 @@
+VG Dashboard — V30.1 Correção da Navegação
+Data: 2026-08-15
+
+Correção:
+- preserva todos os .sb-nav-btn antes de remover os grupos antigos
+- reconstrói Início & Hotéis, Gestão, Análise, Suporte e Administração com os respetivos botões
+- permite reparar uma navegação já marcada pela V30 através de v30Version=30.1
+- Ficha do Hotel permanece independente e o módulo ficha-hotel.js não foi alterado
+
+Validação:
+- estado intermédio de publicação (V30 projeto + V30.1 assets): 32/32 suites aprovadas
+- V30.1 completa: 33/33 suites aprovadas duas vezes consecutivas
+- 92 referências locais verificadas
+- 56 ficheiros JavaScript validados
+- backend dashboard-sessao.js inalterado
+- service worker inalterado e network-first para recursos estáticos

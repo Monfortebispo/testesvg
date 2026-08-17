@@ -1,0 +1,24 @@
+VG Dashboard v12 — Forecast & Cenários
+Data: 2026-08-14
+
+Objetivo:
+- Projetar fecho por hotel/mês com base no ritmo dos snapshots do Revenue Intelligence.
+- Traduzir a ocupação projetada em Receita, GOP, margem, ADR e RevPAR.
+- Permitir cenários sem alterar dados gravados.
+
+Implementado:
+- Nova página Forecast & Cenários.
+- API RI getHotelMonthForecast/getForecastRows, mantendo a fórmula de ocupação dentro do RI.
+- Meta de ocupação V9 integrada.
+- ADR e receita complementar com referência P&L atual ou STLY + metas/orçamento técnico.
+- Custos de pessoal, restantes custos e efeito sede rastreáveis.
+- Cenários Conservador, Base, Ambicioso e Eficiência.
+- Ajustes de ocupação, ADR, receita complementar, pessoal e outros custos.
+- Forecast do portefólio ponderado por capacidade/RN.
+- Nível de confiança do forecast e indicação da fonte.
+
+Validação final:
+- npm test: 14/14 suites aprovadas.
+- 56 referências locais verificadas.
+- 37 ficheiros JavaScript validados sintaticamente.
+- Função Netlify sem alterações relativamente à v11.

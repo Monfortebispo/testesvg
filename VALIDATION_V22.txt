@@ -1,0 +1,25 @@
+VG Dashboard — Agenda Operacional v22
+Data: 2026-08-14
+
+VALIDAÇÃO FINAL
+- 24/24 suites de regressão aprovadas
+- 74 referências locais verificadas
+- 45 ficheiros JavaScript validados por sintaxe
+- Agenda partilhada server-side: OK
+- Prazos de Ações derivados sem duplicação: OK
+- Permissões por hotel/responsável: OK
+- Optimistic concurrency (409): OK
+- Auditoria server-side: OK
+- Backup/Recuperação inclui ops-agenda/: OK
+- Pesquisa Global integra Agenda: OK
+- Notificações Inteligentes integram eventos próximos: OK
+- Mobile/PWA integra Agenda: OK
+- Service worker network-only para Netlify/API: OK
+
+ENDPOINTS V22
+GET  ?resource=ops-agenda
+POST ?resource=ops-agenda-save
+POST ?resource=ops-agenda-delete
+
+NOTA
+A função netlify/functions/dashboard-sessao.js foi alterada nesta versão e deve ser publicada.

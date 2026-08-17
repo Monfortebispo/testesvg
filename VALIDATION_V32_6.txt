@@ -1,0 +1,27 @@
+VG OPERATIONS — VALIDAÇÃO V32.6
+Data: 2026-08-16
+
+OBJETIVO
+Adicionar ao Resumo Operacional um PDF horizontal acumulado ao mês, por Geografia e regiões, com logótipo Vila Galé.
+
+VALIDAÇÕES
+- Botão PDF acumulado presente no Resumo Operacional.
+- Mês final gera automaticamente Janeiro -> mês selecionado.
+- PT+ES e Brasil permanecem isolados pela Geografia ativa.
+- Seleção de uma ou várias regiões validada.
+- Todos os hotéis usa apenas unidades permitidas na Geografia/perfil.
+- Perfis Diretor/Assistente não expandem o âmbito além do hotel autorizado.
+- Receita, Custos e GOP acumulam por soma mensal.
+- Ocupação recalculada por Ocupados / Disponíveis acumulados.
+- ADR recalculado por Receita Alojamento / Quartos Ocupados acumulados.
+- RevPAR recalculado por Receita Alojamento / Quartos Disponíveis acumulados.
+- GOP% e Custos/Receita recalculados sobre totais acumulados.
+- Energia/Quarto Ocupado calculado por Energia acumulada / Quartos Ocupados acumulados.
+- Meses em falta são assinalados no ecrã e no PDF.
+- PDF desenhado em A3 landscape.
+- Logótipo Vila Galé incorporado no próprio HTML do relatório em data URI.
+- Validação visual: PDF sintético renderizado a PNG sem cortes, sobreposições ou problemas de contraste.
+- Testes: 47/47 suites aprovadas.
+
+RESULTADO
+APROVADO PARA DEPLOY.

@@ -1,0 +1,25 @@
+VG Dashboard v13 — validação final
+Data: 2026-08-14
+
+Objetivo:
+- Deteção automática de anomalias financeiras, operacionais e de preços.
+
+Implementado:
+- nova página Deteção de Anomalias;
+- mediana/MAD e robust z-score;
+- anomalias de eficiência por rácio de custo;
+- custo vs crescimento de Receita/quartos ocupados;
+- Receita e ADR vs mediana do portefólio;
+- quebra atípica da margem GOP com sede;
+- preços F&B do último mês disponível vs histórico/portefólio;
+- três níveis de sensibilidade;
+- integração na Central de Operações;
+- cache da análise de preços;
+- nenhum novo Blob ou alteração de autenticação.
+
+Validação:
+- npm test: 17/17 suites aprovadas;
+- 58 referências locais verificadas;
+- 38 ficheiros JavaScript validados sintaticamente;
+- dashboard-sessao.js: SHA-256 igual à v12;
+- sem pasta histórica assets/js/fixes.

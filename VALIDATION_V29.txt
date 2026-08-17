@@ -1,0 +1,21 @@
+VG Dashboard — Comparação de Cenários v29
+Data: 2026-08-14
+
+Funcionalidades:
+- cenários guardados por hotel, mês e ano
+- comparação de até 4 cenários + Forecast Base
+- Ocupação, ADR, Receita, GOP, GOP%, RevPAR, TRevPAR, Pessoal e Custos
+- premissas V12 reutilizadas sem duplicar o motor financeiro
+- deteção de Base alterada e recálculo sobre dados atuais
+- permissões por hotel e Direção
+- concorrência otimista
+- Pesquisa Global e mobile/PWA
+- Auditoria & Governação
+- Backup & Recuperação
+
+Validação final:
+- 30/30 suites aprovadas duas vezes consecutivas
+- 86 referências locais verificadas
+- 51 ficheiros JavaScript validados
+- backend alterado para ops-scenario/*
+- service worker vg-operations-shell-v29

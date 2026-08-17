@@ -1,0 +1,33 @@
+VG OPERATIONS / DASHBOARD — VALIDAÇÃO V33.1
+
+Versão do pacote: 33.1.0
+Data: 2026-08-16
+
+1. CITY LEDGER
+- Filtro Clientes / Entidades surge no detalhe de hotel.
+- Seleção múltipla suportada por checkbox.
+- Seleção legada de um cliente continua compatível.
+- Alterar hotel limpa a seleção de clientes.
+- Botões Todos os clientes / Limpar seleção repõem todas as entidades do hotel.
+- Botão Limpar filtros repõe Hotel, Cliente, Aging, Situação de Crédito e Pesquisa.
+- Teste runtime sintético valida filtragem de 1, 2 e recuperação de todas as entidades.
+
+2. VISIBILIDADE DA INTEGRAÇÃO
+- Badge superior: V33.1 · Integrado.
+- Grupo lateral Operação Integrada: Receita Detalhada, Compras & A&B, Housekeeping e Reputação & Guest Experience.
+- Lançador no Resumo expõe os quatro módulos integrados.
+- Botões dos novos módulos existem também no HTML estático para evitar dependência exclusiva da reconstrução dinâmica da navegação.
+
+3. DEPLOY / CACHE
+- PLATFORM_BUILD = 33.1.
+- Service Worker = vg-operations-shell-v33-1.
+- fallback PWA aponta para ?vg=33.1.
+- Version guard inclui diagnóstico de Receita Detalhada, Compras & A&B e Housekeeping.
+- Recursos estáticos continuam network-first.
+
+4. REGRESSÃO
+- Ficha do Hotel preservada byte-a-byte.
+- Reputação, Receita Detalhada, Compras & A&B, Fichas Técnicas, Housekeeping, City Ledger, PDFs, Instagram, geografia e restantes módulos mantidos.
+- Suite integral: 49/49.
+
+RESULTADO: V33.1 aprovada para deploy após validação automatizada e auditoria estrutural.

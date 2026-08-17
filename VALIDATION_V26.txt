@@ -1,0 +1,24 @@
+VG Dashboard — Gestão de Documentos v26
+Data: 2026-08-14
+
+Validação funcional:
+- upload autenticado por hotel
+- associação a Ação e Agenda
+- pesquisa e filtros por metadados
+- abertura/download autenticado
+- edição com controlo de concorrência
+- substituição de ficheiro
+- bloqueio de formatos executáveis
+- limite de 3,5 MB
+- permissões Diretor/Direção
+- Auditoria & Governação
+- Backup & Recuperação de metadados + conteúdo
+- integração Pesquisa Global e mobile/PWA
+
+Validação técnica final:
+- 28/28 suites de regressão aprovadas, repetidas duas vezes consecutivas
+- 82 referências locais verificadas
+- 49 ficheiros JavaScript validados pela suite estrutural
+- 139 ficheiros totais
+- service worker vg-operations-shell-v26
+- backend com endpoints próprios de documentos

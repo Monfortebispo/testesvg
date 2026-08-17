@@ -1,0 +1,18 @@
+VG Operations V32.2 — validação
+Data: 2026-08-16
+
+Alterações principais
+- Página Hotéis recuperada na navegação, com características e fichas técnicas.
+- Hotéis respeita a Geografia ativa (PT + ES / Brasil) e não mistura carteiras.
+- Mercado renomeado visualmente para Geografia.
+- Ficha do Hotel renomeada visualmente para Comentários Fecho do Mês.
+- Módulo assets/js/modules/ficha-hotel.js preservado byte-a-byte.
+- Barra horizontal flutuante de atalhos removida do HTML/JS; Ctrl/Cmd+K continua disponível.
+- Contraste de Notificações e Pesquisa reforçado.
+- Compras & Artigos uniformizado com a linguagem visual global.
+- PWA/cache atualizado para build 32.2.
+
+Regressão
+- 43/43 suites aprovadas.
+- JS principal validado por node --check dentro da suite.
+- Teste V32.2 dedicado confirma recuperação de Hotéis, Geografia, nomenclatura, remoção da barra, uniformização e preservação do módulo de comentários.

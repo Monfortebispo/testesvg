@@ -1,0 +1,28 @@
+VG Dashboard — Notificações Inteligentes v21
+Data: 2026-08-14
+
+Validação automática final:
+- 23/23 suites de regressão aprovadas
+- 72 referências locais verificadas
+- 44 ficheiros JavaScript validados por sintaxe
+- service worker: vg-operations-shell-v21
+- backend dashboard-sessao.js: inalterado face à V19/V18
+
+Cobertura específica V21:
+- centro de notificações desktop e mobile
+- níveis Urgente / Importante / Informativo
+- agregação por hotel e categoria para reduzir ruído
+- Ações: fora do prazo e vencimento <= 2 dias
+- Performance: regras operacionais existentes
+- Revenue: risco material e gap de forecast
+- Anomalias: sinal mais material por hotel
+- Dados: erros críticos e fontes desatualizadas/falhadas
+- âmbito por perfil/hotel
+- marcar como lida, adiar 24h e ocultar até a situação mudar
+- preferências por categoria
+- badge desktop/mobile
+- alertas urgentes opcionais do dispositivo sem serviço externo de push
+- app shell PWA atualizado; APIs/Blobs continuam network-only
+- ausência de credenciais no estado local de notificações
+
+Resultado: APROVADO PARA DEPLOY.

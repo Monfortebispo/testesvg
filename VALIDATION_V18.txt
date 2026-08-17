@@ -1,0 +1,21 @@
+VG Dashboard v18 — Performance
+Data: 2026-08-14
+
+Alterações validadas:
+- XLSX removido do caminho crítico de arranque; carregamento lazy via VG.performance.ensureXLSX().
+- Imports P&L, Fichas Técnicas, Receitas Detalhe e Instagram aguardam XLSX sob pedido.
+- Exportações Ficha do Hotel e Orçamento aguardam XLSX sob pedido.
+- Scripts externos com defer para download paralelo e execução ordenada após parsing.
+- Preconnect para cdnjs (Chart.js).
+- Reputação, Agenda e Hotéis deixam de renderizar no bootstrap.
+- Hotéis, Ocupação, Instagram e Receitas Detalhe renderizam ao abrir a respetiva vista.
+- Intl.NumberFormat reutilizado por precisão, evitando recriação em milhares de células.
+- Mudança de vista redimensiona apenas gráficos visíveis registados no núcleo.
+- Service worker v18 com pré-cache concorrente em lotes; APIs/Blobs continuam network-only.
+- Função Netlify dashboard-sessao.js não foi alterada relativamente à v17.
+
+Resultado:
+- npm test: 21/21 suites aprovadas.
+- 68 referências locais verificadas.
+- 42 ficheiros JavaScript validados sintaticamente.
+- 0 pasta fixes histórica.

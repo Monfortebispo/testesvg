@@ -1,0 +1,23 @@
+VG Dashboard — Pesquisa Global v19
+Data: 2026-08-14
+
+Validação automática final:
+- 22/22 suites de regressão aprovadas
+- 70 referências locais verificadas
+- 43 ficheiros JavaScript validados por sintaxe
+- service worker: vg-operations-shell-v19
+- backend dashboard-sessao.js: inalterado face à V18 (SHA-256 04cf3e7199a9d1e461585666df16e58d59b4b628df6a289323f9a4474813af62)
+
+Cobertura específica V19:
+- Ctrl/Cmd + K
+- pesquisa sem acentos
+- hotel + KPI
+- ações
+- metas e regras
+- artigos e fornecedores
+- comentários da Ficha do Hotel
+- Centro de Dados
+- Auditoria exclusiva da Direção
+- recursos PWA estáticos, sem dados/API em cache
+
+Resultado: APROVADO PARA DEPLOY.

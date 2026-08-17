@@ -1,0 +1,12 @@
+VG Dashboard — V31.1 Correção do seletor de mercado
+
+- Seletor montado em .topbar-right.
+- PT+ES / Brasil visíveis para Direção/Admin.
+- Perfis de hotel mantêm restrição ao respetivo mercado.
+- Build guard 31.1 e shell PWA v31_1.
+
+Validação final:
+- 37/37 suites aprovadas duas vezes consecutivas.
+- Simulação V31 + apenas Lote 1: 36/36 suites aprovadas.
+- Teste de regressão reproduz a hierarquia .topbar > .topbar-right > .theme-dots e valida a montagem antes dos temas.
+- Ficha do Hotel e backend sem alteração funcional nesta correção.

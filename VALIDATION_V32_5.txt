@@ -1,0 +1,10 @@
+VG Dashboard V32.5 — validação
+
+Correções:
+1. PDF City Ledger: contraste de texto independente do tema da aplicação.
+2. Assistente Analítico: metas formatadas por tipo de KPI e sem casas decimais espúrias.
+
+Validação automatizada: 46/46 suites aprovadas.
+Validação visual adicional: PDF de teste renderizado com cabeçalho branco sobre azul e linhas em texto escuro.
+
+Estado: DEPLOY AUTORIZADO.

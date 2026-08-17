@@ -1,0 +1,9 @@
+VG Operations V35.8 — ESTABILIDADE / ROLLBACK CONTROLADO
+
+Objetivo: retirar integralmente a camada Performance V35.7 que causou regressões de arranque, cache parcial e módulos sem CSS/estado.
+
+Base funcional: V35.6 auditada.
+Mantido: Governanta direta mobile, Chefe de Receção e permissões, Hotel 360 Eficiência, Ctrl+K Pesquisa Global, documentos/hotéis, responsividade 125%/150%, módulos nativos A&B/HK.
+Retirado: performance loader V35.7, lazy loading transversal V35.7, lógica de cache-first/metadados V35.7 e precache reduzido V35.7.
+Service Worker: cache vg-operations-shell-v35-8 para expulsar caches 35.7.
+Prioridade: fiabilidade e consistência dos dados acima da velocidade.

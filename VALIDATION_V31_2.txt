@@ -1,0 +1,14 @@
+VG Dashboard — V31.2 Isolamento de mercados
+Data: 2026-08-15
+
+Correção:
+- Brasil vazio não apresenta KPIs, Central, Ficha ou comentários herdados de PT+ES.
+- Topo e contexto deixam de manter 35 hotéis/€ após troca para um mercado sem P&L.
+- Vistas dependentes de P&L ficam ocultas e é mostrado um empty state específico do mercado.
+- Ações/Agenda/Documentos/Aprovações e outras áreas independentes continuam acessíveis.
+- Ficha do Hotel permanece byte-a-byte inalterada.
+
+Validação:
+- 38/38 suites de regressão aprovadas.
+- teste dedicado market-empty-isolation-v31_2.test.js.
+- build guard 31.2 e service worker vg-operations-shell-v31_2.

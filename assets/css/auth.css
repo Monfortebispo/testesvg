@@ -1,0 +1,77 @@
+
+#vgLoginOverlay{position:fixed;inset:0;z-index:999999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#07111f 0%,#0d1e33 45%,#172d4d 100%);font-family:var(--font,Arial,sans-serif);}
+.vg-login-card{width:min(430px,calc(100vw - 32px));background:#fff;border:1px solid rgba(139,26,26,.18);border-radius:22px;box-shadow:0 24px 90px rgba(0,0,0,.35);padding:30px;text-align:center;color:#1a0606;}
+.vg-login-logo{width:220px;max-width:72%;height:auto;margin:0 auto 18px;display:block;}
+.vg-login-title{font-size:18px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;color:#8b1a1a;margin-bottom:4px;}
+.vg-login-sub{font-size:12px;color:#7a3030;margin-bottom:22px;}
+.vg-login-field{display:flex;flex-direction:column;gap:6px;text-align:left;margin-bottom:12px;}
+.vg-login-field label{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#7a3030;font-weight:800;}
+.vg-login-field input{height:42px;border:1px solid rgba(139,26,26,.25);border-radius:10px;padding:0 12px;font-size:14px;outline:none;background:#fbf8f7;color:#1a0606;}
+.vg-login-field input:focus{border-color:#8b1a1a;box-shadow:0 0 0 3px rgba(139,26,26,.08);}
+.vg-login-btn{width:100%;height:44px;border:0;border-radius:10px;background:#8b1a1a;color:#fff;font-weight:900;letter-spacing:.8px;cursor:pointer;margin-top:6px;}
+.vg-login-error{min-height:18px;margin-top:10px;color:#b91c1c;font-size:12px;font-weight:800;}
+.vg-login-note{font-size:10px;color:#8a6b6b;margin-top:14px;line-height:1.45;}
+.vg-auth-pill{display:none;align-items:center;gap:8px;border:1px solid var(--border,#ddd);background:var(--surface-2,#f3f4f6);border-radius:999px;padding:6px 10px;font-size:11px;color:var(--text-1,#111);}
+.vg-auth-pill b{font-weight:900;}
+.vg-auth-pill span{color:var(--text-2,#666);}
+.vg-auth-btn{display:none;border:1px solid rgba(139,26,26,.25);background:rgba(139,26,26,.08);color:#8b1a1a;border-radius:8px;padding:7px 10px;font-size:11px;font-weight:900;cursor:pointer;}
+body.vg-is-admin #vgSetupBtn{display:inline-flex!important;}
+#vgSetupModal{position:fixed;inset:0;z-index:999998;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.62);font-family:var(--font,Arial,sans-serif);}
+#vgPasswordModal{position:fixed;inset:0;z-index:1000000;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.72);font-family:var(--font,Arial,sans-serif);}
+.vg-password-card{width:min(430px,calc(100vw - 32px));background:var(--surface-1,#fff);color:var(--text-1,#111);border:1px solid var(--border,#ddd);border-radius:18px;box-shadow:0 24px 80px rgba(0,0,0,.45);padding:24px;}
+.vg-password-card h3{margin:0 0 6px;color:var(--gold,#8b1a1a);font-size:15px;letter-spacing:1px;text-transform:uppercase;}
+.vg-password-card p{margin:0 0 16px;font-size:11px;line-height:1.5;color:var(--text-3,#666);}
+.vg-password-card .vg-login-field input{background:var(--surface-2,#f4f4f4);color:var(--text-1,#111);border-color:var(--border-2,#ddd);}
+.vg-password-actions{display:flex;gap:8px;margin-top:8px;}
+.vg-password-actions .vg-login-btn{margin:0;}
+.vg-auth-modal-card{width:min(1100px,calc(100vw - 32px));max-height:88vh;overflow:auto;background:var(--surface-1,#fff);color:var(--text-1,#111);border:1px solid var(--border,#ddd);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.35);}
+.vg-auth-modal-head{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid var(--border-2,#eee);}
+.vg-auth-modal-head h3{margin:0;color:var(--gold,#8b1a1a);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;}
+.vg-auth-modal-body{padding:16px 18px;}
+.vg-auth-grid{display:grid;grid-template-columns:1fr 1.5fr 1fr 1fr 1.5fr auto;gap:8px;margin-bottom:14px;align-items:center;}
+.vg-auth-grid input,.vg-auth-grid select{border:1px solid var(--border-2,#ddd);border-radius:8px;padding:8px;background:var(--surface-2,#f4f4f4);color:var(--text-1,#111);font-size:12px;min-width:0;}
+.vg-auth-table-wrap{max-height:280px;overflow:auto;border:1px solid var(--border-2,#eee);border-radius:10px;margin-bottom:16px;}
+.vg-auth-table{width:100%;border-collapse:collapse;font-size:12px;}
+.vg-auth-table th,.vg-auth-table td{padding:8px;border-bottom:1px solid var(--border-2,#eee);text-align:left;}
+.vg-auth-table th{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3,#777);position:sticky;top:0;background:var(--surface-2,#f4f4f4);}
+.vg-auth-smallbtn{border:1px solid var(--border-2,#ddd);background:var(--surface-2,#f4f4f4);color:var(--text-1,#111);border-radius:7px;padding:5px 8px;cursor:pointer;font-size:11px;margin-right:4px;}
+.vg-lock-message{margin:10px 0;padding:10px 12px;border:1px solid rgba(139,26,26,.22);border-radius:10px;background:rgba(139,26,26,.08);color:#8b1a1a;font-size:12px;font-weight:800;}
+.vg-edit-locked{opacity:.58!important;pointer-events:none!important;}
+@media(max-width:800px){.vg-auth-grid{grid-template-columns:1fr;}}
+
+
+/* V35.6 · Governanta: experiência operacional mobile dedicada e direta.
+   A autenticação continua central; o chrome analítico da Dashboard é ocultado. */
+body.vg-governanta-mode{
+  display:block!important;
+  min-height:100dvh!important;
+  padding:0!important;
+  background:#f5f8fb!important;
+}
+body.vg-governanta-mode .topbar,
+body.vg-governanta-mode .sidebar,
+body.vg-governanta-mode .context-panel,
+body.vg-governanta-mode .global-filter-bar,
+body.vg-governanta-mode #vgMobileNav,
+body.vg-governanta-mode #vgMobileMore,
+body.vg-governanta-mode #vgMobileInstall,
+body.vg-governanta-mode #v30ProfileHomeRoot,
+body.vg-governanta-mode #drawerOverlay{display:none!important;}
+body.vg-governanta-mode .main{
+  display:block!important;
+  width:100%!important;
+  min-height:100dvh!important;
+  padding:0!important;
+  margin:0!important;
+}
+body.vg-governanta-mode .view-content{padding:0!important;margin:0!important;min-height:100dvh!important;}
+body.vg-governanta-mode #view-housekeeping{display:block!important;padding:0!important;margin:0!important;min-height:100dvh!important;}
+body.vg-governanta-mode #housekeepingRoot{display:block!important;min-height:100dvh!important;width:100%!important;}
+body.vg-governanta-mode #housekeepingRoot>div{min-height:100dvh!important;}
+
+/* V35.6 · o modo Governanta deve ocupar a aplicação desde o topo, sem wrappers analíticos. */
+body.vg-governanta-mode #view-housekeeping > #housekeepingRoot{padding:0!important;margin:0!important;}
+body.vg-governanta-mode #housekeepingRoot .od-hero{display:none!important;}
+body.vg-governanta-mode #housekeepingRoot .od-native-mount{padding:0!important;margin:0!important;min-height:100dvh!important;}
+body.vg-governanta-mode html,
+html:has(body.vg-governanta-mode){scroll-behavior:auto!important;}

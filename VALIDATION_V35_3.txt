@@ -1,0 +1,61 @@
+VG OPERATIONS — VALIDAÇÃO V35.3
+Data: 2026-08-17
+
+OBJETIVO
+Versão de robustez sobre V35.2: correção da gravação dos Hotéis, autorização server-side A&B/HK, migração verificável do histórico HK, performance, documentos e coerência de versão.
+
+CORREÇÃO DO ERRO REPORTADO
+- assets/js/modules/hoteis.js: o objeto editado deixou de ser declarado com const antes de ser atualizado com a resposta do servidor.
+- Regressão explícita testa que hoteisSaveEditor usa `let d=Object.assign(...)` e não volta a `const`.
+- Backend da ficha usa expectedUpdatedAt e responde 409 quando outra sessão gravou entretanto.
+
+HOUSEKEEPING
+- autorização server-side por sessão/perfil/hotel;
+- perfis restritos não alteram outro hotel nem campos de aprovação/reabertura;
+- Compras tem leitura sem escrita de inventário;
+- migração histórica exige >=3 campanhas, >=2 fechadas e >=1 aberta;
+- merge preserva linhas/movimentos e cria backup `vg_hk_backup_pre_v353_*` antes de gravar.
+
+CUSTOS & COMPRAS A&B
+- autorização server-side;
+- perfis de hotel não publicam configuração global;
+- previsões permitidas são fundidas apenas no hotel da sessão;
+- Direção/Admin/Compras mantêm acesso global conforme função.
+
+DOCUMENTOS
+- MIME é determinado no servidor pela extensão permitida;
+- endpoint ops-document-content é autenticado e binário;
+- teste runtime confirma que os bytes devolvidos são idênticos aos guardados;
+- PDF enviado com MIME do browser incorreto continua a ser devolvido como application/pdf;
+- limite de ficheiro mantém-se em 3,5 MB.
+
+PERFORMANCE
+- scripts nativos A&B e Housekeeping retirados do carregamento inicial do index.html;
+- retirados também do precache inicial do Service Worker;
+- carregamento dinâmico por vista através de loadNative35();
+- JavaScript local inicial: 1 713 527 bytes;
+- equivalente anterior com os dois módulos nativos no arranque: 2 227 480 bytes;
+- redução do JS inicial: 513 953 bytes (~23,1%).
+
+COERÊNCIA
+- package.json: 35.3.0
+- index.html/meta/badge: V35.3
+- Version Guard: 35.3
+- Service Worker: vg-operations-shell-v35-3
+
+AUDITORIA AUTOMÁTICA
+- npm test: 57/57 suites aprovadas — Deploy autorizado.
+- node --check: todos os JavaScript em assets/js, netlify/functions e tests aprovados.
+- JSON: 3 ficheiros analisados sem erro.
+- index.html: 620 IDs, 0 duplicados.
+- referências locais do HTML: 103, 0 em falta.
+- Service Worker: 107 recursos estáticos referenciados, 0 em falta.
+- Ficha do Hotel protegida SHA256:
+  2779d6f5cbfcedb672f037494ee54847a16aec2247f5a0594346e3e6c4963dc7
+
+TESTES RUNTIME NOVOS
+- v35_3-runtime-hardening.test.js: permissões server-side HK/A&B por perfil/hotel.
+- v35_3-hotel-documents.test.js: gravação de hotéis, concorrência 409, MIME e integridade binária documental.
+
+LIMITAÇÃO DE VALIDAÇÃO
+Não é reivindicado um E2E visual real em Chromium neste ambiente. A validação de browser local tem sido bloqueada pelas limitações do runtime/DBus; a V35.3 foi validada por regressão, runtime simulado do backend, sintaxe, integridade e referências locais.

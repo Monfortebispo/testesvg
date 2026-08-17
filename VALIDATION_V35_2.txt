@@ -1,0 +1,30 @@
+VG Operations V35.2 — VALIDAÇÃO FINAL
+Data: 2026-08-17
+
+CORREÇÕES DESTA VERSÃO
+- Hotéis: todos os campos da ficha ficam editáveis num editor nativo.
+- Hotéis: edição inclui identificação, região, categoria, morada, telefone, web, coordenadas, edifício, quartos, horários, piscinas, SPA, salas, garagem, segmentos, características, idiomas, contactos, restaurantes, bares e distâncias.
+- Hotéis: alterações persistem no backend partilhado e entram em auditoria/backup.
+- Documentos: novo endpoint binário autenticado para abertura/download de anexos.
+- Documentos: PDF e imagens abrem num preview interno; Word/Excel/outros descarregam de forma segura.
+- Interface: seletor compacto Original / 2.0 / V2 no topo, sem recuperar a barra antiga.
+- Housekeeping: sincronização por merge com o histórico de inventariovg.netlify.app, preservando dados já importados na Dashboard.
+- Ficha do Hotel: não alterada.
+
+AUDITORIA
+- npm test: 55/55 suites aprovadas.
+- node --check: todos os JS em assets/js, netlify/functions e tests aprovados.
+- Ficheiros do projeto: 212.
+- index.html: 622 IDs; 0 duplicados.
+- Referências locais no index.html: 105; 0 em falta.
+- package.json: 35.2.0.
+- Ficha Hotel SHA256: 2779d6f5cbfcedb672f037494ee54847a16aec2247f5a0594346e3e6c4963dc7
+
+TESTES DE REGRESSÃO NOVOS/AMPLIADOS
+- endpoint binário de documentos devolve exatamente os bytes guardados.
+- Diretor pode editar a ficha do próprio hotel apesar das variações de nomenclatura.
+- Diretor não pode editar outro hotel.
+- frontend contém editor de todos os grupos de dados dos hotéis.
+- seletor compacto de interfaces e merge histórico HK verificados.
+
+Deploy autorizado.

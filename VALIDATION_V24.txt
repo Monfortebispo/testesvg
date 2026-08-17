@@ -1,0 +1,12 @@
+VG Dashboard — Relatórios Automáticos v24
+Data: 2026-08-14
+
+Validação final:
+- 26/26 suites de regressão aprovadas
+- 78 referências locais verificadas pela suite de estrutura
+- 47 ficheiros JavaScript validados
+- Relatórios: hotel / região / consolidado
+- Tipos: mensal executivo / semanal operacional
+- Exportação: PDF (impressão), Word compatível .doc e HTML
+- Backend dashboard-sessao.js inalterado face à V23
+- Service worker atualizado para shell v24

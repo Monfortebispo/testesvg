@@ -1,0 +1,19 @@
+VG Dashboard v17 — Backup & Recuperação
+Data: 2026-08-14
+
+Implementado:
+- snapshots server-side dos blobs operacionais recuperáveis;
+- exclusão explícita de utilizadores, credenciais, auditoria, presença e recursos internos;
+- listagem de versões apenas para Direção;
+- confirmação REPOR para recuperação e APAGAR para eliminação;
+- snapshot automático pre_restore antes de qualquer reposição;
+- leitura integral do snapshot antes da fase destrutiva;
+- reposição global que remove chaves operacionais posteriores à versão escolhida;
+- eventos de Auditoria & Governação para criação, reposição e eliminação;
+- interface desktop e mobile/PWA;
+- cache PWA apenas dos ficheiros estáticos da interface.
+
+Resultado final:
+- npm test: 20/20 suites aprovadas;
+- structure.test.js: 67 referências locais e 41 ficheiros JS validados;
+- backup-recovery.test.js: snapshot, exclusões de segurança, safety copy, restore e delete aprovados.

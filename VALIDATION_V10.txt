@@ -1,0 +1,23 @@
+VG Dashboard v10 — Centro de Dados
+Data: 2026-08-14
+
+Implementado:
+- novo módulo Centro de Dados e navegação dedicada;
+- estado/cobertura para P&L mensal, acumulado, Ocupação, referência, Reputação, Instagram, Compras e Fichas técnicas;
+- histórico server-side de carregamentos com identidade autenticada;
+- registo de ficheiro, âmbito, métricas, duplicados, avisos e erros;
+- snapshots internos por fonte quando o tamanho permite;
+- rollback restrito à Direção;
+- proteção dos blobs internos de backup;
+- integração de registo nos parsers/importadores existentes;
+- deteção visual de desatualização, ausência de dados e problemas de qualidade.
+
+Segurança:
+- Diretor pode consultar histórico, mas não obter snapshots globais;
+- apenas Direção/Admin pode guardar snapshots de rollback e executar reversões;
+- identidade do histórico é imposta pelo servidor.
+
+Validação:
+- npm test: 11/11 suites aprovadas;
+- 52 referências locais verificadas;
+- 35 ficheiros JavaScript validados sintaticamente.

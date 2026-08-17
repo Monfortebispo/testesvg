@@ -1,0 +1,26 @@
+VG Dashboard v15 — validação PWA / Mobile
+Data: 2026-08-14
+
+Base: VG Dashboard v13 (v14 omitida por decisão funcional).
+
+Implementado:
+- manifest.webmanifest válido, display standalone e start_url na Central.
+- ícones 180 / 192 / 512 px.
+- service-worker.js com app shell estática.
+- API Netlify explicitamente network-only.
+- métodos não-GET nunca cacheados.
+- navegação mobile: Central / Hotéis / Ações / Alertas / Mais.
+- bottom sheet de acessos rápidos.
+- adaptação mobile de Central, Ações, Forecast e Anomalias.
+- instalação PWA Android/Chrome.
+- sincronização manual dos dados partilhados.
+- correção de concorrência: updatedAt monotónico nas Ações.
+
+Validação automática:
+- npm test: 18/18 suites aprovadas.
+- structure.test.js: 63 referências locais e 39 ficheiros JS validados.
+- pwa-mobile.test.js valida app shell, manifest, ícones, service worker e exclusão da API.
+- security.test.js repetido 5 vezes consecutivas após a correção de timestamp: 5/5.
+
+Nota:
+- Chart.js e XLSX continuam em CDN e não são colocados na cache PWA; sem internet, gráficos/exportação Excel podem ficar indisponíveis.

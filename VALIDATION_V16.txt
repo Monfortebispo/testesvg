@@ -1,0 +1,21 @@
+VG Dashboard v16 — Auditoria & Governação
+Data: 2026-08-14
+
+Implementado:
+- página Auditoria & Governação exclusiva da Direção;
+- eventos individuais server-side em _audit-event/*;
+- identidade e timestamp impostos pela função Netlify;
+- diferenças antes/depois para alterações auditáveis;
+- histórico anterior preservado e marcado como legado;
+- filtros por período, utilizador, hotel e categoria;
+- exportação CSV;
+- auditoria de login, password, utilizadores, configurações/regiões, Metas & Regras, Ficha do Hotel, ações, importações/rollbacks e publicação partilhada;
+- passwords, tokens, secrets, hashes e salts excluídos do trilho;
+- integração PWA/mobile, sem cache de API ou dados empresariais.
+
+Validação final:
+- npm test: 19/19 suites aprovadas;
+- 65 referências locais verificadas;
+- 40 ficheiros JavaScript validados sintaticamente;
+- governance.test.js valida permissões, diferenças e proteção de credenciais;
+- service worker atualizado para cache vg-operations-shell-v16.

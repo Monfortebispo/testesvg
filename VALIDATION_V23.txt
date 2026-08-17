@@ -1,0 +1,26 @@
+VG DASHBOARD — VALIDATION V23
+=============================
+Versão: 23.0.0
+Módulo: Performance dos Hotéis
+Data: 2026-08-14
+
+Validação funcional
+- Página Performance Hotel ligada ao menu e ao router
+- KPIs canónicos reutilizados
+- Forecast V12 / Revenue Intelligence reutilizados
+- Benchmarking V11 reutilizado
+- Alertas, Anomalias, Ações e Qualidade de Dados consolidados
+- Restrição de Diretor/Assistente à respetiva unidade
+- Pesquisa Global abre diretamente a Performance do hotel
+- Mobile/PWA inclui acesso Performance
+- V23 não introduz Score Operacional paralelo
+
+Validação técnica
+- 25/25 suites de regressão aprovadas
+- 76 referências locais verificadas
+- 46 ficheiros JavaScript validados
+- service worker: vg-operations-shell-v23
+- dashboard-sessao.js inalterado face à V22
+- SHA-256 backend: 76d7e919d38c852602464414e0a26e4ae38b8e3f419f4f6d6d31c19914c16c39
+
+Resultado: DEPLOY AUTORIZADO

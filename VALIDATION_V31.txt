@@ -1,0 +1,30 @@
+VG Dashboard — Mercados Internacionais v31
+Data: 2026-08-15
+
+Escopo validado:
+- PT+ES permanece mercado legado em EUR, sem reimportação obrigatória.
+- Brasil independente em BRL/R$.
+- 13 hotéis BR identificados nos ficheiros P&L/A&B fornecidos.
+- Grupos Brasil: Cidade, Resorts, Collection.
+- aliases AMAZÔNIA/AMAZONIA, Ouro Preto, Sunset Cumbuco e Eco Resort de Angra.
+- P&L deteta mercado pelos hotéis antes de aplicar.
+- Compras A&B deteta mercado pelos dicionários de hotéis.
+- snapshots mistos de Reputação/Ocupação/Instagram são repartidos por mercado.
+- Blobs genéricos Brasil em namespace próprio; Iberia conserva chaves antigas.
+- Ações, Agenda, Documentos, Aprovações, Cenários e Centro de Dados filtrados por market.
+- utilizador Diretor/Assistente não pode trocar para outro mercado no servidor.
+- EUR e BRL nunca são agregados financeiramente.
+- Ficha do Hotel preservada byte-a-byte; moeda adaptada externamente.
+- migração de localStorage legado permitida apenas em Iberia.
+- PWA shell v31 / build guard 31.0.
+
+Validação técnica: executar `npm test` antes da publicação.
+
+Validação final executada:
+- 36/36 suites aprovadas repetidamente.
+- 94 referências locais verificadas.
+- 57 ficheiros JavaScript validados por sintaxe.
+- simulação do Lote 1 sobre V30.3: 35/35 suites aprovadas.
+- aplicação completa após Lote 2: 36/36 suites aprovadas.
+- Ficha do Hotel SHA-256: 2779d6f5cbfcedb672f037494ee54847a16aec2247f5a0594346e3e6c4963dc7 (inalterada).
+- Backend SHA-256 V31: 847799af14dcac3dd85484d842c472b40cab0372431c28dcc723d82364122226.

@@ -1,0 +1,26 @@
+VG Dashboard — Workflow de Aprovações v27
+Data: 2026-08-14
+
+Validação funcional:
+- submissão de pedidos por hotel
+- tipos e prioridades
+- aprovador geral ou específico
+- decisão reservada à Direção
+- autoaprovação apenas como exceção auditada
+- aprovação / rejeição / cancelamento
+- histórico e controlo de concorrência
+- ligações a Ações, Agenda, Documentos e metas
+- Documentos V26 ligados a Aprovações V27
+- Pesquisa Global
+- Notificações Inteligentes
+- mobile/PWA
+- Auditoria & Governação
+- Backup & Recuperação
+
+Validação técnica final:
+- 29/29 suites de regressão aprovadas
+- suite completa executada duas vezes consecutivas
+- 84 referências locais verificadas
+- 50 ficheiros JavaScript validados
+- service worker vg-operations-shell-v27
+- backend dashboard-sessao.js alterado para V27

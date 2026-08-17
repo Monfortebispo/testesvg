@@ -1,0 +1,104 @@
+VG OPERATIONS — VALIDAÇÃO V35.4
+Release: V35.4 · Acessos por Perfil
+Data de auditoria: 2026-08-17
+
+OBJETIVO DA RELEASE
+- Tornar Governanta um perfil oficial da autenticação central.
+- Criar o perfil Chefe de Receção.
+- Permitir um ou vários hotéis por utilizador.
+- Permitir à Direção de Operações escolher os módulos visíveis por utilizador.
+- Garantir que apenas a Direção de Operações tem acesso automático a todos os hotéis e módulos.
+- Aplicar controlo de âmbito também no servidor para operações críticas.
+
+MODELO DE ACESSO CENTRAL
+Cada utilizador passa a ter:
+- role: perfil funcional;
+- hotels[]: um ou vários hotéis autorizados;
+- modules[]: módulos autorizados.
+
+Perfis oficiais:
+- Direção de Operações
+- Diretor
+- Assistente de Direção
+- Governanta
+- Chefe de Receção
+- Compras
+
+Direção de Operações:
+- hotels = ["*"]
+- modules = ["*"]
+- acesso integral automático.
+
+Utilizadores não-Direção:
+- têm de possuir pelo menos um hotel e pelo menos um módulo;
+- módulos de governação/administração não podem ser atribuídos por adulteração do pedido;
+- o servidor volta a validar perfil, hotel e módulo nas operações protegidas.
+
+GOVERNANTA
+- Perfil reconhecido na autenticação central.
+- Pode estar associada a um ou vários hotéis.
+- O módulo recomendado por defeito é Housekeeping.
+- Login conduz à experiência Housekeeping dedicada.
+- Interface Governanta é full-screen/mobile-first, sem a Dashboard administrativa à volta.
+- Um hotel: entra diretamente no hotel autorizado.
+- Vários hotéis: apresenta escolha entre os hotéis autorizados.
+- Trabalha sobre a campanha ativa.
+- Pode registar quebras, com causa obrigatória.
+- Pode efetuar contagem física e respetivos movimentos/ajustes permitidos.
+- Não pode forjar aprovação, reabertura ou âmbito de outro hotel.
+- Sair termina a sessão central, e não apenas recarrega o módulo.
+
+CHEFE DE RECEÇÃO
+- Perfil oficial da autenticação central.
+- Pode estar associado a um ou vários hotéis.
+- Tem uma proposta de menus inicial, mas a Direção pode marcar/desmarcar módulos por utilizador.
+- O menu, pesquisa global e command palette respeitam os módulos permitidos.
+- Dados hotel-specific ficam limitados ao conjunto de hotéis autorizado.
+
+MENUS / RBAC
+- Setup permite selecionar vários hotéis por utilizador.
+- Setup permite selecionar módulos individualmente.
+- “Aplicar perfil recomendado” funciona apenas como ponto de partida; a Direção pode personalizar.
+- Os menus não autorizados ficam ocultos.
+- Pesquisa Global e command palette não expõem atalhos para módulos não autorizados.
+- Rotas tentadas diretamente são redirecionadas/falham conforme o âmbito.
+- Endpoints críticos verificam o módulo e o hotel no servidor, não apenas na interface.
+
+BACKENDS REVISTOS
+- dashboard-sessao.js: perfis, hotels[], modules[], filtragem e validação server-side.
+- hk-store.js: Housekeeping multi-hotel, scope por utilizador e bloqueio de campos administrativos.
+- custos-ab-store.js: A&B multi-hotel e validação de módulo/âmbito.
+
+MIGRAÇÃO / COMPATIBILIDADE
+- Utilizadores antigos com campo único hotel são migrados para hotels[].
+- Perfis antigos recebem módulos recomendados quando ainda não existe configuração explícita.
+- A Direção pode depois restringir ou ampliar o acesso operacional.
+- Mantida compatibilidade com os módulos originais sem alterar a Ficha do Hotel protegida.
+
+AUDITORIA AUTOMÁTICA FINAL
+- npm test: 58/58 suites aprovadas — Deploy autorizado.
+- JavaScript: 125 ficheiros verificados com node --check, sem erros.
+- JSON: package.json, manifest.webmanifest e operations-seed-v33.json válidos.
+- HTML: 625 IDs, 0 duplicados.
+- Referências locais no index.html: 103, 0 em falta.
+- Coerência de versão:
+  * package.json = 35.4.0
+  * HTML/meta = V35.4
+  * Version Guard = 35.4
+  * Service Worker = vg-operations-shell-v35-4
+- Ficha do Hotel preservada byte-for-byte:
+  SHA256 2779d6f5cbfcedb672f037494ee54847a16aec2247f5a0594346e3e6c4963dc7
+
+TESTES ESPECÍFICOS V35.4
+- criação/login de Governanta com dois hotéis;
+- tentativa de atribuir módulo de governação a Governanta é removida server-side;
+- criação/login de Chefe de Receção com dois hotéis e módulos limitados;
+- Housekeeping devolve apenas os hotéis autorizados;
+- Governanta altera stock permitido mas não consegue forjar aprovação;
+- Chefe sem Housekeeping recebe 403 nesse backend;
+- Chefe sem A&B recebe 403 nesse backend;
+- Chefe com A&B recebe apenas os hotéis autorizados.
+
+LIMITAÇÃO DE VALIDAÇÃO
+- Não é reivindicado teste visual E2E em Chromium real neste ambiente.
+- A validação cobre regressão automatizada, runtime sintético, sintaxe, referências e políticas server-side.

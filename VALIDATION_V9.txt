@@ -1,0 +1,23 @@
+VG Dashboard v9 — Metas & Regras configuráveis
+Data: 2026-08-14
+
+Implementado:
+- módulo partilhado assets/js/modules/targets-rules.js;
+- CSS assets/css/targets-rules.css;
+- editor no Setup da Direção;
+- regras globais configuráveis e ativáveis/desativáveis;
+- metas por hotel/ano/mês para Ocupação, GOP%, Receita vs LY e ADR vs LY;
+- opção Acumulado / período (mês 0);
+- metas explícitas com prioridade sobre thresholds globais;
+- Alertas e Central de Operações ligados à configuração v9;
+- Revenue Intelligence ligado à meta explícita de ocupação;
+- fallback RI ano anterior + X p.p. configurável;
+- sincronização manual atualiza Metas & Regras;
+- permissões server-side: Direção escreve, utilizadores autenticados leem.
+
+Validação final:
+- npm test: 10/10 suites aprovadas;
+- 50 referências locais verificadas;
+- 34 ficheiros JavaScript validados sintaticamente;
+- estrutura v8.1 preservada sem pasta fixes;
+- deploy autorizado pelos testes.

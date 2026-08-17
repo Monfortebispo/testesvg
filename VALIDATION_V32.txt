@@ -1,0 +1,45 @@
+VG Operations — V32
+City Ledger & Gestão de Cobranças + Eficiência & Unit Economics
+Data: 2026-08-16
+
+Validações sobre City_Ledger_PT.xlsm:
+- 6 abas analisadas: Listagem, Extrato Cliente, Agrupado Cliente, Agrupado Hotel, Detalhe Hotel e Detalhe Cliente.
+- Aba Listagem usada como fonte canónica.
+- 47 valores distintos na coluna HOTEL.
+- 35 hotéis oficiais PT+ES reconhecidos.
+- 20.696 linhas pertencentes a hotéis oficiais.
+- Linhas de entidades não-hotel excluídas pelo campo HOTEL.
+- 20.646 linhas oficiais em EUR e 50 linhas oficiais em BRL observadas no ficheiro PT; os totais financeiros não misturam moedas.
+- Vencimento: DATA_DOCUMENTO + 30 dias.
+- Aging histórico calculado contra DATA_REGISTO do snapshot.
+- Saldo negativo tratado como crédito, não dívida.
+
+Unit Economics:
+- Custos, receitas e GOP por quarto disponível, quarto ocupado, dormida, hóspede/cliente e chegada.
+- Energia disponível em todas as cinco bases.
+- Agregação de portefólio ponderada por atividade.
+- Custos: redução unitária = positiva; Receitas/GOP: aumento unitário = positivo.
+
+Segurança e persistência:
+- Dados City Ledger separados por mercado.
+- Importação apenas Direção/Admin.
+- Diretor/Assistente limitado ao hotel associado.
+- Diligências com utilizador/data-hora derivados da sessão no servidor.
+- Blobs de City Ledger incluídos em Backup & Recuperação.
+- Ficha do Hotel não alterada.
+
+Validação técnica final:
+- 42/42 suites de regressão aprovadas duas vezes consecutivas.
+- V31.2 + apenas Lote 1: 38/38 suites antigas aprovadas.
+- Ficha do Hotel preservada byte-a-byte.
+- service worker atualizado para vg-operations-shell-v32.
+- backend alterado para City Ledger server-side.
+
+HOTFIX CITY LEDGER — 2026-08-16
+- Adicionado filtro dinâmico por SITUACAO_CREDITO, incluindo opção "Sem situação".
+- Pesquisa City Ledger estabilizada: a escrita atualiza apenas o corpo dos resultados e deixa de recriar/perder foco do campo.
+- Pesquisa passa também a considerar código de cliente e situação de crédito.
+- Resumo/KPIs e visão por hotel passam a respeitar os filtros ativos.
+- Snapshots com a mesma DATA_REGISTO são ordenados pelo createdAt: o carregamento mais recente fica ativo e o anterior permanece no histórico.
+- Novo ficheiro cria snapshot independente; não acumula saldos com o anterior e não elimina diligências.
+- Regressão integral: 42/42 suites aprovadas.

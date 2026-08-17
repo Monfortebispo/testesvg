@@ -1,0 +1,16 @@
+VG Operations V32.4 — Contraste Temas Claros + Reputação/Instagram
+
+Alterações:
+- Contraste explícito no cabeçalho para os temas ERP e Vila Galé.
+- Notificações, Pesquisa, Ctrl K, utilizadores online e Perguntar aos dados passam a usar texto legível nos fundos claros.
+- Tema azul escuro preservado.
+- Reputação e Instagram retirados da navegação legacy oculta.
+- Novo grupo lateral: Qualidade & Comunicação.
+- As vistas e módulos de Reputação/Instagram existentes foram preservados; não houve reconstrução de dados.
+- Build guard, PWA e service worker atualizados para V32.4.
+
+Validação:
+- 45/45 suites de regressão aprovadas.
+- Ficha/Comentários Fecho do Mês preservada.
+- City Ledger V32.3 e cobrança por email preservados.
+- Hotéis, Geografia e uniformização V32.2 preservados.

@@ -1,0 +1,22 @@
+VG Operations V32.3 — City Ledger: Cobrança por Email
+Data: 2026-08-16
+
+VALIDAÇÃO
+- 44/44 suites de regressão aprovadas.
+- JavaScript City Ledger: sintaxe validada com node --check.
+- Backend Netlify: sintaxe validada com node --check.
+- PDF: geração local validada; Blob application/pdf com conteúdo > 1,5 KB em cenário sintético multi-hotel.
+- Templates: GET devolve exatamente 3 templates.
+- Permissões: Diretor de hotel recebe 403 ao tentar alterar templates; Direção recebe 200.
+- Autoria: createdBy, createdByName e createdByRole são derivados da sessão autenticada no servidor.
+- Envio multi-hotel: registo separado por hotel ligado pelo mesmo emailBatchId.
+- Service Worker / Build guard / mobile atualizados para 32.3.
+
+FUNCIONALIDADES
+- 3 templates configuráveis por Geografia.
+- Texto, destinatário, CC e assunto editáveis.
+- Âmbito por hotel ou todos os hotéis permitidos ao perfil.
+- Extrato PDF por entidade com secções por hotel e totais por moeda.
+- Preparação de email via mailto + download do PDF.
+- Registo manual "como enviado" sem envio automático.
+- Histórico com utilizador/perfil, template, assunto, destinatários, snapshot, ficheiro e saldo à data.

@@ -1,0 +1,18 @@
+VG Dashboard — Correção de estabilidade v29.1
+Data: 2026-08-14
+
+Correções:
+- coerência automática entre index.html, JavaScript/CSS e service worker
+- service worker versionado /service-worker.js?vg=29.1
+- updateViaCache: none
+- recursos estáticos network-first quando online; cache apenas como fallback offline
+- Gestão de Documentos renderiza imediatamente antes da leitura dos Blobs
+- Workflow de Aprovações renderiza imediatamente antes da leitura dos Blobs
+- Comparação de Cenários renderiza imediatamente antes da leitura dos Blobs
+- diagnóstico visível se um módulo recente não carregar, sem placeholder infinito
+
+Validação final:
+- 31/31 suites de regressão aprovadas duas vezes consecutivas
+- 87 referências locais verificadas
+- 52 ficheiros JavaScript validados
+- backend dashboard-sessao.js inalterado face à V29

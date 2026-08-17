@@ -1,0 +1,21 @@
+VG Dashboard — Assistente Analítico v25
+Data: 2026-08-14
+
+Validação funcional:
+- perguntas em linguagem natural sem API externa
+- comparação entre hotéis
+- rankings e deterioração de KPI
+- forecast abaixo da meta com mês explícito
+- pessoal vs atividade
+- ações e anomalias
+- evolução de preços em Compras com linguagem de média ponderada mensal
+- rastreabilidade das respostas
+- restrições de hotel por perfil
+- fallback seguro para perguntas não suportadas
+
+Validação técnica final:
+- 27/27 suites de regressão aprovadas, repetidas duas vezes consecutivas
+- 80 referências locais verificadas
+- 48 ficheiros JavaScript validados
+- service worker vg-operations-shell-v25
+- backend dashboard-sessao.js inalterado face à V24

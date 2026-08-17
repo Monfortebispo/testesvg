@@ -1,0 +1,30 @@
+VG Dashboard v11 — validação final
+Data: 2026-08-14
+
+Benchmarking Executivo:
+- Hotel vs STLY, Região, Portefólio e Meta/Orçamento.
+- Receita comparada por crescimento vs LY.
+- GOP comparado por margem GOP com sede.
+- Ocupação ponderada por quartos disponíveis.
+- ADR ponderado por quartos ocupados.
+- RevPAR ponderado por quartos disponíveis.
+- Custos/Pessoal comparados em % da receita.
+- Hotel selecionado excluído do benchmark agregado quando existem peers.
+- Percentis e liga regional implementados.
+- Targets V9 têm precedência sobre regras/orçamento técnico.
+- Vários meses agregam targets com pesos coerentes.
+
+Estrutura:
+- assets/js/modules/benchmarking.js ligado ao HTML.
+- assets/css/benchmarking.css ligado ao HTML.
+- view-benchmark e nav-benchmark presentes.
+- navigation-shell inclui Benchmarking.
+- runtime atualizado para VG.version 11.0.
+- função Netlify inalterada face à v10.
+
+Testes:
+- 12/12 suites aprovadas.
+- 54 referências locais verificadas.
+- 36 ficheiros JavaScript validados sintaticamente.
+- 0 pasta assets/js/fixes.
+- Deploy autorizado por npm test.

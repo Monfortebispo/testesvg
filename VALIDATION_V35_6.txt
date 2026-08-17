@@ -1,0 +1,10 @@
+VG Operations V35.6 — Navegação, Pesquisa e Governanta
+
+Correções funcionais:
+1. Hotel 360º > Eficiência: `efficiency` incluído na whitelist de tabs e ligado a Unit Economics.
+2. Pesquisa Global: Ctrl/Cmd+K pertence exclusivamente a global-search.js; navigation-shell.js deixa de abrir a paleta antiga com o mesmo atalho.
+3. Governanta: entrada direta no modo mobile; removido hero para este perfil; shell desktop verdadeiramente oculto; reposicionamento no topo.
+4. Responsividade 125%/150%: responsive-desktop-v35_6.css ligado ao index.html e ao Service Worker.
+5. Coerência de versão: HTML, package, guard, SW e backend em V35.6.
+
+A validação automática final deve ser executada com `npm test` após qualquer alteração adicional.

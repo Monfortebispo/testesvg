@@ -1,0 +1,32 @@
+VG Operations 2.0 — v30
+Data: 2026-08-14
+
+Âmbito:
+- menu principal simplificado
+- Ficha do Hotel preservada sem alterações
+- Hotel 360º
+- Score Operacional V28 integrado
+- análise automática de causa
+- objetivos e planos de recuperação via Ações
+- Revenue Intelligence + Forecast + Cenários consolidados em Revenue & Forecast
+- Notificações como camada principal; Alertas clássicos mantidos como detalhe
+- Assistente Analítico transversal
+- Home específica por perfil
+- coerência PWA / version guard V30
+
+Guardas técnicos:
+- SHA-256 esperado de assets/js/modules/ficha-hotel.js:
+  2779d6f5cbfcedb672f037494ee54847a16aec2247f5a0594346e3e6c4963dc7
+- backend dashboard-sessao.js permanece igual à V29.1
+- sem nova fonte de cálculo P&L/Forecast
+- dados Netlify/API continuam fora do cache do service worker
+
+A validação final deve ser confirmada por `npm test` imediatamente antes do empacotamento.
+
+Validação final executada:
+- 32/32 suites aprovadas duas vezes consecutivas
+- 92 referências locais verificadas
+- 56 ficheiros JavaScript validados
+- teste de integridade confirma Ficha do Hotel byte-a-byte igual à V29.1
+- service worker vg-operations-shell-v30
+- backend dashboard-sessao.js inalterado face à V29.1

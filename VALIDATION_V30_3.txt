@@ -1,0 +1,23 @@
+VG Dashboard — Correções consolidadas v30.3
+Data: 2026-08-15
+
+Correções:
+- Home Portefólio usa getActiveHotels()/filtro ativo do dashboard
+- Região/hotéis selecionados recalculam Críticos, Atenção, Estáveis, Receita em risco, Ações vencidas, Score médio e prioridades
+- Ponte do GOP usa magnitude económica da despesa e aceita custos contabilizados com sinal positivo ou negativo
+- Redução de custo = impacto positivo no GOP (verde); aumento = impacto negativo (vermelho)
+- Revenue & Forecast preserva wrappers originais #view-revenueint, #view-forecast e #view-scenariocompare para manter CSS, grelhas, cards, tabelas e gráficos
+- Correções V30.1/V30.2 mantidas
+- Ficha do Hotel permanece inalterada
+- Backend permanece inalterado
+
+A validar: suite completa, sintaxe JS, integridade dos lotes e deploy intermédio do Lote 1.
+
+Validação final executada:
+- 35/35 suites aprovadas duas vezes consecutivas
+- simulação Lote 1 sobre V30.2: 34/34 suites aprovadas
+- 92 referências locais verificadas
+- 56 ficheiros JavaScript validados
+- Ficha do Hotel inalterada face à V30.2
+- backend dashboard-sessao.js inalterado face à V30.2
+- service worker vg-operations-shell-v30_3

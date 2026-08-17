@@ -1,0 +1,58 @@
+VG OPERATIONS — VALIDAÇÃO V34.0
+Data: 2026-08-16
+
+RESULTADO GLOBAL
+- Versão: 34.0.0
+- Regressão: 54/54 suites aprovadas
+- Estado: DEPLOY AUTORIZADO pela suíte automática
+
+INTEGRAÇÃO FUNCIONAL
+- City Ledger: filtro multi-entidade por hotel, Todos os clientes/Limpar seleção e Limpar filtros.
+- Housekeeping & Têxtil: ferramenta original incorporada em integrated/housekeeping/index.html, incluindo Painel, Inventário, Projeção de compra, Relatório executivo, Comparação de campanhas, Análise/Mapa de quebras, Valorização, Alertas, Campanhas, Utilizadores, Catálogo, Registo de alterações e modo Governanta/mobile.
+- Custos & Compras A&B: ferramenta original incorporada em integrated/custos-ab/index.html, incluindo evolução, subfamílias, artigos, hotel, inventário, receitas, stock, comentários, encomendas, excessos, previsão, previsto vs real e roomnights.
+- Reputação semanal: tabela explícita GRI por origem/fonte e detalhe por Booking.com, Expedia, Google, Tripadvisor e restantes origens presentes no relatório.
+- Fichas Técnicas: cartões clicáveis com detalhe completo; biblioteca paginada.
+- Consumo Teórico: apenas correspondência exata, alias controlado ou mapeamento manual validado; sem matching difuso por substring. Cálculo por ingrediente validado em runtime sintético.
+- Buffets & Ementas: importador Excel, filtros hotel/refeição, ligação exata a fichas técnicas e estado vazio explícito sem dados fabricados.
+- Resumo Operacional PDF: botão PDF acumulado carregado explicitamente no Resumo; A3 horizontal; logo Vila Galé; Janeiro->mês selecionado; aviso de meses em falta.
+- PDF geral: cabeçalhos de tabelas alinhados, identidade/rodapé institucional e instrução para desativar cabeçalhos/rodapés automáticos do browser.
+- Performance: seed integrado carregado apenas nas vistas que dele dependem; micro-módulos A&B/Housekeeping não são criados no arranque.
+
+AUDITORIA ESTÁTICA
+- Ficheiros do projeto antes deste relatório: 207
+- Ficheiros JavaScript: 121
+- node --check: todos os ficheiros JavaScript aprovados
+- Scripts inline Housekeeping: 3/3 aprovados
+- Scripts inline Custos A&B: 1/1 aprovado
+- IDs em index.html: 620; duplicados: 0
+- Referências locais do index.html: 103; em falta: 0
+- Recursos locais referenciados pelo Service Worker: 108; em falta: 0
+- Ficha do Hotel protegida — SHA256: 2779d6f5cbfcedb672f037494ee54847a16aec2247f5a0594346e3e6c4963dc7
+
+DADOS DE REFERÊNCIA INTEGRADOS
+- Seed: 34.0.0
+- Relatórios de reputação semanal: 310
+- Fichas de receitas: 215
+- Fichas de produtos: 38
+- Exemplo de receita detalhada: 693 linhas
+
+AUDITORIA PDF
+- Amostra operacional acumulada gerada com WeasyPrint e renderizada para imagem.
+- Formato: A3 landscape, 1 página, 1190.55 x 841.89 pt.
+- JavaScript no PDF final: não.
+- Inspeção visual: sem clipping, sobreposições ou glifos quebrados; logo, KPIs, regiões, tabelas e rodapé legíveis.
+
+SMOKE TEST HTTP
+- /index.html: HTTP 200
+- /integrated/housekeeping/index.html: HTTP 200
+- /integrated/custos-ab/index.html: HTTP 200
+- /assets/data/operations-seed-v33.json: HTTP 200
+
+LIMITAÇÕES DECLARADAS
+- Não foi possível concluir um teste visual end-to-end em Chromium headless neste ambiente devido a limitações do runtime/DBus; não é apresentada uma alegação de E2E browser que não tenha sido executada.
+- As grelhas de buffet referidas pelo utilizador não foram localizadas entre os ficheiros acessíveis nesta sessão/Library. A V34.0 inclui o módulo/importador completo e não inventa pratos, quantidades ou capitações. Assim que o Excel original for carregado, entra diretamente no módulo.
+
+CONTROLO DE DEPLOY
+- Build visível: V34.0 · Integrado
+- Cache PWA: vg-operations-shell-v34-0
+- Version guard: 34.0
